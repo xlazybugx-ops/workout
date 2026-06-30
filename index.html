@@ -163,6 +163,29 @@
   .hub-hint{text-align:center;color:var(--ink-dim);font-style:italic;font-size:13px;margin-top:12px}
   @media(max-width:560px){ .hub-spot-label{opacity:1;transform:none;font-size:9px;padding:1px 5px} }
 
+  /* ===== ФОТО-ХАБ (пейзаж + здания-картинки) ===== */
+  .hub-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--gold-soft);
+    border-radius:10px;padding:9px 14px;margin-bottom:8px}
+  .hub-place{font-family:'Cinzel';font-size:clamp(13px,2.4vw,18px);color:var(--gold);letter-spacing:.04em}
+  .hub-res{display:flex;gap:14px;flex-wrap:wrap}
+  .hub-res b{font-family:'Cinzel';font-weight:600;font-size:clamp(12px,2vw,15px);color:#ffe9c0}
+  .hub-stage-photo{aspect-ratio:9/16;max-height:78vh;min-height:340px;margin:0 auto;background:#1a1410}
+  @media(min-aspect-ratio:1/1){ .hub-stage-photo{aspect-ratio:16/9;max-height:70vh} }
+  .hub-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .hub-bg-fallback{background:linear-gradient(180deg,#3a2450,#8a4a52 45%,#d97a42 75%,#f0a850)}
+  /* здания «приземляются» нижним краём в точку привязки */
+  .hub-spot-photo{width:auto;height:auto}
+  .hub-spot .hub-spot-photo{transform-origin:bottom center}
+  .hub-spot-img{display:block;width:calc(clamp(54px,13vw,120px) * var(--bscale,1));height:auto;
+    filter:drop-shadow(0 6px 8px rgba(0,0,0,.55))}
+  .hub-spot-photo svg{width:calc(clamp(48px,10vw,80px) * var(--bscale,1));height:auto}
+  /* у фото-зданий привязка по нижнему краю (центр-низ на точке) */
+  .hub-stage-photo .hub-spot{transform:translate(-50%,-100%)}
+  .hub-stage-photo .hub-spot:hover{transform:translate(-50%,-100%) scale(1.08)}
+  .hub-stage-photo .hub-spot-label{margin-top:2px}
+  .hub-stage-photo .hub-spot-badge{top:6px;right:-2px}
+
   /* шапка экрана с возвратом на хаб */
   .screen-bar{display:flex;align-items:center;gap:12px;margin:10px 0 4px}
   .home-btn{font-family:'Cinzel';font-size:13px;letter-spacing:.04em;cursor:pointer;
@@ -1949,14 +1972,14 @@ function hubSceneSVG(){
 }
 // постройки-ссылки: иконка-рисунок, подпись, позиция (% сцены), экран
 const HUB_SPOTS=[
-  {v:'lair',   label:'Логово',     x:13, y:64, art:'castle'},
-  {v:'hatch',  label:'Гнездо',     x:33, y:80, art:'nest'},
-  {v:'forge',  label:'Кузница',    x:52, y:72, art:'forge'},
-  {v:'spire',  label:'Шпиль',      x:70, y:48, art:'tower'},
-  {v:'arena',  label:'Турнир',     x:86, y:76, art:'arena'},
-  {v:'explore',label:'Странствия', x:24, y:40, art:'portal'},
-  {v:'roost',  label:'Гнездилище', x:46, y:42, art:'altar'},
-  {v:'codex',  label:'Кодекс',     x:64, y:80, art:'book'},
+  {v:'explore',label:'Странствия', x:22, y:46, art:'portal', s:1.0},
+  {v:'roost',  label:'Гнездилище', x:45, y:44, art:'altar',  s:1.0},
+  {v:'spire',  label:'Шпиль',      x:71, y:42, art:'tower',  s:1.5},
+  {v:'lair',   label:'Логово',     x:14, y:66, art:'castle', s:1.2},
+  {v:'forge',  label:'Кузница',    x:50, y:70, art:'forge',  s:1.1},
+  {v:'codex',  label:'Кодекс',     x:65, y:80, art:'book',   s:1.0},
+  {v:'hatch',  label:'Гнездо',     x:33, y:82, art:'nest',   s:0.85},
+  {v:'arena',  label:'Турнир',     x:85, y:74, art:'arena',  s:1.1},
 ];
 function hubSpotArt(art){
   switch(art){
@@ -1983,19 +2006,24 @@ function renderHub(){
   if(!wrap) return;
   const spots=HUB_SPOTS.map(sp=>{
     const badge=hubBadge(sp.v);
-    return `<button class="hub-spot" data-go="${sp.v}" style="left:${sp.x}%;top:${sp.y}%">
-      <span class="hub-spot-art">${hubSpotArt(sp.art)}</span>
+    // фото-здание с SVG-фолбэком, если файла нет
+    const svgEsc=hubSpotArt(sp.art).replace(/"/g,'&quot;');
+    const img=`<img class="hub-spot-img" src="images/hub_${sp.v}.png" alt=""
+        onerror="this.outerHTML=this.getAttribute('data-fb')" data-fb="${svgEsc}">`;
+    return `<button class="hub-spot" data-go="${sp.v}" style="left:${sp.x}%;top:${sp.y}%;--bscale:${sp.s||1}">
+      <span class="hub-spot-art hub-spot-photo">${img}</span>
       <span class="hub-spot-label">${sp.label}</span>
       ${badge?`<span class="hub-spot-badge">${badge}</span>`:''}
     </button>`;
   }).join('');
   wrap.innerHTML=`
-    <div class="hub-stage">
-      ${hubSceneSVG()}
-      <div class="hub-title-plate">
-        <div class="hub-title">${S.settlement||'Драконьи Земли'}</div>
-        <div class="hub-sub">🪙 ${S.gold} · 🥚 ${S.eggs} · 🐉 ${S.dragons.length} · ✦ ${S.dust}</div>
-      </div>
+    <div class="hub-topbar">
+      <span class="hub-place">🏰 ${S.settlement||'Драконьи Земли'}</span>
+      <span class="hub-res"><b>🪙 ${S.gold}</b><b>🥚 ${S.eggs}</b><b>🐉 ${S.dragons.length}</b><b>✦ ${S.dust}</b></span>
+    </div>
+    <div class="hub-stage hub-stage-photo">
+      <img class="hub-bg" src="images/hub_bg.png" alt=""
+        onerror="this.style.display='none';this.parentNode.classList.add('hub-bg-fallback')">
       ${spots}
     </div>
     <p class="hub-hint">Нажми на любое строение, чтобы отправиться туда. Драконьи земли ждут тебя!</p>`;
