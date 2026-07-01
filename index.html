@@ -43,6 +43,14 @@
     mix-blend-mode:overlay;
   }
   #app{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:18px 16px 90px}
+  /* Полноэкранный режим на телефоне: контент до краёв */
+  @media(max-width:560px){
+    #app{padding:12px 10px 84px}
+    .panel{border-radius:8px;padding:14px 12px;margin-left:-4px;margin-right:-4px}
+    .hub-stage-photo{max-width:none;border-radius:0;margin-left:-10px;margin-right:-10px;width:calc(100% + 20px);max-height:74vh}
+    .hub-stage{border-left:none;border-right:none}
+    .topbar{margin-left:-10px;margin-right:-10px;padding-left:10px;padding-right:10px}
+  }
 
   /* Header */
   /* Компактная полоса ресурсов (одна строка, вверху, липкая) */
@@ -149,7 +157,7 @@
   .hub-place{font-family:'Cinzel';font-size:clamp(13px,2.4vw,18px);color:var(--gold);letter-spacing:.04em}
   .hub-res{display:flex;gap:14px;flex-wrap:wrap}
   .hub-res b{font-family:'Cinzel';font-weight:600;font-size:clamp(12px,2vw,15px);color:#ffe9c0}
-  .hub-stage-photo{aspect-ratio:768/1376;max-height:80vh;min-height:340px;margin:0 auto;background:#1a1410;max-width:520px}
+  .hub-stage-photo{aspect-ratio:768/1376;max-height:82vh;min-height:340px;margin:0 auto;background:#1a1410;max-width:640px;width:100%}
   .hub-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
   .hub-bg-fallback{background:linear-gradient(180deg,#3a2450,#8a4a52 45%,#d97a42 75%,#f0a850)}
   /* невидимая кликабельная зона поверх нарисованного здания */
@@ -264,6 +272,8 @@
 
   /* ===== АРТЕФАКТЫ И КУЗНИЦА ===== */
   .artgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:6px}
+  .artcard.carousel-card{width:160px}
+  .artcard.carousel-card.sel{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 6px 18px rgba(217,164,65,.3)}
   .artcard{position:relative;background:radial-gradient(110px 70px at 50% 0,rgba(217,164,65,.07),transparent),var(--panel2);
     border:1px solid var(--edge);border-radius:6px;padding:11px 10px;text-align:center;cursor:pointer;transition:.16s;overflow:hidden}
   .artcard:hover{transform:translateY(-2px);border-color:var(--gold-soft);box-shadow:0 6px 16px rgba(0,0,0,.4)}
@@ -338,6 +348,21 @@
   .deco-inv{display:flex;flex-direction:column;gap:6px}
   .deco-inv-item{display:flex;justify-content:space-between;font-size:13px;padding:5px 8px;background:rgba(18,13,9,.3);border-radius:6px}
   .deco-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  /* Кодекс: вкладки и легенды */
+  .codex-tabs{display:flex;gap:8px;margin:4px 0 12px}
+  .codex-tab{flex:1;font-family:'Cinzel';font-size:13px;padding:8px;border-radius:8px;cursor:pointer;
+    background:rgba(18,13,9,.4);border:1px solid var(--edge);color:var(--ink-dim);transition:.15s}
+  .codex-tab.on{background:rgba(217,164,65,.16);border-color:var(--gold-soft);color:var(--gold)}
+  .lore-world{margin-bottom:18px}
+  .lore-world-head{font-family:'Cinzel';font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .lore-scrolls{display:flex;flex-direction:column;gap:8px}
+  .lore-scroll{border:1px solid var(--edge);border-radius:8px;padding:10px 12px}
+  .lore-scroll.got{background:linear-gradient(180deg,rgba(40,30,18,.5),rgba(24,17,10,.5));border-color:var(--gold-soft)}
+  .lore-scroll.locked{background:rgba(18,13,9,.3);opacity:.7}
+  .lore-scroll-title{font-family:'Cinzel';font-size:13.5px;color:var(--ink);display:flex;justify-content:space-between;gap:8px;align-items:center}
+  .lore-biome{font-size:10.5px;color:var(--gold-soft);letter-spacing:.05em}
+  .lore-scroll-text{font-size:12.5px;color:var(--ink-dim);font-style:italic;line-height:1.5;margin-top:6px}
+  .lore-hint{font-size:12px;color:var(--gold);margin-top:8px;padding:6px 8px;background:rgba(217,164,65,.1);border-radius:6px}
   .forge-stat b{font-family:'Cinzel';color:var(--ink)}
   .forge-stat .up{color:var(--venom)}
   .forge-sub{font-family:'Cinzel';font-size:14px;letter-spacing:.06em;color:var(--gold);margin:0 0 8px}
@@ -741,6 +766,22 @@
   .move:disabled{opacity:.35;cursor:not-allowed}
   .move .mn{font-family:'Cinzel';font-size:13px}
   .move .md{font-size:11px;color:var(--ink-dim)}
+  .move .mv-meta{font-size:11.5px;color:var(--ink-dim);margin-top:3px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .mv-dmg{font-family:'Cinzel';color:#e8b96a}
+  .mv-dmg .gold{color:var(--gold)}
+  .mv-dmg .dim{color:var(--ink-dim)}
+  .mv-heal{color:#9c4}
+  .mana-cost{color:#8ac0ff;font-family:'Cinzel'}
+  .mana-gain{color:#8ac0ff}
+  .need-mana{color:#c5544a}
+  .move-guard{border-color:rgba(127,178,74,.4)}
+  .battle-latest{min-height:20px;margin-top:12px;padding:10px 12px;background:rgba(18,13,9,.45);border:1px solid var(--edge);
+    border-radius:8px;font-size:13px;line-height:1.5;text-align:center;color:var(--ink)}
+  .battle-latest.flash{animation:latestflash .4s ease}
+  @keyframes latestflash{0%{background:rgba(217,164,65,.2)}100%{background:rgba(18,13,9,.45)}}
+  .battle-latest.battle-history{text-align:left;max-height:200px;overflow-y:auto;animation:none}
+  .battle-history .bh-title{font-family:'Cinzel';color:var(--gold);font-size:13px;margin-bottom:6px;text-align:center}
+  .battle-history p{margin:4px 0;font-size:12px;color:var(--ink-dim);border-bottom:1px dashed rgba(92,67,38,.3);padding-bottom:4px}
   .move-spell{border-color:rgba(109,180,212,.55);background:radial-gradient(80px 40px at 0 0,rgba(109,180,212,.12),transparent),var(--panel2)}
   .move-spell:hover:not(:disabled){border-color:var(--frost)}
   .move-ult{border-color:var(--gold);background:radial-gradient(90px 45px at 0 0,rgba(217,164,65,.18),transparent),var(--panel2)}
@@ -901,9 +942,16 @@
   <!-- CODEX -->
   <section class="view" id="codex">
     <div class="panel">
-      <h2>Кодекс видов</h2>
-      <p class="lede">Все драконы мира. Открой каждого, поймав хотя бы одного.</p>
-      <div class="roster" id="codexGrid"></div>
+      <h2>Кодекс</h2>
+      <div class="codex-tabs">
+        <button class="codex-tab on" data-ctab="species">🐉 Виды</button>
+        <button class="codex-tab" data-ctab="lore">📜 Легенды</button>
+      </div>
+      <div id="codexSpecies">
+        <p class="lede">Все драконы мира. Открой каждого, поймав хотя бы одного.</p>
+        <div class="roster" id="codexGrid"></div>
+      </div>
+      <div id="codexLore" style="display:none"></div>
     </div>
   </section>
 
@@ -1314,7 +1362,62 @@ const DECORATIONS=[
   {id:'hoard',    name:'Груда сокровищ',  icon:'💰', rarity:3, desc:'Драконье золото горой.'},
   {id:'shrine',   name:'Древний алтарь',  icon:'⛩️', rarity:3, desc:'Святилище давно ушедших.'},
 ];
-const decorById=id=>DECORATIONS.find(d=>d.id===id);
+/* ======================= СВИТКИ ЛЕГЕНД =======================
+   Лор по мирам и биомам. Собираются в странствиях и из сундуков, хранятся в Кодексе.
+   hint — подсказка к боссу/артефакту/механике (мягкая, необязательная). */
+const LORE_SCROLLS=[
+  /* ОГНЕННЫЙ МИР */
+  {world:'emberreach', biome:1, n:1, title:'Пепел первых дней', text:'Когда мир был молод, драконы Карн-Вулака дышали таким жаром, что камень тёк рекой. Пепельные пустоши помнят их шаги.'},
+  {world:'emberreach', biome:1, n:2, title:'Тлеющие клятвы', text:'Огненные драконы клянутся не словом, а искрой: угасшая клятва означает угасшего дракона. Оттого они верны до последнего уголька.'},
+  {world:'emberreach', biome:1, n:3, title:'Дар Жароеда', text:'Древний Жароед оставил потомкам клык, что вечно тлеет. Говорят, из таких клыков кузнецы куют оружие, жалящее пламенем.', hint:'Клык Жароеда — оружие, усиливающее атаку.'},
+  {world:'emberreach', biome:3, n:1, title:'Сердце спящего вулкана', text:'В самом ядре Карн-Вулака бьётся Магмовое Сердце. Тот, кто носит его, пьёт жизнь врага — но тяжесть его сковывает движения.', hint:'Магмовое Сердце (ядро огня): вампиризм ценой скорости.'},
+  {world:'emberreach', biome:3, n:2, title:'Владыка пламени', text:'Глубже всех спит древний огненный владыка. Легенды шепчут: даже вечный огонь боится холода, что старше самого пламени.', hint:'Босс огня уязвим к ледяной стихии.'},
+
+  /* ЯДОВИТЫЙ МИР */
+  {world:'mirelot', biome:1, n:1, title:'Шёпот зелёных озёр', text:'Чащоба Зелёных Озёр дышит. Каждый лист, каждая капля тёмной воды знает имя чужака ещё до того, как он ступит под кроны.'},
+  {world:'mirelot', biome:1, n:2, title:'Наследие грибницы', text:'Под топями раскинулась единая грибница — древнее любого дракона. Она помнит всё и делится памятью с теми, кто чтит её споры.'},
+  {world:'mirelot', biome:1, n:3, title:'Идол гнили', text:'Болотные драконы вырезают идолов, источающих ядовитую дымку. Носящий такой идол становится быстрее и злее в бою.', hint:'Идол Гнили ускоряет и усиливает дракона.'},
+  {world:'mirelot', biome:3, n:1, title:'Улей спор', text:'В сердце гнили живёт Корона Спор — живой венец, обостряющий чутьё до смертельной точности. Но он разъедает броню носителя.', hint:'Корона Спор (ядро яда): крит ценой защиты.'},
+  {world:'mirelot', biome:3, n:2, title:'Матерь Топей', text:'Исполинская хозяйка болот не терпит огня в своих владениях. Но пламя — единственное, что заставляет её отступить.', hint:'Босс яда уязвим к огненной стихии.'},
+
+  /* ЛЕДЯНОЙ МИР */
+  {world:'glacior', biome:1, n:1, title:'Безмолвие пиков', text:'Пики Хладного Безмолвия хранят тишину столь глубокую, что рёв дракона тонет в ней, не родившись. Здесь ценят терпение.'},
+  {world:'glacior', biome:1, n:2, title:'Вмёрзшие века', text:'В замёрзших озёрах виднеются тени древних существ. Лёд не убивает — он хранит, ожидая часа пробуждения.'},
+  {world:'glacior', biome:1, n:3, title:'Осколок Вечнольда', text:'Льдина, что не тает даже в горне. Кузнецы вставляют её в доспех — и он хранит носителя от любого жара.', hint:'Осколок Вечнольда усиливает защиту и жизнь.'},
+  {world:'glacior', biome:3, n:1, title:'Замёрзшая бездна', text:'На дне ледяного мира дремлет Корона Мерзлоты, хранящая бездонный запас маны. Но холод её сковывает прыть носителя.', hint:'Корона Мерзлоты (ядро льда): мана ценой скорости.'},
+  {world:'glacior', biome:3, n:2, title:'Владыка стужи', text:'Древний ледяной владыка неуязвим для холода и стали. Лишь ярость пламени способна растопить его вечную броню.', hint:'Босс льда уязвим к огненной стихии.'},
+
+  /* ШТОРМОВОЙ МИР */
+  {world:'stormpeak', biome:1, n:1, title:'Песнь грозовых утёсов', text:'Парящие скалы Штормового мира поют под ветром. Драконы бури рождаются в раскате грома и живут, пока звучит их нота.'},
+  {world:'stormpeak', biome:1, n:2, title:'Пойманная молния', text:'Умелые драконоводы ловят молнию в гребень-венец. Тот, кто носит Гребень Грозы, двигается стремительнее ветра.', hint:'Гребень Грозы усиливает прыть и атаку.'},
+  {world:'stormpeak', biome:1, n:3, title:'Закон неба', text:'В Штормовом мире один закон: кто быстрее, тот и прав. Медлительность здесь равна поражению.'},
+  {world:'stormpeak', biome:3, n:1, title:'Громовой трон', text:'На вершине бури стоит трон, а на нём — Клык Грозы. Он дарует сокрушительный крит, но лишает всякой защиты.', hint:'Клык Грозы (ядро бури): крит ценой защиты и жизни.'},
+  {world:'stormpeak', biome:3, n:2, title:'Владыка бурь', text:'Повелитель гроз бьёт молнией трижды, а на четвёртый раз замирает, копя силу. В этот миг он беззащитен.', hint:'Босс бури замирает после трёх ударов — момент для ульты.'},
+
+  /* ТЕНЕВОЙ МИР */
+  {world:'voidedge', biome:1, n:1, title:'Сумеречный предел', text:'Там, где гаснет последний свет, начинается Беззвёздный Предел. Сюда идут лишь те, кто не боится потерять себя во тьме.'},
+  {world:'voidedge', biome:1, n:2, title:'Латы безмолвия', text:'Тень можно соткать, как ткань. Латы Безмолвия глушат удары и скрывают носителя в самой ночи.', hint:'Латы Безмолвия усиливают защиту и жизнь.'},
+  {world:'voidedge', biome:1, n:3, title:'Цена тьмы', text:'Тьма даёт силу, но берёт плату. Драконы теней сильнее всех — и одиноки более всех.'},
+  {world:'voidedge', biome:3, n:1, title:'Беззвёздное ядро', text:'В сердце пустоты покоится Жнец Пустоты — коса из антисвета. Она пожирает жизнь и бьёт без промаха, но носитель беззащитен.', hint:'Жнец Пустоты (ядро тени): вампиризм и крит ценой защиты.'},
+  {world:'voidedge', biome:3, n:2, title:'Владыка пустоты', text:'Древнейший из всех, Владыка Пустоты питается тьмой. Лишь свет чистого пламени способен обжечь того, кто соткан из мрака.', hint:'Босс тени уязвим к огненной стихии.'},
+];
+function scrollId(s){ return s.world+'_b'+s.biome+'_'+s.n; }
+function scrollsFound(){ if(!Array.isArray(S.scrolls))S.scrolls=[]; return S.scrolls; }
+function hasScroll(s){ return scrollsFound().includes(scrollId(s)); }
+function addScroll(scr){
+  const id=scrollId(scr);
+  if(!scrollsFound().includes(id)){ scrollsFound().push(id); return true; }
+  return false;
+}
+// выдать случайный ещё не найденный свиток данного мира/биома (или любой из мира)
+function grantScroll(worldId, biomeN){
+  let pool=LORE_SCROLLS.filter(s=>s.world===worldId && !hasScroll(s));
+  if(biomeN){ const exact=pool.filter(s=>s.biome===biomeN); if(exact.length) pool=exact; }
+  if(!pool.length) return null; // все собраны
+  const scr=pool[rnd(0,pool.length-1)];
+  addScroll(scr);
+  return scr;
+}
 // декоративные слоты на карте хаба (координаты в % от сцены)
 const DECO_SLOTS=[
   {i:0, x:8,  y:52},
@@ -1374,6 +1477,14 @@ function rollChestLoot(tier, perfect){
     const el=ELEMENTS_LIST[rnd(0,4)];
     addEgg(el,3);
     out.items.push({type:'egg', el});
+  }
+  // свиток легенды: шанс растёт с уровнем сундука
+  const scrollChance=[0,0.25,0.4,0.6][tier];
+  if(Math.random()<scrollChance*(perfect?1.3:1)){
+    // из сундука — свиток случайного мира (сундук мог прийти откуда угодно)
+    const worlds=['emberreach','mirelot','glacior','stormpeak','voidedge'];
+    const scr=grantScroll(worlds[rnd(0,worlds.length-1)]);
+    if(scr) out.items.push({type:'scroll', scr});
   }
   S.gold+=out.gold; S.dust+=out.dust;
   return out;
@@ -1466,6 +1577,7 @@ function showChestResult(tier, loot, result){
     if(it.type==='art') items+=`<div class="chest-item">${it.art.icon} <b>${it.art.name}</b> ${'★'.repeat(it.art.rarity)}</div>`;
     if(it.type==='deco') items+=`<div class="chest-item">${it.deco.icon} украшение <b>${it.deco.name}</b></div>`;
     if(it.type==='egg') items+=`<div class="chest-item">🥚 яйцо-ядро (${ELEMENTS[it.el].name})</div>`;
+    if(it.type==='scroll') items+=`<div class="chest-item">📜 свиток «${it.scr.title}»</div>`;
   });
   toast(`<b>${ct.icon} ${ct.name} открыт!</b> ${resultLabel}<br>+${loot.gold}🪙 +${loot.dust}✦${items?'<br>'+items:''}`);
   // обновить экраны
@@ -1482,8 +1594,9 @@ const POI_TYPES = [
   {kind:'choice',   icon:'❓', label:'Загадочное место',  weight:14},
   {kind:'beast',    icon:'👹', label:'Чьё-то логово',     weight:11},
   {kind:'friend',   icon:'🐣', label:'Дружелюбный зверёк',weight:10},
-  {kind:'chest',    icon:'🎁', label:'Запертый сундук',   weight:11},
-  {kind:'key',      icon:'🔑', label:'Забытый ключ',      weight:10},
+  {kind:'chest',    icon:'🎁', label:'Запертый сундук',   weight:10},
+  {kind:'key',      icon:'🔑', label:'Забытый ключ',      weight:9},
+  {kind:'scroll',   icon:'📜', label:'Древний свиток',     weight:9},
 ];
 // добрые выборы для точек kind:'choice' (две опции с разными наградами)
 const POI_CHOICES = [
@@ -1652,6 +1765,7 @@ let S = {
   keys:{1:0,2:0,3:0}, // ключи по уровням
   decorations:{},  // размещённые украшения {slotIndex: decorId}
   decorOwned:[],   // список полученных id украшений (для инвентаря)
+  scrolls:[],      // собранные свитки легенд (id)
   dragons:[],      // {uid,id,level,xp,curHp,morph,equip,genes,gen,nature}
   discovered:{},   // species id -> true
   morphsSeen:{},   // species id -> {morphId:true}
@@ -2435,14 +2549,27 @@ function openEquipPicker(d, slot){
   }
   box.innerHTML=`<div class="equip-picker">
     <div class="equip-picker-head">Выбери ${SLOT_NAME[slot].toLowerCase()}:</div>
-    <div class="artgrid" id="pickGrid"></div>
+    <div class="carousel">
+      <button class="carousel-arrow prev" id="pickPrev" aria-label="Назад">‹</button>
+      <div class="carousel-track" id="pickGrid"></div>
+      <button class="carousel-arrow next" id="pickNext" aria-label="Вперёд">›</button>
+    </div>
   </div>`;
   const grid=$('#pickGrid');
   options.forEach(a=>{
     const chip=artChip(a,{showWearer:true,onclick:i=>{equipArtifact(d,i.invUid);}});
+    chip.classList.add('carousel-card');
     if(equippedHere===a.invUid) chip.classList.add('sel');
     grid.appendChild(chip);
   });
+  const pp=$('#pickPrev'), pn=$('#pickNext');
+  if(pp&&pn){
+    const amt=()=>Math.max(grid.clientWidth*0.8,180);
+    pp.onclick=()=>grid.scrollBy({left:-amt(),behavior:'smooth'});
+    pn.onclick=()=>grid.scrollBy({left:amt(),behavior:'smooth'});
+    const upd=()=>{pp.classList.toggle('hidden',grid.scrollLeft<=4);pn.classList.toggle('hidden',grid.scrollLeft+grid.clientWidth>=grid.scrollWidth-4);};
+    grid.addEventListener('scroll',upd,{passive:true}); setTimeout(upd,50);
+  }
 }
 
 function restCost(d){const st=statsOf(d);const missing=st.maxHp-d.curHp;return Math.max(5,Math.ceil(missing*1.2));}
@@ -3165,6 +3292,15 @@ function resolvePOI(idx){
     addKey(tier);
     const ct=chestType(tier);
     msg=`Найден <b>${ct.keyIcon} ${ct.keyName}</b>! Им можно открыть ${ct.name.toLowerCase()}.`;
+  } else if(p.kind==='scroll'){
+    const scr=grantScroll(region.worldId, region.biomeN);
+    if(scr){
+      msg=`Найден свиток «<b>${scr.title}</b>»! ${scr.hint?'📜 Он хранит подсказку.':'Прочти его в Кодексе.'}`;
+    } else {
+      const g=rnd(region.gold[0],region.gold[1]);
+      S.gold+=g; f.stats.gold+=g;
+      msg=`Свиток этого мира уже собран. Вместо него — <b>${g}🪙</b>.`;
+    }
   } else if(p.kind==='friend'){
     const g=rnd(region.gold[0],region.gold[1])/2|0;
     S.gold+=g; f.stats.gold+=g; if(Math.random()<0.4){addEgg(region.el,region.biomeN);f.stats.eggs++;}
@@ -3423,6 +3559,20 @@ function renderBattle(){
   const elScene={fire:'fire',venom:'jungle',frost:'ice',storm:'ice',shade:'shade'}[b.foe.el]||'shade';
   const canSpell = b.me.spell && b.me.mana>=b.me.spell.manaCost;
   const canUlt = b.me.ult && b.me.mana>=b.me.ult.manaCost;
+  // оценка урона приёма по текущим статам (диапазон с учётом стихии)
+  const estDmg=(pow)=>{
+    const base=b.me.atk*pow*0.7 - b.foe.def*0.6;
+    const mult=advMult(b.me.el,b.foe.el);
+    const lo=Math.max(1,Math.round(base*0.85*mult));
+    const hi=Math.max(1,Math.round(base*1.15*mult));
+    return {lo,hi,mult};
+  };
+  const dmgTag=(pow,acc)=>{
+    const e=estDmg(pow);
+    const advIcon = e.mult>1?' <span class="gold">▲</span>':(e.mult<1?' <span class="dim">▽</span>':'');
+    const accNote = acc?` <span class="dim">·${Math.round(acc*100)}%</span>`:'';
+    return `<span class="mv-dmg">⚔️ ${e.lo}–${e.hi}${advIcon}${accNote}</span>`;
+  };
   stage.innerHTML=`
   <div class="arena">
     <div class="arena-bg">${sceneSVG(elScene,'battle')}</div>
@@ -3448,15 +3598,15 @@ function renderBattle(){
     <h2>Приёмы</h2>
     <div class="moves" id="moveBox">
       ${moves.map(m=>`<button class="move" data-k="${m.key}" ${b.over?'disabled':''}>
-        <div class="mn">${m.n}</div><div class="md">${m.t}</div></button>`).join('')}
-      <button class="move" data-k="guard" ${b.over?'disabled':''}>
-        <div class="mn">${GUARD.n}</div><div class="md">${GUARD.t}</div></button>
+        <div class="mn">${m.n}</div><div class="mv-meta">${dmgTag(m.pow, m.pow>=1.5?0.7:0)}</div></button>`).join('')}
+      <button class="move move-guard" data-k="guard" ${b.over?'disabled':''}>
+        <div class="mn">🛡️ ${GUARD.n}</div><div class="mv-meta"><span class="mv-heal">✚ защита +лечение</span> <span class="mana-gain">+${MANA_REGEN_GUARD}💧</span></div></button>
       ${b.me.spell?`<button class="move move-spell" data-k="spell" ${b.over||!canSpell?'disabled':''}>
-        <div class="mn">${b.me.spell.icon} ${b.me.spell.n} <span class="mana-cost">💧${b.me.spell.manaCost}</span></div><div class="md">заклинание · ${b.me.spell.t}${!canSpell?' <span class="need-mana">(мало маны)</span>':''}</div></button>`:''}
+        <div class="mn">${b.me.spell.icon} ${b.me.spell.n}</div><div class="mv-meta">${dmgTag(b.me.spell.pow)} <span class="mana-cost">💧${b.me.spell.manaCost}</span>${!canSpell?' <span class="need-mana">мало</span>':''}</div></button>`:''}
       ${b.me.ult?`<button class="move move-ult" data-k="ult" ${b.over||!canUlt?'disabled':''}>
-        <div class="mn">⭐ ${b.me.ult.icon} ${b.me.ult.n} <span class="mana-cost">💧${b.me.ult.manaCost}</span></div><div class="md">${!canUlt?'<span class="need-mana">нужно '+b.me.ult.manaCost+'💧</span>':'УЛЬТА · '+b.me.ult.t}</div></button>`:''}
+        <div class="mn">⭐ ${b.me.ult.icon} ${b.me.ult.n}</div><div class="mv-meta">${dmgTag(b.me.ult.pow)} <span class="mana-cost">💧${b.me.ult.manaCost}</span>${!canUlt?' <span class="need-mana">нужно '+b.me.ult.manaCost+'💧</span>':''}</div></button>`:''}
     </div>
-    <div class="log" id="battleLog">${b.log.map(l=>`<p>${l}</p>`).join('')}</div>
+    <div class="battle-latest" id="battleLatest">${b.log.length?b.log[b.log.length-1]:''}</div>
     <div class="btnrow" id="battleEnd"></div>
   </div>`;
   $$('#moveBox .move').forEach(btn=>btn.onclick=()=>{
@@ -3468,10 +3618,9 @@ function renderBattle(){
     else move=MOVES[b.me.el][+k.slice(1)];
     playerMove(move);
   });
-  const lg=$('#battleLog');lg.scrollTop=lg.scrollHeight;
 }
 
-function pushLog(html){battle.log.push(html);const lg=$('#battleLog');if(lg){lg.innerHTML=battle.log.map(l=>`<p>${l}</p>`).join('');lg.scrollTop=lg.scrollHeight;}}
+function pushLog(html){battle.log.push(html);const lt=$('#battleLatest');if(lt){lt.innerHTML=html;lt.classList.remove('flash');void lt.offsetWidth;lt.classList.add('flash');}}
 
 function advMult(attEl,defEl){
   if(ADVANTAGE[attEl]===defEl)return 1.4;
@@ -3775,6 +3924,12 @@ function endBattle(win){
     floatText('УВЫ…','#c5544a');
   }
   const end=$('#battleEnd');
+  // после боя — показать полную историю сражения
+  const latest=$('#battleLatest');
+  if(latest){
+    latest.classList.add('battle-history');
+    latest.innerHTML=`<div class="bh-title">📜 Ход сражения</div>`+b.log.map(l=>`<p>${l}</p>`).join('');
+  }
   if(b.fromFlight && flight){
     if(win){ flight.stats.beasts++; }
     end.innerHTML=`<button class="btn" id="backFlightBtn">↩ Вернуться в полёт</button>`;
@@ -4013,7 +4168,11 @@ function renderForge(){
       </div>
       <div class="forge-stock">
         <h3 class="forge-sub">Сундук реликвий <span class="dmeta">(${S.artifacts.length})</span></h3>
-        <div class="artgrid" id="artGrid"></div>
+        <div class="carousel">
+          <button class="carousel-arrow prev" id="artPrev" aria-label="Назад">‹</button>
+          <div class="carousel-track" id="artGrid"></div>
+          <button class="carousel-arrow next" id="artNext" aria-label="Вперёд">›</button>
+        </div>
         <p class="hint">Выбери реликвию, чтобы рассмотреть, ковать или распылить. Надеть артефакт на дракона можно в его свитке в Логове.</p>
       </div>
     </div>`;
@@ -4026,7 +4185,23 @@ function renderForge(){
 
   if(!noArt){
     const grid=$('#artGrid');
-    S.artifacts.forEach(a=>grid.appendChild(artChip(a,{selectable:true,showWearer:true,onclick:i=>{S.forgeSel=i.invUid;renderForge();}})));
+    S.artifacts.forEach(a=>{
+      const chip=artChip(a,{selectable:true,showWearer:true,onclick:i=>{S.forgeSel=i.invUid;renderForge();}});
+      chip.classList.add('carousel-card');
+      if(a.invUid===S.forgeSel) chip.classList.add('sel');
+      grid.appendChild(chip);
+    });
+    const ap=$('#artPrev'), an=$('#artNext');
+    if(ap&&an){
+      const amt=()=>Math.max(grid.clientWidth*0.8,180);
+      ap.onclick=()=>grid.scrollBy({left:-amt(),behavior:'smooth'});
+      an.onclick=()=>grid.scrollBy({left:amt(),behavior:'smooth'});
+      const upd=()=>{ap.classList.toggle('hidden',grid.scrollLeft<=4);an.classList.toggle('hidden',grid.scrollLeft+grid.clientWidth>=grid.scrollWidth-4);};
+      grid.addEventListener('scroll',upd,{passive:true}); setTimeout(upd,50);
+      // прокрутить к выбранному
+      const selCard=[...grid.children].find(c=>c.classList.contains('sel'));
+      if(selCard) setTimeout(()=>selCard.scrollIntoView({inline:'center',block:'nearest'}),30);
+    }
     const fb=$('#forgeBtn');
     if(fb) fb.onclick=()=>doForge(inst);
     const rb=$('#recycleBtn');
@@ -4262,12 +4437,20 @@ function confirmReleaseOne(d){
 
 /* ===== КОДЕКС ===== */
 function renderCodex(){
+  // вкладки
+  const tabs=$$('#codex .codex-tab');
+  tabs.forEach(t=>t.onclick=()=>{
+    tabs.forEach(x=>x.classList.toggle('on',x===t));
+    const isLore=t.dataset.ctab==='lore';
+    $('#codexSpecies').style.display=isLore?'none':'block';
+    $('#codexLore').style.display=isLore?'block':'none';
+    if(isLore) renderLore();
+  });
   const g=$('#codexGrid');g.innerHTML='';
   SPECIES.forEach(sp=>{
     const found=S.discovered[sp.id];
     const owned=S.dragons.filter(d=>d.id===sp.id).length;
     const seen=S.morphsSeen[sp.id]||{};
-    // силуэт показываем в самом редком из найденных окрасов
     let displayMorph='common';
     if(found){
       const ownedMorphs=MORPHS.filter(m=>seen[m.id]);
@@ -4289,6 +4472,37 @@ function renderCodex(){
       ${found?`<div class="mdots" title="Собранные окрасы">${morphDots}</div>`:''}`;
     g.appendChild(div);
   });
+}
+
+// вкладка «Легенды»: свитки лора по мирам
+function renderLore(){
+  const box=$('#codexLore'); if(!box) return;
+  const total=LORE_SCROLLS.length, found=scrollsFound().length;
+  let html=`<p class="lede">Свитки легенд, собранные в странствиях. Собрано: <b>${found}/${total}</b>. В некоторых скрыты подсказки к артефактам и владыкам миров.</p>`;
+  WORLDS.forEach(w=>{
+    const worldScrolls=LORE_SCROLLS.filter(s=>s.world===w.id);
+    const gotCount=worldScrolls.filter(s=>hasScroll(s)).length;
+    html+=`<div class="lore-world">
+      <div class="lore-world-head">${elTag(w.el)} <b>${w.name}</b> <span class="dmeta">${gotCount}/${worldScrolls.length}</span></div>
+      <div class="lore-scrolls">`;
+    worldScrolls.forEach(s=>{
+      const got=hasScroll(s);
+      if(got){
+        html+=`<div class="lore-scroll got">
+          <div class="lore-scroll-title">📜 ${s.title} <span class="lore-biome">${BIOME_TIERLABEL[s.biome].split(' · ')[0]}</span></div>
+          <div class="lore-scroll-text">${s.text}</div>
+          ${s.hint?`<div class="lore-hint">💡 ${s.hint}</div>`:''}
+        </div>`;
+      } else {
+        html+=`<div class="lore-scroll locked">
+          <div class="lore-scroll-title">🔒 Неизвестный свиток <span class="lore-biome">${BIOME_TIERLABEL[s.biome].split(' · ')[0]}</span></div>
+          <div class="lore-scroll-text">Найди этот свиток в странствиях по миру «${w.name}».</div>
+        </div>`;
+      }
+    });
+    html+=`</div></div>`;
+  });
+  box.innerHTML=html;
 }
 
 /* ===== ВКЛАДКИ ===== */
@@ -4370,6 +4584,7 @@ function migrateDragons(){
   if(!S.keys||typeof S.keys!=='object') S.keys={1:0,2:0,3:0};
   if(!S.decorations||typeof S.decorations!=='object') S.decorations={};
   if(!Array.isArray(S.decorOwned)) S.decorOwned=[];
+  if(!Array.isArray(S.scrolls)) S.scrolls=[];
   let migrated=0;
   for(const d of S.dragons){
     // характер: назначить, если нет
