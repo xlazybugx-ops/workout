@@ -339,6 +339,7 @@
   @keyframes decofloat{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-56%)}}
   .hub-hint-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
   .hub-deco-btn{width:auto;margin:0}
+  .hub-btns{display:flex;gap:8px;flex-wrap:wrap}
   .deco-slots{display:flex;flex-direction:column;gap:8px;margin-top:8px}
   .deco-slot-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:8px;align-items:center;
     background:rgba(18,13,9,.4);border:1px solid var(--edge);border-radius:8px;padding:8px 10px}
@@ -399,6 +400,12 @@
   .gene-score{font-family:'Cinzel';font-size:11px;color:var(--frost);background:var(--vellum);border:1px solid var(--edge);border-radius:10px;padding:1px 8px}
 
   .gene-block{margin:14px 0 6px;padding:12px;background:rgba(18,13,9,.5);border:1px solid var(--edge);border-radius:6px}
+  .gene-details summary.gene-summary{cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;
+    font-family:'Cinzel';font-size:13px;color:var(--ink);list-style:none;padding:4px 0;flex-wrap:wrap}
+  .gene-details summary.gene-summary::-webkit-details-marker{display:none}
+  .gene-details summary.gene-summary::before{content:'▸';color:var(--gold-soft);margin-right:6px;transition:.15s;display:inline-block}
+  .gene-details[open] summary.gene-summary::before{transform:rotate(90deg)}
+  .gene-details .gene-rows{margin-top:8px}
   .nature-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--edge)}
   .nature-badge{font-family:'Cinzel';font-size:14px;color:var(--gold);background:rgba(217,164,65,.12);
     border:1px solid var(--gold-soft);border-radius:8px;padding:3px 12px;white-space:nowrap}
@@ -853,10 +860,9 @@
     <span class="topbar-place">🏰 <b id="tbPlace">Драконьи Земли</b></span>
     <span class="topbar-res">
       <span class="tb-item">🪙<b id="gold">0</b></span>
-      <span class="tb-item">🥚<b id="eggs">0</b></span>
-      <span class="tb-item">🐉<b id="count">0</b><span class="tb-dim">/<span id="species">0</span></span></span>
-      <span class="tb-item">💠<b id="relics">0</b></span>
       <span class="tb-item">✦<b id="dust">0</b></span>
+      <span class="tb-item">🥚<b id="eggs">0</b></span>
+      <span class="tb-item">🐉<b id="count">0</b></span>
     </span>
   </div>
 
@@ -1580,9 +1586,46 @@ function showChestResult(tier, loot, result){
     if(it.type==='scroll') items+=`<div class="chest-item">📜 свиток «${it.scr.title}»</div>`;
   });
   toast(`<b>${ct.icon} ${ct.name} открыт!</b> ${resultLabel}<br>+${loot.gold}🪙 +${loot.dust}✦${items?'<br>'+items:''}`);
-  // обновить экраны
-  if($('#forge')&&$('#forge').classList.contains('on')) renderForge();
-  if($('#hub')&&$('#hub').classList.contains('on')) renderHub();
+  // обновить открытую сокровищницу или хаб
+  if(S._treasuryOpen) renderTreasury();
+  else if($('#hub')&&$('#hub').classList.contains('on')) renderHub();
+}
+
+/* ===== СОКРОВИЩНИЦА (отдельный экран для сундуков) ===== */
+function openTreasury(){ S._treasuryOpen=true; renderTreasury(); }
+function closeTreasury(){ S._treasuryOpen=false; renderHub(); }
+function renderTreasury(){
+  const wrap=$('#hubWrap'); if(!wrap) return;
+  const chests=chestsArr();
+  const keyInv=[1,2,3].map(t=>`${chestType(t).keyIcon} ${chestType(t).keyName.split(' ')[0]}: <b>${keyCount(t)}</b>`).join(' · ');
+  let list;
+  if(!chests.length){
+    list=`<div class="empty">Сундуков нет. Их находят в странствиях по мирам — чем глубже биом, тем богаче сундук.</div>`;
+  } else {
+    const rows=chests.map((c,i)=>{
+      const ct=chestType(c.tier);
+      const haveKey=keyCount(c.tier)>0;
+      const fc=ct.forgeCost;
+      const canForgeOpen=S.gold>=fc.gold&&S.dust>=fc.dust;
+      return `<div class="chest-row">
+        <span class="chest-ic">${ct.icon}</span>
+        <span class="chest-name">${ct.name}<br><span class="chest-sub">${ct.zones} ${ct.zones===1?'замок':'замка'} · ${BIOME_TIERLABEL[c.tier].split(' · ')[0]}</span></span>
+        <button class="btn ${haveKey?'':'ghost'} chest-key" data-open="${i}" ${haveKey?'':'disabled'}>${ct.keyIcon} Ключ${haveKey?` (${keyCount(c.tier)})`:' нет'}</button>
+        <button class="btn ghost chest-forge" data-forge="${i}" ${canForgeOpen?'':'disabled'}>⚒️ ${fc.gold}🪙+${fc.dust}✦</button>
+      </div>`;
+    }).join('');
+    list=`<div class="chest-list">${rows}</div>`;
+  }
+  wrap.innerHTML=`<div class="panel" style="margin:0">
+    <div class="screen-bar" style="margin-top:0"><button class="home-btn" id="treasBack">← Поселение</button>
+      <span class="screen-bar-title">🎁 Сокровищница</span></div>
+    <p class="lede">Сундуки, добытые в странствиях. Открой ключом (подбор замка → лучший лут) или в кузне за ресурсы (наверняка).</p>
+    <div class="chest-keys-inv">Ключи: ${keyInv}</div>
+    ${list}
+  </div>`;
+  $('#treasBack').onclick=closeTreasury;
+  wrap.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openChestWithKey(+b.dataset.open));
+  wrap.querySelectorAll('[data-forge]').forEach(b=>b.onclick=()=>openChestWithForge(+b.dataset.forge));
 }
 /* ======================= ТОЧКИ ИНТЕРЕСА (ПОЛЁТ-ИССЛЕДОВАНИЕ) =======================
    При каждом заходе на карте биома появляется 3-4 случайные точки. */
@@ -2304,8 +2347,6 @@ function renderLedger(){
   $('#gold').textContent=S.gold;
   $('#eggs').textContent=eggCount();
   $('#count').textContent=S.dragons.length;
-  $('#species').textContent=SPECIES.length;
-  $('#relics').textContent=S.artifacts.length;
   $('#dust').textContent=S.dust;
   const pl=$('#tbPlace'); if(pl) pl.textContent=S.settlement||'Драконьи Земли';
 }
@@ -2483,30 +2524,32 @@ function renderDetail(d){
             <span class="nature-badge">${natureById(d.nature).icon} ${natureById(d.nature).name}</span>
             <span class="nature-desc">${natureById(d.nature).desc}${natureById(d.nature).up?` (${GENE_ICON[natureById(d.nature).up]}+ / ${GENE_ICON[natureById(d.nature).down]}−)`:''}</span>
           </div>
-          <div class="equip-head">Геном
-            <span class="gene-gen">поколение ${d.gen||1}</span>
-            <span class="equip-sum">бюджет ${geneSum(d.genes)}/${GENE_BUDGET_MAX}${isPerfect(d.genes)?' · <b style="color:var(--gold)">ИДЕАЛ ✦</b>':''}</span>
-          </div>
-          <div class="gene-hint-mut">Мутация усиливает выбранный стат ценой другого. Изредка — растит общий бюджет.</div>
-          <div class="gene-rows">
-            ${GENE_KEYS.map(k=>{
-              const v=d.genes[k]||0;
-              const pips=Array.from({length:GENE_MAX},(_,i)=>`<i class="${i<v?'on':''}"></i>`).join('');
-              const mcost=mutateCost(d);
-              return `<div class="gene-row">
-                <span class="gene-name">${GENE_ICON[k]} ${GENE_LABEL[k]}</span>
-                <span class="pips big">${pips}</span>
-                <span class="gene-val">${v}/${GENE_MAX}</span>
-                <button class="gene-mut" data-mut="${k}" ${S.dust<mcost||v>=GENE_MAX?'disabled':''} title="Усилить ${GENE_LABEL[k]} за ${mcost} пыли (ценой другого стата)">⟳ ${mcost}✦</button>
-              </div>`;
-            }).join('')}
-          </div>
-          <div class="gene-foot">
-            ${d.genes.spark
-              ? '<span class="gene-spark-line">✦ Искра рода горит — +8% ко всем статам</span>'
-              : `<button class="btn ghost gene-spark-btn" id="sparkBtn" ${S.dust<SPARK_DUST?'disabled':''}>Зажечь искру&nbsp;·&nbsp;${SPARK_DUST}✦</button>`}
-            <button class="btn ghost" id="toRoostBtn">В Гнездилище →</button>
-          </div>
+          <details class="gene-details">
+            <summary class="gene-summary">
+              <span>🧬 Геном <span class="gene-gen">поколение ${d.gen||1}</span></span>
+              <span class="equip-sum">бюджет ${geneSum(d.genes)}/${GENE_BUDGET_MAX}${d.genes.spark?' · ✦':''}${isPerfect(d.genes)?' <b style="color:var(--gold)">ИДЕАЛ</b>':''}</span>
+            </summary>
+            <div class="gene-hint-mut">Мутация усиливает выбранный стат ценой другого. Изредка — растит общий бюджет.</div>
+            <div class="gene-rows">
+              ${GENE_KEYS.map(k=>{
+                const v=d.genes[k]||0;
+                const pips=Array.from({length:GENE_MAX},(_,i)=>`<i class="${i<v?'on':''}"></i>`).join('');
+                const mcost=mutateCost(d);
+                return `<div class="gene-row">
+                  <span class="gene-name">${GENE_ICON[k]} ${GENE_LABEL[k]}</span>
+                  <span class="pips big">${pips}</span>
+                  <span class="gene-val">${v}/${GENE_MAX}</span>
+                  <button class="gene-mut" data-mut="${k}" ${S.dust<mcost||v>=GENE_MAX?'disabled':''} title="Усилить ${GENE_LABEL[k]} за ${mcost} пыли (ценой другого стата)">⟳ ${mcost}✦</button>
+                </div>`;
+              }).join('')}
+            </div>
+            <div class="gene-foot">
+              ${d.genes.spark
+                ? '<span class="gene-spark-line">✦ Искра рода горит — +8% ко всем статам</span>'
+                : `<button class="btn ghost gene-spark-btn" id="sparkBtn" ${S.dust<SPARK_DUST?'disabled':''}>Зажечь искру&nbsp;·&nbsp;${SPARK_DUST}✦</button>`}
+              <button class="btn ghost" id="toRoostBtn">В Гнездилище →</button>
+            </div>
+          </details>
         </div>
         <div class="btnrow">
           <button class="btn ghost" id="restBtn" ${d.curHp>=st.maxHp?'disabled':''}>Отдых&nbsp;·&nbsp;🪙${restCost(d)}</button>
@@ -2785,6 +2828,7 @@ function hubBadge(v){
   return '';
 }
 function renderHub(){
+  S._treasuryOpen=false;
   const wrap=$('#hubWrap');
   if(!wrap) return;
   const spots=HUB_SPOTS.map(sp=>{
@@ -2813,10 +2857,14 @@ function renderHub(){
     </div>
     <div class="hub-hint-row">
       <p class="hub-hint">Нажми на любое строение, чтобы отправиться туда.</p>
-      ${ownedCount?`<button class="btn ghost hub-deco-btn" id="decoBtn">🎨 Украшения (${ownedCount})</button>`:''}
+      <div class="hub-btns">
+        <button class="btn ghost hub-deco-btn" id="treasBtn">🎁 Сокровищница${chestCount()?` (${chestCount()})`:''}</button>
+        ${ownedCount?`<button class="btn ghost hub-deco-btn" id="decoBtn">🎨 Украшения (${ownedCount})</button>`:''}
+      </div>
     </div>`;
   wrap.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
   const db=$('#decoBtn'); if(db) db.onclick=openDecorManager;
+  const tb=$('#treasBtn'); if(tb) tb.onclick=openTreasury;
 }
 
 // управление украшениями: разместить/убрать по слотам
@@ -4091,30 +4139,6 @@ function renderForge(){
     </div>
     ${fl<SMITHY_MAX?`<button class="btn" id="smithyUpBtn">Улучшить кузню</button>`:'<span class="smithy-max">Мастерская мастеров ✦</span>'}
   </div>`;
-  // сокровищница сундуков
-  const chests=chestsArr();
-  let chestBlock='';
-  if(chests.length){
-    const rows=chests.map((c,i)=>{
-      const ct=chestType(c.tier);
-      const haveKey=keyCount(c.tier)>0;
-      const fc=ct.forgeCost;
-      const canForgeOpen=S.gold>=fc.gold&&S.dust>=fc.dust;
-      return `<div class="chest-row">
-        <span class="chest-ic">${ct.icon}</span>
-        <span class="chest-name">${ct.name}<br><span class="chest-sub">${ct.zones} ${ct.zones===1?'замок':'замка'}</span></span>
-        <button class="btn ${haveKey?'':'ghost'} chest-key" data-open="${i}" ${haveKey?'':'disabled'}>${ct.keyIcon} Ключ${haveKey?` (${keyCount(c.tier)})`:' нет'}</button>
-        <button class="btn ghost chest-forge" data-forge="${i}" ${canForgeOpen?'':'disabled'}>⚒️ ${fc.gold}🪙+${fc.dust}✦</button>
-      </div>`;
-    }).join('');
-    const keyInv=[1,2,3].filter(t=>keyCount(t)>0).map(t=>`${chestType(t).keyIcon}×${keyCount(t)}`).join(' · ')||'нет ключей';
-    chestBlock=`<div class="chest-panel">
-      <h3 class="forge-sub">🎁 Сундуки <span class="dmeta">(${chests.length})</span></h3>
-      <div class="chest-keys-inv">Ключи: ${keyInv}</div>
-      <div class="chest-list">${rows}</div>
-      <p class="hint">Ключ запускает подбор замка (мастерство → лучший лут). Кузня вскрывает за ресурсы наверняка.</p>
-    </div>`;
-  }
 
   // артефактная часть (только если есть артефакты)
   let artLayout='';
@@ -4180,7 +4204,6 @@ function renderForge(){
 
   body.innerHTML=`
     ${smithyHeader}
-    ${chestBlock}
     ${artLayout}`;
 
   if(!noArt){
@@ -4198,7 +4221,6 @@ function renderForge(){
       an.onclick=()=>grid.scrollBy({left:amt(),behavior:'smooth'});
       const upd=()=>{ap.classList.toggle('hidden',grid.scrollLeft<=4);an.classList.toggle('hidden',grid.scrollLeft+grid.clientWidth>=grid.scrollWidth-4);};
       grid.addEventListener('scroll',upd,{passive:true}); setTimeout(upd,50);
-      // прокрутить к выбранному
       const selCard=[...grid.children].find(c=>c.classList.contains('sel'));
       if(selCard) setTimeout(()=>selCard.scrollIntoView({inline:'center',block:'nearest'}),30);
     }
@@ -4207,9 +4229,6 @@ function renderForge(){
     const rb=$('#recycleBtn');
     if(rb) rb.onclick=()=>recycleArtifact(inst.invUid);
   }
-  // сундуки: обработчики
-  body.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openChestWithKey(+b.dataset.open));
-  body.querySelectorAll('[data-forge]').forEach(b=>b.onclick=()=>openChestWithForge(+b.dataset.forge));
   const sb=$('#smithyUpBtn');
   if(sb) sb.onclick=openSmithyUpgrade;
 }
@@ -4518,6 +4537,7 @@ function ensureScreenBar(v){
   sec.insertBefore(bar, sec.firstChild);
 }
 function switchView(v){
+  if(v!=='hub') S._treasuryOpen=false;
   $$('.view').forEach(s=>s.classList.toggle('on',s.id===v));
   ensureScreenBar(v);
   if(v==='hub')renderHub();
