@@ -45,47 +45,26 @@
   #app{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding:18px 16px 90px}
 
   /* Header */
-  header.crest{
-    text-align:center;padding:22px 8px 8px;position:relative;
-  }
-  .crest-frame{
-    display:inline-block;position:relative;padding:6px 54px;
-  }
-  .crest-frame::before,.crest-frame::after{
-    content:"";position:absolute;top:50%;width:42px;height:42px;transform:translateY(-50%);
-    background-size:contain;background-repeat:no-repeat;background-position:center;opacity:.85;
-  }
-  .crest-frame::before{left:0;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23caa14a'%3E%3Cpath d='M22 6c-3 0-6 2-8 5-1-2-3-3-5-3 1 2 1 4 0 6 2 0 4-1 5-3 1 3 3 5 6 5-2-1-3-3-3-5 2 1 4 1 5-1-2 0-3-1-3-3 2 0 4-1 6-3z'/%3E%3C/svg%3E");
-    transform:translateY(-50%) scaleX(-1)}
-  .crest-frame::after{right:0;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23caa14a'%3E%3Cpath d='M22 6c-3 0-6 2-8 5-1-2-3-3-5-3 1 2 1 4 0 6 2 0 4-1 5-3 1 3 3 5 6 5-2-1-3-3-3-5 2 1 4 1 5-1-2 0-3-1-3-3 2 0 4-1 6-3z'/%3E%3C/svg%3E")}
-  .crest h1{
-    font-family:'Cinzel',serif;font-weight:700;letter-spacing:.16em;
-    margin:0;font-size:clamp(28px,5.4vw,50px);
-    color:transparent;background:linear-gradient(180deg,#f8e2a0,#d9a441 48%,#9a7430);
-    -webkit-background-clip:text;background-clip:text;
-    text-shadow:0 2px 1px rgba(0,0,0,.5),0 0 22px rgba(217,164,65,.18);
-  }
-  .crest .sub{font-style:italic;color:var(--ink-dim);letter-spacing:.06em;margin-top:4px;font-size:14px}
-  .rule{height:2px;background:
-    radial-gradient(circle at center,var(--gold) 0,transparent 2px) center/8px 2px,
-    linear-gradient(90deg,transparent,var(--edge) 20%,var(--gold-soft) 50%,var(--edge) 80%,transparent);
-    margin:12px auto;max-width:640px;opacity:.9}
-
-  /* Resource bar */
-  .ledger{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:6px 0 4px}
-  .coin{
-    display:flex;align-items:center;gap:7px;
-    background:linear-gradient(180deg,var(--panel2),var(--panel));
-    border:1px solid var(--edge);border-radius:4px;padding:7px 14px;font-family:'Cinzel';font-size:14px;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 3px 8px rgba(0,0,0,.3);
-  }
-  .coin b{color:var(--gold);font-weight:600}
-  .coin .ic{font-size:16px;filter:drop-shadow(0 1px 1px #000)}
+  /* Компактная полоса ресурсов (одна строка, вверху, липкая) */
+  .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    gap:10px;flex-wrap:nowrap;background:linear-gradient(180deg,rgba(30,22,14,.98),rgba(24,17,11,.98));
+    border-bottom:1px solid var(--gold-soft);padding:8px 16px;margin:-18px -16px 12px;
+    box-shadow:0 3px 12px rgba(0,0,0,.4);backdrop-filter:blur(4px)}
+  .topbar-place{font-family:'Cinzel';font-size:clamp(12px,2.3vw,16px);color:var(--gold);letter-spacing:.03em;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:1;min-width:0}
+  .topbar-place b{font-weight:600;color:var(--gold)}
+  .topbar-res{display:flex;gap:12px;flex-shrink:0}
+  .tb-item{display:flex;align-items:center;gap:3px;font-family:'Cinzel';font-size:clamp(12px,2vw,15px);color:#ffe9c0;white-space:nowrap}
+  .tb-item b{color:var(--gold);font-weight:600}
+  .tb-dim{color:var(--ink-dim);font-size:.85em}
+  @media(max-width:480px){ .topbar-res{gap:8px} .tb-item{font-size:12px} .topbar{padding:7px 12px;margin:-18px -16px 10px} }
 
   /* Nav tabs */
   nav.tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:16px 0 8px}
+  .risk-tag{display:inline-block;font-family:'Cinzel';font-size:11px;padding:1px 8px;border-radius:8px;letter-spacing:.03em}
+  .risk-tag.hard{background:rgba(197,84,74,.25);color:#e88;border:1px solid rgba(197,84,74,.5)}
+  .risk-tag.even{background:rgba(217,164,65,.18);color:var(--gold);border:1px solid var(--gold-soft)}
+  .risk-tag.easy{background:rgba(127,178,74,.18);color:#9c4;border:1px solid rgba(127,178,74,.4)}
   .tab{
     font-family:'Cinzel';letter-spacing:.08em;font-size:13px;
     background:linear-gradient(180deg,rgba(53,39,24,.5),transparent);
@@ -163,28 +142,30 @@
   .hub-hint{text-align:center;color:var(--ink-dim);font-style:italic;font-size:13px;margin-top:12px}
   @media(max-width:560px){ .hub-spot-label{opacity:1;transform:none;font-size:9px;padding:1px 5px} }
 
-  /* ===== ФОТО-ХАБ (пейзаж + здания-картинки) ===== */
+  /* ===== ФОТО-ХАБ (нарисованный пейзаж + невидимые клик-зоны) ===== */
   .hub-topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
     background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--gold-soft);
     border-radius:10px;padding:9px 14px;margin-bottom:8px}
   .hub-place{font-family:'Cinzel';font-size:clamp(13px,2.4vw,18px);color:var(--gold);letter-spacing:.04em}
   .hub-res{display:flex;gap:14px;flex-wrap:wrap}
   .hub-res b{font-family:'Cinzel';font-weight:600;font-size:clamp(12px,2vw,15px);color:#ffe9c0}
-  .hub-stage-photo{aspect-ratio:9/16;max-height:78vh;min-height:340px;margin:0 auto;background:#1a1410}
-  @media(min-aspect-ratio:1/1){ .hub-stage-photo{aspect-ratio:16/9;max-height:70vh} }
+  .hub-stage-photo{aspect-ratio:768/1376;max-height:80vh;min-height:340px;margin:0 auto;background:#1a1410;max-width:520px}
   .hub-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
   .hub-bg-fallback{background:linear-gradient(180deg,#3a2450,#8a4a52 45%,#d97a42 75%,#f0a850)}
-  /* здания «приземляются» нижним краём в точку привязки */
-  .hub-spot-photo{width:auto;height:auto}
-  .hub-spot .hub-spot-photo{transform-origin:bottom center}
-  .hub-spot-img{display:block;width:calc(clamp(54px,13vw,120px) * var(--bscale,1));height:auto;
-    filter:drop-shadow(0 6px 8px rgba(0,0,0,.55))}
-  .hub-spot-photo svg{width:calc(clamp(48px,10vw,80px) * var(--bscale,1));height:auto}
-  /* у фото-зданий привязка по нижнему краю (центр-низ на точке) */
-  .hub-stage-photo .hub-spot{transform:translate(-50%,-100%)}
-  .hub-stage-photo .hub-spot:hover{transform:translate(-50%,-100%) scale(1.08)}
-  .hub-stage-photo .hub-spot-label{margin-top:2px}
-  .hub-stage-photo .hub-spot-badge{top:6px;right:-2px}
+  /* невидимая кликабельная зона поверх нарисованного здания */
+  .hub-zone{position:absolute;transform:translate(-50%,-50%);z-index:5;cursor:pointer;
+    background:transparent;border:2px solid transparent;border-radius:14px;padding:0;
+    display:flex;align-items:flex-end;justify-content:center;transition:.16s}
+  .hub-zone:hover,.hub-zone:focus{background:radial-gradient(ellipse at center,rgba(255,220,140,.18),transparent 70%);
+    border-color:rgba(255,220,140,.55);box-shadow:0 0 22px rgba(255,200,120,.35);outline:none}
+  .hub-zone-label{font-family:'Cinzel';font-size:clamp(10px,1.7vw,13px);color:#fff;letter-spacing:.04em;
+    background:rgba(20,12,8,.82);border:1px solid rgba(217,164,65,.6);border-radius:10px;padding:2px 10px;white-space:nowrap;
+    opacity:0;transform:translateY(8px);transition:.16s;margin-bottom:-10px;pointer-events:none}
+  .hub-zone:hover .hub-zone-label,.hub-zone:focus .hub-zone-label{opacity:1;transform:translateY(0)}
+  .hub-zone-badge{position:absolute;top:6px;right:6px;min-width:20px;height:20px;border-radius:10px;
+    background:var(--ember);color:#fff;font-size:12px;font-family:'Cinzel';display:flex;align-items:center;justify-content:center;
+    padding:0 5px;box-shadow:0 2px 6px rgba(0,0,0,.6);animation:badgepulse 1.8s ease-in-out infinite}
+  @media(max-width:560px){ .hub-zone-label{opacity:1;transform:none;font-size:9px;padding:1px 6px} }
 
   /* шапка экрана с возвратом на хаб */
   .screen-bar{display:flex;align-items:center;gap:12px;margin:10px 0 4px}
@@ -493,6 +474,20 @@
   .bar > i{display:block;height:100%;border-radius:5px;transition:width .5s ease}
   .bar.hp > i{background:linear-gradient(90deg,#e07a5f,var(--hp))}
   .bar.xp > i{background:linear-gradient(90deg,#74c0dc,var(--xp))}
+  .bar.mn > i{background:linear-gradient(90deg,#5a8fd8,#8ac0ff)}
+  .hpwrap.mana{margin-top:4px}
+  .mana-meta{color:#8ac0ff !important;font-size:11px}
+  .mana-cost{font-size:11px;color:#8ac0ff;font-family:'Cinzel'}
+  .need-mana{color:#c5544a;font-size:11px}
+  .mana-log{color:#8ac0ff}
+  /* значки зон в мини-игре ульты */
+  .ult-card .timing-bar{margin-bottom:10px}
+  .ult-badge{position:absolute;left:4px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;
+    background:rgba(0,0,0,.5);color:#fff;font-size:12px;font-family:'Cinzel';display:flex;align-items:center;justify-content:center;border:1px solid var(--gold-soft)}
+  .ult-badge.ok{background:rgba(127,178,74,.8);border-color:#7fb24a}
+  .ult-badge.ok-crit{background:rgba(255,210,74,.9);border-color:#ffd24a;color:#1a1410}
+  .ult-badge.miss{background:rgba(197,84,74,.8);border-color:#c5544a}
+  .timing-marker.locked{opacity:.4}
   .statline{display:flex;justify-content:space-between;font-size:12px;color:var(--ink-dim);margin-top:8px}
   .statline b{color:var(--ink);font-family:'Cinzel'}
 
@@ -729,19 +724,16 @@
 <body>
 <div id="startScreen" class="start-screen" style="display:none"></div>
 <div id="app">
-  <header class="crest">
-    <div class="crest-frame"><h1>Драконис</h1></div>
-    <div class="sub">Кодекс Чешуи · хроника драконоводов</div>
-  </header>
-
-  <div class="ledger">
-    <div class="coin"><span class="ic">🪙</span><span>Золото&nbsp;<b id="gold">0</b></span></div>
-    <div class="coin"><span class="ic">🥚</span><span>Яйца&nbsp;<b id="eggs">0</b></span></div>
-    <div class="coin"><span class="ic">🐉</span><span>Драконы&nbsp;<b id="count">0</b>/<span id="species">0</span></span></div>
-    <div class="coin"><span class="ic">💠</span><span>Реликвии&nbsp;<b id="relics">0</b></span></div>
-    <div class="coin"><span class="ic">✦</span><span>Пыль&nbsp;<b id="dust">0</b></span></div>
+  <div class="topbar" id="topbar">
+    <span class="topbar-place">🏰 <b id="tbPlace">Драконьи Земли</b></span>
+    <span class="topbar-res">
+      <span class="tb-item">🪙<b id="gold">0</b></span>
+      <span class="tb-item">🥚<b id="eggs">0</b></span>
+      <span class="tb-item">🐉<b id="count">0</b><span class="tb-dim">/<span id="species">0</span></span></span>
+      <span class="tb-item">💠<b id="relics">0</b></span>
+      <span class="tb-item">✦<b id="dust">0</b></span>
+    </span>
   </div>
-  <div class="rule"></div>
 
   <!-- HUB (главный экран) -->
   <section class="view on" id="hub">
@@ -1210,7 +1202,11 @@ const artifactById = id => ARTIFACTS.find(a=>a.id===id);
 
 // стоимость ковки артефакта со своего текущего уровня на следующий (мягкая, без долгого гринда)
 function forgeCost(art, level){
-  return Math.round((15 + art.rarity*8) * Math.pow(1.32, level-1));
+  return Math.round((15 + art.rarity*8) * Math.pow(1.5, level-1));
+}
+// доп. расход пыли на высоких уровнях ковки (с 5-го): делает пыль дефицитной
+function forgeDustCost(level){
+  return level>=5 ? (level-4)*10 : 0;
 }
 const FORGE_MAX = 8;
 
@@ -1265,8 +1261,8 @@ const QUEST_POOL = [
   {id:'feed',      icon:'🍖', text:'Покорми дракона', goalBase:2, unit:'раз', reward:{gold:90}},
   {id:'pet',       icon:'💖', text:'Погладь дракона', goalBase:2, unit:'раз', reward:{gold:90}},
 ];
-const IDLE_RATE_PER_DRAGON = 0.6; // золота в минуту с каждого уровня суммарно — приятный бонус за возвращение
-const IDLE_CAP_HOURS = 8;         // максимум накопления offline
+const IDLE_RATE_PER_DRAGON = 0.32; // золота в минуту с каждого уровня суммарно — приятный бонус, но не замена активной игре
+const IDLE_CAP_HOURS = 5;         // максимум накопления offline
 
 /* ===== ГЕНЕТИКА =====
    У каждого дракона геном из 4 статовых генов (атка/защ/жизнь/прыть).
@@ -1307,7 +1303,7 @@ function genomeAvgMult(genes){
 }
 
 // пологая кривая: до ур.100 реально дойти (~линейный рост требований)
-const xpToNext = lvl => 30 + lvl*12;
+const xpToNext = lvl => Math.round(40 + lvl*10 + lvl*lvl*0.8);
 const speciesById = id => SPECIES.find(s=>s.id===id);
 
 // найти экземпляр артефакта в инвентаре по invUid
@@ -1569,10 +1565,17 @@ function breedDragons(a,b){
   questEvent('breed'); persist();
   return child;
 }
+// стоимость следующей мутации растёт с числом уже сделанных этому дракону
+function mutateCost(d){
+  const n=d.mutations||0;
+  return MUTATE_DUST + n*6; // 8,14,20,26,...
+}
 // точечная мутация одного гена за пыль (±, с уклоном вверх)
 function mutateGene(d,key){
-  if(S.dust<MUTATE_DUST){toast('Недостаёт пыли для мутации.');return;}
-  S.dust-=MUTATE_DUST;
+  const cost=mutateCost(d);
+  if(S.dust<cost){toast(`Недостаёт пыли для мутации (нужно ${cost}✦).`);return;}
+  S.dust-=cost;
+  d.mutations=(d.mutations||0)+1;
   const roll=Math.random();
   let delta;
   if(roll<0.55) delta=1;          // чаще улучшение
@@ -1592,7 +1595,7 @@ function mutateGene(d,key){
   renderLedger();renderLair();
 }
 // редкая искусственная искра за много пыли
-const SPARK_DUST=30;
+const SPARK_DUST=70;
 function igniteSpark(d){
   if(d.genes.spark){toast('Искра уже горит в этом драконе.');return;}
   if(S.dust<SPARK_DUST){toast(`Нужно ${SPARK_DUST} ✦ пыли, чтобы зажечь искру.`);return;}
@@ -1617,8 +1620,9 @@ function renderLedger(){
   $('#species').textContent=SPECIES.length;
   $('#relics').textContent=S.artifacts.length;
   $('#dust').textContent=S.dust;
-  $('#hatchBtn').disabled = S.eggs<1;
-  $('#buyEggBtn').disabled = S.gold<30;
+  const pl=$('#tbPlace'); if(pl) pl.textContent=S.settlement||'Драконьи Земли';
+  if($('#hatchBtn')) $('#hatchBtn').disabled = S.eggs<1;
+  if($('#buyEggBtn')) $('#buyEggBtn').disabled = S.gold<30;
 }
 
 function elTag(el){const e=ELEMENTS[el];return `<span class="elem-tag ${e.cls}">${e.name}</span>`;}
@@ -1798,11 +1802,12 @@ function renderDetail(d){
             ${GENE_KEYS.map(k=>{
               const v=d.genes[k]||0;
               const pips=Array.from({length:GENE_MAX},(_,i)=>`<i class="${i<v?'on':''}"></i>`).join('');
+              const mcost=mutateCost(d);
               return `<div class="gene-row">
                 <span class="gene-name">${GENE_ICON[k]} ${GENE_LABEL[k]}</span>
                 <span class="pips big">${pips}</span>
                 <span class="gene-val">${v}/${GENE_MAX}</span>
-                <button class="gene-mut" data-mut="${k}" ${S.dust<MUTATE_DUST||v>=GENE_MAX?'disabled':''} title="Мутировать ген за ${MUTATE_DUST} пыли">⟳ ${MUTATE_DUST}✦</button>
+                <button class="gene-mut" data-mut="${k}" ${S.dust<mcost||v>=GENE_MAX?'disabled':''} title="Мутировать ген за ${mcost} пыли">⟳ ${mcost}✦</button>
               </div>`;
             }).join('')}
           </div>
@@ -1971,15 +1976,17 @@ function hubSceneSVG(){
   </svg>`;
 }
 // постройки-ссылки: иконка-рисунок, подпись, позиция (% сцены), экран
+// Координаты и размеры кликабельных зон (в % от размера фона).
+// w/h — ширина/высота невидимой зоны в % (чтобы попадать по зданию).
 const HUB_SPOTS=[
-  {v:'explore',label:'Странствия', x:22, y:46, art:'portal', s:1.0},
-  {v:'roost',  label:'Гнездилище', x:45, y:44, art:'altar',  s:1.0},
-  {v:'spire',  label:'Шпиль',      x:71, y:42, art:'tower',  s:1.5},
-  {v:'lair',   label:'Логово',     x:14, y:66, art:'castle', s:1.2},
-  {v:'forge',  label:'Кузница',    x:50, y:70, art:'forge',  s:1.1},
-  {v:'codex',  label:'Кодекс',     x:65, y:80, art:'book',   s:1.0},
-  {v:'hatch',  label:'Гнездо',     x:33, y:82, art:'nest',   s:0.85},
-  {v:'arena',  label:'Турнир',     x:85, y:74, art:'arena',  s:1.1},
+  {v:'explore',label:'Странствия', x:18, y:37, w:22, h:16},
+  {v:'roost',  label:'Гнездилище', x:48, y:35, w:20, h:15},
+  {v:'spire',  label:'Шпиль',      x:82, y:30, w:20, h:24},
+  {v:'lair',   label:'Логово',     x:15, y:62, w:24, h:20},
+  {v:'forge',  label:'Кузница',    x:47, y:62, w:22, h:18},
+  {v:'codex',  label:'Кодекс',     x:80, y:63, w:22, h:18},
+  {v:'hatch',  label:'Гнездо',     x:32, y:83, w:20, h:15},
+  {v:'arena',  label:'Турнир',     x:72, y:86, w:26, h:16},
 ];
 function hubSpotArt(art){
   switch(art){
@@ -2006,21 +2013,13 @@ function renderHub(){
   if(!wrap) return;
   const spots=HUB_SPOTS.map(sp=>{
     const badge=hubBadge(sp.v);
-    // фото-здание с SVG-фолбэком, если файла нет
-    const svgEsc=hubSpotArt(sp.art).replace(/"/g,'&quot;');
-    const img=`<img class="hub-spot-img" src="images/hub_${sp.v}.png" alt=""
-        onerror="this.outerHTML=this.getAttribute('data-fb')" data-fb="${svgEsc}">`;
-    return `<button class="hub-spot" data-go="${sp.v}" style="left:${sp.x}%;top:${sp.y}%;--bscale:${sp.s||1}">
-      <span class="hub-spot-art hub-spot-photo">${img}</span>
-      <span class="hub-spot-label">${sp.label}</span>
-      ${badge?`<span class="hub-spot-badge">${badge}</span>`:''}
+    return `<button class="hub-zone" data-go="${sp.v}"
+        style="left:${sp.x}%;top:${sp.y}%;width:${sp.w}%;height:${sp.h}%">
+      <span class="hub-zone-label">${sp.label}</span>
+      ${badge?`<span class="hub-zone-badge">${badge}</span>`:''}
     </button>`;
   }).join('');
   wrap.innerHTML=`
-    <div class="hub-topbar">
-      <span class="hub-place">🏰 ${S.settlement||'Драконьи Земли'}</span>
-      <span class="hub-res"><b>🪙 ${S.gold}</b><b>🥚 ${S.eggs}</b><b>🐉 ${S.dragons.length}</b><b>✦ ${S.dust}</b></span>
-    </div>
     <div class="hub-stage hub-stage-photo">
       <img class="hub-bg" src="images/hub_bg.png" alt=""
         onerror="this.style.display='none';this.parentNode.classList.add('hub-bg-fallback')">
@@ -2545,16 +2544,20 @@ function renderArenaPicker(){
       const lvl=Math.max(1,me.level+delta);
       const sp=weightedSpecies();
       const foeMorph=rollMorph();
-      const reward=Math.round(lvl* (8+sp.rarity*4) * (morphById(foeMorph).id==='common'?1:1.2));
+      // множитель за риск: враг выше твоего уровня — щедрее, слабее — скромнее
+      const riskMult = delta>0 ? 1.5 : (delta<0 ? 0.7 : 1.0);
+      const reward=Math.round(lvl* (8+sp.rarity*4) * (morphById(foeMorph).id==='common'?1:1.2) * riskMult);
       const card=document.createElement('div');
       card.className='dcard';
+      const riskTag = delta>0?'<span class="risk-tag hard">⚔️ Сильнее</span>':(delta<0?'<span class="risk-tag easy">Слабее</span>':'<span class="risk-tag even">Равный</span>');
       card.innerHTML=`
         <span class="lvlpill">ур.${lvl}</span>
         <span class="star">${'★'.repeat(sp.rarity)}</span>
         ${sigilHTML(sp,foeMorph,'sigil',lvl)}
         <div class="dname">Дикий ${sp.name}</div>
         ${elTag(sp.el)} ${morphBadge(foeMorph)}
-        <div class="dmeta" style="margin-top:8px;color:var(--gold)">Награда 🪙${reward}</div>`;
+        <div style="margin-top:6px">${riskTag}</div>
+        <div class="dmeta" style="margin-top:6px;color:var(--gold)">Награда 🪙${reward}</div>`;
       card.onclick=()=>startBattle(me,{id:sp.id,level:lvl,morph:foeMorph},reward);
       foes.appendChild(card);
     });
@@ -2572,13 +2575,18 @@ function makeCombatant(d,isFoe){
   const ults = unlocked.filter(n=>n.kind==='ult');
   const topSpell = spells.length? spells[spells.length-1] : null;
   const topUlt = ults.length? ults[ults.length-1] : null;
+  // мана: «магические» стихии (буря, тень) выносливее; старт — треть
+  const manaMax = (sp.el==='storm'||sp.el==='shade') ? 8 : 6;
   return {uid:d.uid,ref:isFoe?null:d,sp,el:sp.el,morph:d.morph||'common',
     level:d.level,maxHp:st.maxHp,hp:isFoe?st.maxHp:d.curHp,
     atk:st.atk,def:st.def,spd:st.spd,isFoe,
-    spell: topSpell? {n:topSpell.name, icon:topSpell.icon, pow:1.45, t:topSpell.desc, isSpell:true} : null,
-    ult: topUlt? {n:topUlt.name, icon:topUlt.icon, pow:2.4, t:topUlt.desc, isUlt:true, heal: topUlt.lvl===100} : null,
+    mana:2, manaMax,
+    spell: topSpell? {n:topSpell.name, icon:topSpell.icon, pow:1.45, t:topSpell.desc, isSpell:true, manaCost:3} : null,
+    ult: topUlt? {n:topUlt.name, icon:topUlt.icon, pow:2.4, t:topUlt.desc, isUlt:true, heal: topUlt.lvl===100, manaCost:6} : null,
     ultUsed:false};
 }
+const MANA_REGEN_BASIC=1; // мана за обычный удар
+const MANA_REGEN_GUARD=2; // мана за защиту (защита копит ману)
 
 function startBattle(myDragon,foeSpec,reward){
   const foeDragon={id:foeSpec.id,level:foeSpec.level,xp:0,curHp:0,morph:foeSpec.morph||'common'};
@@ -2608,8 +2616,12 @@ function renderBattle(){
   const stage=$('#battleStage');
   const hpBar=c=>`<div class="hpwrap"><div class="bar hp"><i style="width:${Math.max(0,c.hp/c.maxHp*100)}%"></i></div></div>
     <div class="dmeta" style="margin-top:3px">${Math.max(0,c.hp)}/${c.maxHp}</div>`;
+  const manaBar=c=>`<div class="hpwrap mana"><div class="bar mn"><i style="width:${Math.max(0,c.mana/c.manaMax*100)}%"></i></div></div>
+    <div class="dmeta mana-meta">💧 ${c.mana}/${c.manaMax}</div>`;
   const moves = MOVES[b.me.el].map((m,i)=>({...m,key:'m'+i}));
   const elScene={fire:'fire',venom:'jungle',frost:'ice',storm:'ice',shade:'shade'}[b.foe.el]||'shade';
+  const canSpell = b.me.spell && b.me.mana>=b.me.spell.manaCost;
+  const canUlt = b.me.ult && b.me.mana>=b.me.ult.manaCost;
   stage.innerHTML=`
   <div class="arena">
     <div class="arena-bg">${sceneSVG(elScene,'battle')}</div>
@@ -2619,6 +2631,7 @@ function renderBattle(){
         <div class="fname">${b.me.sp.name} <span style="color:var(--ink-dim)">ур.${b.me.level}</span></div>
         ${elTag(b.me.el)} ${morphBadge(b.me.morph)}
         ${hpBar(b.me)}
+        ${manaBar(b.me)}
       </div>
       <div class="versus">⚔</div>
       <div class="fighter" id="fFoe">
@@ -2626,6 +2639,7 @@ function renderBattle(){
         <div class="fname">Дикий ${b.foe.sp.name} <span style="color:var(--ink-dim)">ур.${b.foe.level}</span></div>
         ${elTag(b.foe.el)} ${morphBadge(b.foe.morph)}
         ${hpBar(b.foe)}
+        ${manaBar(b.foe)}
       </div>
     </div>
   </div>
@@ -2636,10 +2650,10 @@ function renderBattle(){
         <div class="mn">${m.n}</div><div class="md">${m.t}</div></button>`).join('')}
       <button class="move" data-k="guard" ${b.over?'disabled':''}>
         <div class="mn">${GUARD.n}</div><div class="md">${GUARD.t}</div></button>
-      ${b.me.spell?`<button class="move move-spell" data-k="spell" ${b.over?'disabled':''}>
-        <div class="mn">${b.me.spell.icon} ${b.me.spell.n}</div><div class="md">заклинание · ${b.me.spell.t}</div></button>`:''}
-      ${b.me.ult?`<button class="move move-ult" data-k="ult" ${b.over||b.me.ultUsed?'disabled':''}>
-        <div class="mn">⭐ ${b.me.ult.icon} ${b.me.ult.n}</div><div class="md">${b.me.ultUsed?'уже применена':'УЛЬТА · '+b.me.ult.t}</div></button>`:''}
+      ${b.me.spell?`<button class="move move-spell" data-k="spell" ${b.over||!canSpell?'disabled':''}>
+        <div class="mn">${b.me.spell.icon} ${b.me.spell.n} <span class="mana-cost">💧${b.me.spell.manaCost}</span></div><div class="md">заклинание · ${b.me.spell.t}${!canSpell?' <span class="need-mana">(мало маны)</span>':''}</div></button>`:''}
+      ${b.me.ult?`<button class="move move-ult" data-k="ult" ${b.over||!canUlt?'disabled':''}>
+        <div class="mn">⭐ ${b.me.ult.icon} ${b.me.ult.n} <span class="mana-cost">💧${b.me.ult.manaCost}</span></div><div class="md">${!canUlt?'<span class="need-mana">нужно '+b.me.ult.manaCost+'💧</span>':'УЛЬТА · '+b.me.ult.t}</div></button>`:''}
     </div>
     <div class="log" id="battleLog">${b.log.map(l=>`<p>${l}</p>`).join('')}</div>
     <div class="btnrow" id="battleEnd"></div>
@@ -2648,8 +2662,8 @@ function renderBattle(){
     const k=btn.dataset.k;
     let move;
     if(k==='guard') move=GUARD;
-    else if(k==='spell') move=b.me.spell;
-    else if(k==='ult'){ move=b.me.ult; b.me.ultUsed=true; }
+    else if(k==='spell'){ if(b.me.mana<b.me.spell.manaCost)return; move=b.me.spell; }
+    else if(k==='ult'){ if(b.me.mana<b.me.ult.manaCost)return; move=b.me.ult; }
     else move=MOVES[b.me.el][+k.slice(1)];
     playerMove(move);
   });
@@ -2659,8 +2673,8 @@ function renderBattle(){
 function pushLog(html){battle.log.push(html);const lg=$('#battleLog');if(lg){lg.innerHTML=battle.log.map(l=>`<p>${l}</p>`).join('');lg.scrollTop=lg.scrollHeight;}}
 
 function advMult(attEl,defEl){
-  if(ADVANTAGE[attEl]===defEl)return 1.25;
-  if(ADVANTAGE[defEl]===attEl)return 0.85;
+  if(ADVANTAGE[attEl]===defEl)return 1.4;
+  if(ADVANTAGE[defEl]===attEl)return 0.7;
   return 1;
 }
 
@@ -2677,7 +2691,7 @@ function doStrike(att,def,move,labelClass,accMult){
   const mult=advMult(att.el,def.el);
   dmg=Math.round(dmg*mult);
   if(def.guarding){dmg=Math.round(dmg*0.55);def.guarding=false;}
-  const crit=(accMult>=2)|| Math.random()<0.12;
+  const crit=(accMult>=2)|| Math.random()<0.06;
   if(crit && accMult<2)dmg=Math.round(dmg*1.6);
   def.hp-=dmg;
   let extra='';
@@ -2703,11 +2717,24 @@ function playerMove(move){
 
   if(move===GUARD){
     b.me.guarding=true;
+    b.me.mana=Math.min(b.me.manaMax, b.me.mana+MANA_REGEN_GUARD);
     const heal=Math.round(b.me.maxHp*0.08);
     b.me.hp=Math.min(b.me.maxHp,b.me.hp+heal);
     animate('me','cast');
-    pushLog(`${b.me.sp.name} <b>встаёт в защиту</b> и восстанавливает <span class="heal">${heal}</span> жизни.`);
+    pushLog(`${b.me.sp.name} <b>встаёт в защиту</b> и восстанавливает <span class="heal">${heal}</span> жизни. <span class="mana-log">+${MANA_REGEN_GUARD}💧</span>`);
     afterPlayerMove();
+    return;
+  }
+  // трата/восстановление маны
+  if(move.manaCost){
+    b.me.mana=Math.max(0, b.me.mana - move.manaCost);
+  } else {
+    // обычный удар восстанавливает ману
+    b.me.mana=Math.min(b.me.manaMax, b.me.mana+MANA_REGEN_BASIC);
+  }
+  // ультимативный приём — двойная мини-игра (если аркада включена)
+  if(move.isUlt && arcadeEnabled()){
+    startUltMinigame(move);
     return;
   }
   // атакующий приём — запускаем мини-игру тайминга (если включена)
@@ -2778,21 +2805,116 @@ function startTimingStrike(move){
   box.querySelector('#timingSkip').onclick=()=>finish(1.0,null,null);
 }
 
+/* ===== ДВОЙНАЯ МИНИ-ИГРА ДЛЯ УЛЬТЫ =====
+   Два поля подряд. Активация только при попадании в обе области.
+   Крит по центру каждой: обе в центр → сокрушительный ×2.25. */
+function startUltMinigame(move){
+  const stage=$('#battleStage'); if(!stage){resolvePlayerStrike(move,1.5);return;}
+  const box=document.createElement('div');
+  box.className='timing-overlay';
+  box.innerHTML=`
+    <div class="timing-card ult-card">
+      <div class="timing-title">⭐ УЛЬТА: Двойной фокус!</div>
+      <div class="timing-sub">Попади в <b>обе</b> золотые зоны. Центр = крит!</div>
+      <div class="timing-bar" id="ultBar1">
+        <div class="timing-zone good"></div>
+        <div class="timing-zone perfect"></div>
+        <div class="timing-marker" id="ultMarker1"></div>
+        <div class="ult-badge" id="ultBadge1">1</div>
+      </div>
+      <div class="timing-bar" id="ultBar2">
+        <div class="timing-zone good"></div>
+        <div class="timing-zone perfect"></div>
+        <div class="timing-marker" id="ultMarker2" style="left:0%"></div>
+        <div class="ult-badge" id="ultBadge2">2</div>
+      </div>
+      <div class="timing-btns">
+        <button class="btn" id="ultHit">ФОКУС!</button>
+        <button class="btn ghost" id="ultSkip">Пропустить</button>
+      </div>
+    </div>`;
+  stage.appendChild(box);
+  const perfStart=45, perfEnd=55, goodStart=32, goodEnd=68;
+  let phase=1; // 1 → бьём первую зону, 2 → вторую
+  let pos=0, dir=1, raf=null, speed=2.0;
+  let hit1=null; // 'crit' | 'good' | null(промах)
+  const m1=box.querySelector('#ultMarker1'), m2=box.querySelector('#ultMarker2');
+  function tick(){
+    pos+=dir*speed;
+    if(pos>=100){pos=100;dir=-1;} if(pos<=0){pos=0;dir=1;}
+    (phase===1?m1:m2).style.left=pos+'%';
+    raf=requestAnimationFrame(tick);
+  }
+  tick();
+  function zoneResult(){
+    if(pos>=perfStart&&pos<=perfEnd) return 'crit';
+    if(pos>=goodStart&&pos<=goodEnd) return 'good';
+    return null;
+  }
+  function finishUlt(accMult,label,color){
+    cancelAnimationFrame(raf);
+    box.remove();
+    if(label) floatText(label,color);
+    resolvePlayerStrike(move, accMult);
+  }
+  box.querySelector('#ultHit').onclick=()=>{
+    if(phase===1){
+      hit1=zoneResult();
+      // отметим результат первой зоны
+      const badge=box.querySelector('#ultBadge1');
+      badge.classList.add(hit1==='crit'?'ok-crit':(hit1==='good'?'ok':'miss'));
+      m1.classList.add('locked');
+      if(hit1===null){
+        // промах по первой — ульта срывается, бьёт ослабленно, мана уже потрачена
+        return finishUlt(0.6,'ульта сорвалась…','#c5544a');
+      }
+      phase=2; pos=0; dir=1;
+    } else {
+      const hit2=zoneResult();
+      const badge=box.querySelector('#ultBadge2');
+      badge.classList.add(hit2==='crit'?'ok-crit':(hit2==='good'?'ok':'miss'));
+      if(hit2===null){
+        return finishUlt(0.6,'вторая зона мимо…','#c5544a');
+      }
+      // обе зоны поражены → сила по сумме
+      if(hit1==='crit'&&hit2==='crit') finishUlt(2.25,'💥 СОКРУШИТЕЛЬНО!','#ffd24a');
+      else if(hit1==='crit'||hit2==='crit') finishUlt(1.9,'⭐ Мощно!','#ffd24a');
+      else finishUlt(1.5,'✯ Ульта прошла!','#7fb24a');
+    }
+  };
+  box.querySelector('#ultSkip').onclick=()=>finishUlt(1.0,null,null);
+}
+
 function foeTurn(){
   const b=battle;if(b.over)return;
-  const moves=MOVES[b.foe.el];
-  // ИИ: иногда защищается на низком HP
-  let move;
-  if(b.foe.hp/b.foe.maxHp<0.25 && Math.random()<0.3){
-    b.foe.guarding=true;
-    const heal=Math.round(b.foe.maxHp*0.07);b.foe.hp=Math.min(b.foe.maxHp,b.foe.hp+heal);
+  const f=b.foe;
+  // враг тоже владеет маной: копит на заклинание, тратит с умом
+  const hpFrac=f.hp/f.maxHp;
+  let move=null, isSpell=false;
+  // 1) на грани — иногда защищается и копит ману
+  if(hpFrac<0.22 && Math.random()<0.35){
+    f.guarding=true;
+    f.mana=Math.min(f.manaMax,f.mana+1);
+    const heal=Math.round(f.maxHp*0.07);f.hp=Math.min(f.maxHp,f.hp+heal);
     animate('foe','cast');
-    pushLog(`Дикий ${b.foe.sp.name} <b>защищается</b> (+${heal} жизни).`);
-  } else {
-    move = Math.random()<0.4?moves[1]:moves[0];
-    animate('foe','cast');animate('me','hit');
-    doStrike(b.foe,b.me,move);
+    pushLog(`Дикий ${f.sp.name} <b>защищается</b> (+${heal} жизни).`);
+    renderHpOnly();
+    if(b.me.hp<=0){return endBattle(false);}
+    $$('#moveBox .move').forEach(x=>x.disabled=false);
+    return;
   }
+  // 2) есть спелл-мана и достаточно (симулируем сильный удар стихии) — бьёт сильнее
+  const foeSpellCost=3;
+  if(f.mana>=foeSpellCost && Math.random()<0.5){
+    f.mana-=foeSpellCost;
+    move={...MOVES[f.el][0], n:'усиленный '+MOVES[f.el][0].n, pow:1.6};
+    isSpell=true;
+  } else {
+    move = Math.random()<0.4?MOVES[f.el][1]:MOVES[f.el][0];
+    f.mana=Math.min(f.manaMax,f.mana+MANA_REGEN_BASIC);
+  }
+  animate('foe','cast');animate('me','hit');
+  doStrike(f,b.me,move);
   renderHpOnly();
   if(b.me.hp<=0){return endBattle(false);}
   $$('#moveBox .move').forEach(x=>x.disabled=false);
@@ -2800,13 +2922,17 @@ function foeTurn(){
 
 function renderHpOnly(){
   const b=battle;
-  const bars=$$('#battleStage .hpwrap');
-  if(bars[0]){bars[0].querySelector('i').style.width=Math.max(0,b.me.hp/b.me.maxHp*100)+'%';bars[0].next? null:null;}
-  // проще перерисовать метки
-  const metas=$$('#battleStage .fighter .dmeta');
-  if(metas[0])metas[0].textContent=`${Math.max(0,Math.round(b.me.hp))}/${b.me.maxHp}`;
-  if(bars[1])bars[1].querySelector('i').style.width=Math.max(0,b.foe.hp/b.foe.maxHp*100)+'%';
-  if(metas[1])metas[1].textContent=`${Math.max(0,Math.round(b.foe.hp))}/${b.foe.maxHp}`;
+  // у каждого бойца две полосы: [0]=hp me, [1]=mana me, [2]=hp foe, [3]=mana foe
+  const fighters=$$('#battleStage .fighter');
+  const upd=(fighterEl,c)=>{
+    if(!fighterEl)return;
+    const hpI=fighterEl.querySelector('.bar.hp i'); if(hpI)hpI.style.width=Math.max(0,c.hp/c.maxHp*100)+'%';
+    const mnI=fighterEl.querySelector('.bar.mn i'); if(mnI)mnI.style.width=Math.max(0,c.mana/c.manaMax*100)+'%';
+    const hpMeta=fighterEl.querySelector('.dmeta:not(.mana-meta)'); if(hpMeta)hpMeta.textContent=`${Math.max(0,Math.round(c.hp))}/${c.maxHp}`;
+    const mnMeta=fighterEl.querySelector('.mana-meta'); if(mnMeta)mnMeta.textContent=`💧 ${c.mana}/${c.manaMax}`;
+  };
+  upd(fighters[0],b.me);
+  upd(fighters[1],b.foe);
 }
 
 function endBattle(win){
@@ -2996,7 +3122,8 @@ function renderForge(){
   const atMax=inst.level>=FORGE_MAX;
   const nextB = atMax?null:artifactBonus({...inst,level:inst.level+1});
   const cost = atMax?0:forgeCost(art,inst.level);
-  const canForge = !atMax && S.gold>=cost;
+  const dustCost = atMax?0:forgeDustCost(inst.level);
+  const canForge = !atMax && S.gold>=cost && S.dust>=dustCost;
   const wearer=wearerOf(inst.invUid);
 
   // diff бонусов
@@ -3021,7 +3148,7 @@ function renderForge(){
         <div class="btnrow" style="justify-content:center">
           ${atMax
             ? `<button class="btn" disabled>Выкован до предела (+${FORGE_MAX})</button>`
-            : `<button class="btn" id="forgeBtn" ${canForge?'':'disabled'}>Ковать&nbsp;·&nbsp;🪙${cost}</button>`}
+            : `<button class="btn" id="forgeBtn" ${canForge?'':'disabled'}>Ковать&nbsp;·&nbsp;🪙${cost}${dustCost?`&nbsp;+&nbsp;✦${dustCost}`:''}</button>`}
           <button class="btn ghost" id="recycleBtn">Распылить&nbsp;·&nbsp;+${recycleYield(inst)}✦</button>
         </div>
         ${!atMax&&!canForge?`<p class="hint" style="text-align:center">Не хватает золота: нужно ${cost}🪙</p>`:''}
@@ -3047,8 +3174,11 @@ function doForge(inst){
   const art=artifactById(inst.id);
   if(inst.level>=FORGE_MAX) return;
   const cost=forgeCost(art,inst.level);
+  const dustCost=forgeDustCost(inst.level);
   if(S.gold<cost){toast('Недостаёт золота для ковки.');return;}
+  if(dustCost>0 && S.dust<dustCost){toast(`Для этой ковки нужно ещё ${dustCost}✦ пыли.`);return;}
   S.gold-=cost;
+  if(dustCost>0) S.dust-=dustCost;
   inst.level++;
   const anvil=$('#anvilArt');
   if(anvil){anvil.classList.remove('forging');void anvil.offsetWidth;anvil.classList.add('forging');}
