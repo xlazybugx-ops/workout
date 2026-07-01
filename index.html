@@ -205,6 +205,22 @@
   .carousel-track::-webkit-scrollbar-thumb{background:var(--gold-soft);border-radius:4px}
   .carousel-track::-webkit-scrollbar-track{background:rgba(0,0,0,.2);border-radius:4px}
   .carousel-card{flex:0 0 auto;width:180px;scroll-snap-align:center}
+  /* Гнездо: карусель яиц-ям */
+  .nest-count{text-align:center;font-family:'Cinzel';color:var(--gold);margin:4px 0 12px;font-size:15px}
+  .egg-card{display:flex;flex-direction:column;align-items:center;gap:8px;
+    background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--edge);border-radius:12px;padding:14px 12px}
+  .egg-pit{width:130px;height:118px;display:flex;align-items:flex-end;justify-content:center;position:relative;
+    background:radial-gradient(ellipse at 50% 92%, #3a2a1a 0%, #241810 55%, transparent 75%);border-radius:50%}
+  .egg-pit::after{content:"";position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+    width:96px;height:26px;background:radial-gradient(ellipse,rgba(0,0,0,.5),transparent 70%);border-radius:50%}
+  .egg-visual{width:88px;height:104px;position:relative;z-index:1;filter:drop-shadow(0 5px 6px rgba(0,0,0,.5))}
+  .egg-visual svg{width:100%;height:100%}
+  .egg-info{text-align:center}
+  .egg-el{font-family:'Cinzel';font-size:14px;color:var(--ink)}
+  .egg-tier{font-size:11px;color:var(--gold-soft);letter-spacing:.06em;text-transform:uppercase}
+  .egg-card .hatch-one{width:100%}
+  .nest-empty{text-align:center;padding:30px 16px}
+  .nest-empty-art{font-size:72px;filter:grayscale(.3);opacity:.8;margin-bottom:10px}
   @media(max-width:560px){ .carousel-card{width:150px} }
   .carousel-arrow{flex:0 0 auto;width:40px;height:40px;border-radius:50%;cursor:pointer;
     background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--gold-soft);
@@ -256,6 +272,8 @@
   .art-name{font-family:'Cinzel';font-size:13px;letter-spacing:.02em}
   .art-slot{display:flex;align-items:center;gap:5px;justify-content:center;font-size:11px;color:var(--ink-dim);margin-top:4px;flex-wrap:wrap}
   .art-bonus{font-size:12px;color:var(--gold);margin-top:6px;font-family:'Cinzel'}
+  .art-good{color:var(--gold)}
+  .art-malus{color:#e08a7a;margin-top:2px;font-size:11.5px}
   .art-wearer{font-size:10.5px;color:var(--frost);font-style:italic;margin-top:4px}
   .art-lvl{position:absolute;top:7px;left:7px;font-family:'Cinzel';font-size:11px;background:var(--vellum);
     border:1px solid var(--gold-soft);border-radius:10px;padding:1px 7px;color:var(--gold)}
@@ -280,6 +298,46 @@
   .art-lvl-inline{color:var(--ember);font-weight:600}
   .forge-stats{display:flex;flex-direction:column;gap:4px;margin:12px 0}
   .forge-stat{display:flex;justify-content:space-between;font-size:13px;border-bottom:1px dashed rgba(92,67,38,.4);padding:3px 2px}
+  .forge-stat.malus b{color:#e08a7a}
+  .smithy-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--gold-soft);
+    border-radius:10px;padding:12px 16px;margin-bottom:14px}
+  .smithy-info{display:flex;flex-direction:column;gap:2px}
+  .smithy-lvl{font-family:'Cinzel';font-size:16px;color:var(--gold);letter-spacing:.04em}
+  .smithy-sub{font-size:12px;color:var(--ink-dim)}
+  .smithy-max{font-family:'Cinzel';color:var(--gold);font-size:13px}
+  .smithy-header .btn{width:auto;margin:0}
+  /* Сундуки */
+  .chest-panel{background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--gold-soft);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+  .chest-keys-inv{font-size:12px;color:var(--gold-soft);margin:2px 0 8px}
+  .chest-list{display:flex;flex-direction:column;gap:8px}
+  .chest-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:8px;align-items:center;
+    background:rgba(18,13,9,.4);border:1px solid var(--edge);border-radius:8px;padding:8px 10px}
+  .chest-ic{font-size:26px}
+  .chest-name{font-family:'Cinzel';font-size:13px;color:var(--ink)}
+  .chest-sub{font-size:10.5px;color:var(--ink-dim)}
+  .chest-row .btn{width:auto;margin:0;font-size:11px;padding:6px 10px}
+  .chest-item{font-size:12px;color:var(--gold);margin-top:2px}
+  /* Мини-игра замка */
+  .lockpick-card .lp-pins{display:flex;justify-content:center;gap:14px;margin:6px 0 12px;font-size:24px}
+  .lp-pin.perfect{filter:drop-shadow(0 0 6px var(--gold))}
+  .lp-pin.ok{opacity:.9}
+  .lp-pin.miss{opacity:.4}
+  /* Украшения хаба */
+  .hub-deco{position:absolute;transform:translate(-50%,-50%);font-size:clamp(20px,4vw,34px);z-index:3;
+    filter:drop-shadow(0 3px 5px rgba(0,0,0,.6));pointer-events:none;animation:decofloat 3s ease-in-out infinite}
+  @keyframes decofloat{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-56%)}}
+  .hub-hint-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .hub-deco-btn{width:auto;margin:0}
+  .deco-slots{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+  .deco-slot-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:8px;align-items:center;
+    background:rgba(18,13,9,.4);border:1px solid var(--edge);border-radius:8px;padding:8px 10px}
+  .deco-slot-label{font-family:'Cinzel';font-size:12px;color:var(--gold-soft)}
+  .deco-slot-cur{font-size:13px;color:var(--ink)}
+  .deco-slot-row .btn,.deco-opts .btn,.deco-opt{width:auto;margin:0;font-size:12px;padding:6px 10px}
+  .deco-inv{display:flex;flex-direction:column;gap:6px}
+  .deco-inv-item{display:flex;justify-content:space-between;font-size:13px;padding:5px 8px;background:rgba(18,13,9,.3);border-radius:6px}
+  .deco-opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
   .forge-stat b{font-family:'Cinzel';color:var(--ink)}
   .forge-stat .up{color:var(--venom)}
   .forge-sub{font-family:'Cinzel';font-size:14px;letter-spacing:.06em;color:var(--gold);margin:0 0 8px}
@@ -316,6 +374,11 @@
   .gene-score{font-family:'Cinzel';font-size:11px;color:var(--frost);background:var(--vellum);border:1px solid var(--edge);border-radius:10px;padding:1px 8px}
 
   .gene-block{margin:14px 0 6px;padding:12px;background:rgba(18,13,9,.5);border:1px solid var(--edge);border-radius:6px}
+  .nature-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--edge)}
+  .nature-badge{font-family:'Cinzel';font-size:14px;color:var(--gold);background:rgba(217,164,65,.12);
+    border:1px solid var(--gold-soft);border-radius:8px;padding:3px 12px;white-space:nowrap}
+  .nature-desc{font-size:12px;color:var(--ink-dim);font-style:italic}
+  .gene-hint-mut{font-size:11.5px;color:var(--ink-dim);margin:2px 0 8px;line-height:1.4}
   .gene-gen{font-family:'Spectral';font-style:italic;font-size:11px;color:var(--ink-dim);margin-left:6px}
   .gene-rows{display:flex;flex-direction:column;gap:7px;margin:4px 0 10px}
   .gene-row{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:10px}
@@ -541,6 +604,27 @@
   .locked{opacity:.78}
   .locked .scene{filter:grayscale(.55) brightness(.7)}
   .region-body .btn{margin-top:4px;width:100%}
+  /* Портал-шапка и список биомов */
+  .portal-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+    background:linear-gradient(180deg,var(--panel),var(--vellum2));border:1px solid var(--gold-soft);
+    border-radius:10px;padding:12px 16px;margin-bottom:6px}
+  .portal-info{display:flex;flex-direction:column;gap:2px}
+  .portal-lvl{font-family:'Cinzel';font-size:16px;color:var(--gold);letter-spacing:.04em}
+  .portal-sub{font-size:12px;color:var(--ink-dim)}
+  .portal-max{font-family:'Cinzel';color:var(--gold);font-size:13px}
+  .portal-header .btn{width:auto;margin:0}
+  .portal-cost{margin-top:10px;font-size:15px;color:#ffe9c0}
+  .biome-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+  .biome-row{display:grid;grid-template-columns:auto 1fr auto;gap:8px 10px;align-items:center;
+    padding:8px 10px;background:rgba(18,13,9,.4);border:1px solid var(--edge);border-radius:8px;font-size:12.5px}
+  .biome-row.off{opacity:.55}
+  .biome-tier{font-family:'Cinzel';font-size:11px;color:var(--gold-soft);letter-spacing:.05em;grid-row:1;grid-column:1}
+  .biome-name{font-family:'Cinzel';font-size:13.5px;color:var(--ink);grid-row:1;grid-column:2}
+  .biome-meta{font-size:11px;color:var(--gold);grid-row:1;grid-column:3;white-space:nowrap}
+  .biome-go{grid-row:2;grid-column:1/-1;text-align:center;font-family:'Cinzel';font-size:12.5px;color:var(--gold);
+    background:rgba(217,164,65,.14);border:1px solid var(--gold-soft);border-radius:6px;padding:5px;cursor:pointer;transition:.15s;margin-top:4px}
+  .biome-go:hover{background:rgba(217,164,65,.28)}
+  .biome-lock{grid-row:2;grid-column:1/-1;text-align:center;font-size:11.5px;color:var(--ink-dim);padding:4px;margin-top:2px}
 
   .exp-banner{position:relative;height:180px;overflow:hidden;border-bottom:1px solid var(--edge)}
   .exp-banner .scene{position:absolute;inset:0;width:100%;height:100%}
@@ -759,15 +843,8 @@
   <section class="view" id="hatch">
     <div class="panel">
       <h2>Гнездо</h2>
-      <p class="lede">Из яиц проклёвываются новые драконы. Чем реже вид — тем сильнее зверь.</p>
-      <div style="text-align:center;padding:14px 0">
-        <div id="eggVisual" style="font-size:88px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.6))">🥚</div>
-        <div class="btnrow" style="justify-content:center">
-          <button class="btn" id="hatchBtn">Высидеть яйцо&nbsp;·&nbsp;🥚1</button>
-          <button class="btn ghost" id="buyEggBtn">Купить яйцо&nbsp;·&nbsp;🪙30</button>
-        </div>
-        <p class="hint">Из каждого яйца дракон рождается в случайном окрасе — багряном, изумрудном, лазурном, белоснежном и других. Редчайший — золотой ✨.</p>
-      </div>
+      <p class="lede">Яйца, добытые в странствиях, ждут своего часа. Стихия яйца определяет, кто вылупится — а глубина биома дарит редкие виды.</p>
+      <div id="hatchWrap"></div>
     </div>
   </section>
 
@@ -1131,38 +1208,282 @@ function rollMorph(){
   return 'common';
 }
 
-const REGIONS = [
-  {id:'emberreach', scene:'fire',  name:'Жерло Карн-Вулака', el:'fire',  tier:1, gold:[18,34], xp:[14,26], eggChance:.28, unlock:0,
-   desc:'Реки лавы вьются меж чёрных вулканов. Воздух дрожит от жара.',
-   biome:'Вулканы и лава'},
-  {id:'mirelot',    scene:'jungle',name:'Чащоба Зелёных Озёр', el:'venom', tier:2, gold:[30,52], xp:[24,40], eggChance:.34, unlock:2,
-   desc:'Исполинские деревья смыкают кроны над тёмной водой. Тут дышит сама зелень.',
-   biome:'Деревья и озёра'},
-  {id:'glacior',    scene:'ice',   name:'Пики Хладного Безмолвия', el:'frost', tier:3, gold:[46,74], xp:[36,56], eggChance:.42, unlock:4,
-   desc:'Ледяные пики режут небо, а замёрзшие озёра хранят то, что вмёрзло века назад.',
-   biome:'Ледяные пики и замёрзшие озёра'},
-  {id:'voidedge',   scene:'shade', name:'Беззвёздный Предел', el:'shade', tier:4, gold:[72,122],xp:[56,92], eggChance:.5,  unlock:6,
-   desc:'Где гаснет последний свет. Сюда идут лишь те, кто не боится тьмы.',
-   biome:'Бездна и тени'},
+/* ===== МИРЫ И БИОМЫ =====
+   5 миров (по стихиям), у каждого 3 биома-подуровня:
+   I поверхность (ур.1+), II глубина (ур.60+), III ядро (ур.100).
+   Доступ гейтится уровнем портала (S.portalLevel) и уровнем дракона. */
+const BIOME_MIN_LEVEL=[0,1,60,100]; // индекс = номер биома (1..3)
+const BIOME_TIERLABEL=['','I · Поверхность','II · Глубина','III · Ядро'];
+
+const WORLDS = [
+  {id:'emberreach', scene:'fire',  el:'fire',  name:'Огненный мир', worldIdx:1,
+   desc:'Земли вечного жара, где реки лавы прорезают чёрный камень.',
+   biomes:[
+     {n:1, name:'Пепельные пустоши', gold:[18,34],  xp:[14,26], eggChance:.28, biome:'Вулканы и лава'},
+     {n:2, name:'Лавовые каверны',   gold:[42,70],  xp:[40,64], eggChance:.34, biome:'Раскалённые пещеры'},
+     {n:3, name:'Сердце Вулкана',    gold:[90,150], xp:[85,130],eggChance:.44, biome:'Ядро огня'},
+   ]},
+  {id:'mirelot', scene:'jungle', el:'venom', name:'Ядовитый мир', worldIdx:2,
+   desc:'Исполинские чащи над тёмной водой, где сама зелень дышит ядом.',
+   biomes:[
+     {n:1, name:'Зелёные озёра',     gold:[24,44],  xp:[18,32], eggChance:.30, biome:'Деревья и озёра'},
+     {n:2, name:'Гнилые топи',       gold:[52,84],  xp:[46,72], eggChance:.36, biome:'Ядовитые болота'},
+     {n:3, name:'Улей Спор',         gold:[105,170],xp:[95,145],eggChance:.46, biome:'Сердце гнили'},
+   ]},
+  {id:'glacior', scene:'ice', el:'frost', name:'Ледяной мир', worldIdx:3,
+   desc:'Ледяные пики режут небо, а замёрзшие озёра хранят древние тайны.',
+   biomes:[
+     {n:1, name:'Снежные склоны',    gold:[30,54],  xp:[24,40], eggChance:.32, biome:'Ледяные пики'},
+     {n:2, name:'Ледяные пещеры',    gold:[64,100], xp:[54,84], eggChance:.38, biome:'Хрустальные гроты'},
+     {n:3, name:'Замёрзшая Бездна',  gold:[120,195],xp:[105,160],eggChance:.48, biome:'Вечная мерзлота'},
+   ]},
+  {id:'stormpeak', scene:'ice', el:'storm', name:'Штормовой мир', worldIdx:4,
+   desc:'Небо, разорванное вечной грозой; молнии пляшут меж парящих скал.',
+   biomes:[
+     {n:1, name:'Грозовые утёсы',    gold:[36,62],  xp:[28,46], eggChance:.32, biome:'Парящие скалы'},
+     {n:2, name:'Око Бури',          gold:[74,116], xp:[62,96], eggChance:.40, biome:'Сердце грозы'},
+     {n:3, name:'Громовой Трон',     gold:[135,215],xp:[118,175],eggChance:.50, biome:'Обитель молний'},
+   ]},
+  {id:'voidedge', scene:'shade', el:'shade', name:'Теневой мир', worldIdx:5,
+   desc:'Там, где гаснет последний свет. Сюда идут лишь бесстрашные.',
+   biomes:[
+     {n:1, name:'Сумеречный предел', gold:[44,74],  xp:[34,56], eggChance:.34, biome:'Бездна и тени'},
+     {n:2, name:'Провал Теней',      gold:[88,138], xp:[74,114],eggChance:.42, biome:'Тёмные глубины'},
+     {n:3, name:'Беззвёздное Ядро',  gold:[155,250],xp:[135,205],eggChance:.52, biome:'Сердце пустоты'},
+   ]},
 ];
 
+// таблица разблокировки по уровню портала: {worlds, maxBiome}
+const PORTAL_TABLE=[
+  null, // индекс 0 не используется
+  {worlds:1, maxBiome:1}, // ур.1
+  {worlds:2, maxBiome:1}, // ур.2
+  {worlds:2, maxBiome:2}, // ур.3 — открыта глубина (биом II)
+  {worlds:3, maxBiome:2}, // ур.4
+  {worlds:4, maxBiome:2}, // ур.5
+  {worlds:5, maxBiome:2}, // ур.6
+  {worlds:5, maxBiome:3}, // ур.7 — открыто ядро (биом III)
+  {worlds:5, maxBiome:3}, // ур.8 — полный доступ
+];
+const PORTAL_MAX=8;
+function portalState(){ return PORTAL_TABLE[Math.max(1,Math.min(PORTAL_MAX,S.portalLevel||1))]; }
+function portalCost(lvl){ return {gold:Math.round(200*Math.pow(1.7,lvl-1)), dust: lvl>=3?(lvl-2)*15:0}; }
+
+// доступен ли мир по уровню портала
+function worldUnlocked(world){ return world.worldIdx <= portalState().worlds; }
+// доступен ли биом: по порталу (глубина) И по наличию дракона нужного уровня
+function biomeUnlocked(world, biomeN){
+  if(!worldUnlocked(world)) return {ok:false, reason:'world'};
+  if(biomeN > portalState().maxBiome) return {ok:false, reason:'portal'};
+  const need=BIOME_MIN_LEVEL[biomeN];
+  if(maxLevel()<need) return {ok:false, reason:'level', need};
+  return {ok:true};
+}
+// собрать «регион» для полёта из мира+биома (совместимо со старым кодом полёта)
+function makeRegion(world, biomeN){
+  const b=world.biomes[biomeN-1];
+  return {id:world.id+'_b'+biomeN, worldId:world.id, scene:world.scene, el:world.el,
+    name:world.name+' · '+b.name, biome:b.biome, desc:world.desc,
+    tier:biomeN + (world.worldIdx-1), // растущая опасность для наград/POI
+    biomeN, gold:b.gold, xp:b.xp, eggChance:b.eggChance};
+}
+
+/* ======================= СУНДУКИ, КЛЮЧИ, УКРАШЕНИЯ =======================
+   3 уровня сундуков по глубине биома. Открываются ключом (мини-игра подбора)
+   или в кузне за ресурсы. Лут: золото, пыль, артефакты, украшения хаба, яйца. */
+const CHEST_TYPES=[
+  {tier:1, name:'Простой сундук', icon:'📦', zones:1, keyName:'Простой ключ',  keyIcon:'🔑',
+   forgeCost:{gold:120, dust:15}},
+  {tier:2, name:'Крепкий сундук', icon:'🧰', zones:2, keyName:'Резной ключ',   keyIcon:'🗝️',
+   forgeCost:{gold:480, dust:30}},
+  {tier:3, name:'Древний сундук', icon:'⚱️', zones:3, keyName:'Древний ключ',  keyIcon:'🔐',
+   forgeCost:{gold:1080, dust:45}},
+];
+const chestType=tier=>CHEST_TYPES.find(c=>c.tier===tier)||CHEST_TYPES[0];
+
+// украшения хаба: ставятся в декоративные слоты на карте поселения
+const DECORATIONS=[
+  {id:'statue',   name:'Драконья статуя', icon:'🗿', rarity:2, desc:'Каменный страж поселения.'},
+  {id:'bonfire',  name:'Вечный костёр',   icon:'🔥', rarity:1, desc:'Тёплый огонь, что не гаснет.'},
+  {id:'banner',   name:'Родовое знамя',   icon:'🚩', rarity:1, desc:'Стяг твоего рода драконоводов.'},
+  {id:'crystal',  name:'Парящий кристалл',icon:'💎', rarity:3, desc:'Мерцает магией древних миров.'},
+  {id:'fountain', name:'Лунный фонтан',   icon:'⛲', rarity:2, desc:'Вода светится в сумерках.'},
+  {id:'tree',     name:'Древо жизни',     icon:'🌳', rarity:2, desc:'Древнее дерево, полное силы.'},
+  {id:'obelisk',  name:'Рунный обелиск',  icon:'🗼', rarity:3, desc:'Испещрён светящимися рунами.'},
+  {id:'lantern',  name:'Звёздный фонарь', icon:'🏮', rarity:1, desc:'Ловит и хранит звёздный свет.'},
+  {id:'hoard',    name:'Груда сокровищ',  icon:'💰', rarity:3, desc:'Драконье золото горой.'},
+  {id:'shrine',   name:'Древний алтарь',  icon:'⛩️', rarity:3, desc:'Святилище давно ушедших.'},
+];
+const decorById=id=>DECORATIONS.find(d=>d.id===id);
+// декоративные слоты на карте хаба (координаты в % от сцены)
+const DECO_SLOTS=[
+  {i:0, x:8,  y:52},
+  {i:1, x:38, y:56},
+  {i:2, x:60, y:52},
+  {i:3, x:90, y:54},
+  {i:4, x:24, y:92},
+  {i:5, x:56, y:94},
+];
+
+// нормализация состояния (для старых сохранений)
+function chestsArr(){ if(!Array.isArray(S.chests))S.chests=[]; return S.chests; }
+function keysObj(){ if(!S.keys||typeof S.keys!=='object')S.keys={1:0,2:0,3:0}; return S.keys; }
+function addChest(tier){ chestsArr().push({tier:Math.max(1,Math.min(3,tier))}); }
+function addKey(tier){ const k=keysObj(); tier=Math.max(1,Math.min(3,tier)); k[tier]=(k[tier]||0)+1; }
+function keyCount(tier){ return keysObj()[tier]||0; }
+function chestCount(){ return chestsArr().length; }
+
+// выбор украшения по редкости (глубже сундук — выше шанс редких)
+function rollDecoration(tier){
+  const bias=[0,0.4,1.0,1.8][tier]||0.4;
+  const adj=DECORATIONS.map(d=>({d, w:Math.pow(bias, d.rarity-1)*100 * (tier>=3?d.rarity:1)}));
+  const total=adj.reduce((a,b)=>a+b.w,0);
+  let r=Math.random()*total;
+  for(const x of adj){ if((r-=x.w)<=0) return x.d; }
+  return DECORATIONS[0];
+}
+
+// лут сундука по уровню; perfect=идеальный подбор даёт бонус
+function rollChestLoot(tier, perfect){
+  const out={gold:0, dust:0, items:[]};
+  out.gold = rnd(60,120)*tier*tier;
+  out.dust = rnd(10,20)*tier;
+  if(perfect){ out.gold=Math.round(out.gold*1.5); out.dust=Math.round(out.dust*1.5); }
+  // артефакт: шанс растёт с уровнем
+  const artChance=[0,0.35,0.6,0.85][tier];
+  if(Math.random()<artChance*(perfect?1.3:1)){
+    let art;
+    if(tier>=3 && Math.random()<(perfect?0.45:0.3)){
+      // ядро: шанс на мировую легендарку
+      const legs=ARTIFACTS.filter(a=>a.world);
+      art=legs[rnd(0,legs.length-1)];
+    } else art=weightedArtifact(Math.min(5,tier+1));
+    const inst=addArtifact(art.id,1);
+    out.items.push({type:'art', art});
+  }
+  // украшение: шанс растёт с уровнем
+  const decoChance=[0,0.4,0.55,0.75][tier];
+  if(Math.random()<decoChance*(perfect?1.25:1)){
+    const deco=rollDecoration(tier);
+    if(!S.decorOwned) S.decorOwned=[];
+    S.decorOwned.push(deco.id);
+    out.items.push({type:'deco', deco});
+  }
+  // ядро: изредка яйцо-ядро
+  if(tier>=3 && Math.random()<(perfect?0.5:0.3)){
+    const el=ELEMENTS_LIST[rnd(0,4)];
+    addEgg(el,3);
+    out.items.push({type:'egg', el});
+  }
+  S.gold+=out.gold; S.dust+=out.dust;
+  return out;
+}
+
+/* ===== ОТКРЫТИЕ СУНДУКОВ ===== */
+// открыть сундук ключом через мини-игру подбора (N зон по уровню)
+function openChestWithKey(chestIdx){
+  const chest=chestsArr()[chestIdx]; if(!chest) return;
+  const tier=chest.tier;
+  if(keyCount(tier)<1){ toast('Нет подходящего ключа.'); return; }
+  startLockpick(tier, (result)=>{
+    // result: 'perfect' | 'ok' | 'jam'
+    keysObj()[tier]--; // ключ расходуется
+    chestsArr().splice(chestIdx,1);
+    const perfect = result==='perfect';
+    const loot=rollChestLoot(tier, perfect);
+    showChestResult(tier, loot, result);
+    persist(); renderLedger();
+  });
+}
+// открыть сундук в кузне за ресурсы (без мини-игры, гарантированный базовый лут)
+function openChestWithForge(chestIdx){
+  const chest=chestsArr()[chestIdx]; if(!chest) return;
+  const tier=chest.tier;
+  const cost=chestType(tier).forgeCost;
+  if(S.gold<cost.gold || S.dust<cost.dust){ toast(`Нужно ${cost.gold}🪙 и ${cost.dust}✦, чтобы вскрыть сундук в кузне.`); return; }
+  S.gold-=cost.gold; S.dust-=cost.dust;
+  chestsArr().splice(chestIdx,1);
+  const loot=rollChestLoot(tier, false);
+  showChestResult(tier, loot, 'forge');
+  persist(); renderLedger();
+}
+
+// мини-игра подбора замка: N зон подряд (обобщение движка зон)
+let lockpickState=null;
+function startLockpick(tier, done){
+  if(!arcadeEnabled()){ done('ok'); return; } // без аркады — обычное открытие
+  const zones=chestType(tier).zones;
+  const overlay=document.createElement('div');
+  overlay.className='timing-overlay';
+  overlay.innerHTML=`
+    <div class="timing-card lockpick-card">
+      <div class="timing-title">${chestType(tier).keyIcon} Подбор замка</div>
+      <div class="timing-sub">Попади в зону в каждом из <b>${zones}</b> положений. Центр = идеальный подбор!</div>
+      <div class="timing-bar" id="lpBar">
+        <div class="timing-zone good"></div>
+        <div class="timing-zone perfect"></div>
+        <div class="timing-marker" id="lpMarker"></div>
+      </div>
+      <div class="lp-pins" id="lpPins">${Array.from({length:zones},(_,i)=>`<span class="lp-pin" id="lpPin${i}">🔒</span>`).join('')}</div>
+      <div class="timing-btns">
+        <button class="btn" id="lpHit">Подобрать!</button>
+        <button class="btn ghost" id="lpSkip">Взломать грубо</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+  // ширина/скорость зависят от уровня: глубже — уже и быстрее
+  const goodW=[0,36,28,22][tier], perfW=[0,10,8,6][tier];
+  const goodStart=50-goodW/2, goodEnd=50+goodW/2, perfStart=50-perfW/2, perfEnd=50+perfW/2;
+  const speed=[0,1.6,2.1,2.6][tier];
+  let pos=0,dir=1,raf=null,zone=0,perfectAll=true,anyHit=true;
+  const marker=overlay.querySelector('#lpMarker');
+  function tick(){ pos+=dir*speed; if(pos>=100){pos=100;dir=-1;} if(pos<=0){pos=0;dir=1;} marker.style.left=pos+'%'; raf=requestAnimationFrame(tick); }
+  tick();
+  function cleanup(){ cancelAnimationFrame(raf); overlay.remove(); }
+  overlay.querySelector('#lpHit').onclick=()=>{
+    const pin=overlay.querySelector('#lpPin'+zone);
+    if(pos>=perfStart&&pos<=perfEnd){ if(pin){pin.textContent='🔓';pin.classList.add('perfect');} }
+    else if(pos>=goodStart&&pos<=goodEnd){ if(pin){pin.textContent='🔓';pin.classList.add('ok');} perfectAll=false; }
+    else { if(pin){pin.textContent='🔒';pin.classList.add('miss');} perfectAll=false; anyHit=false; }
+    zone++;
+    if(zone>=zones){
+      cleanup();
+      done(perfectAll?'perfect':(anyHit?'ok':'jam'));
+    } else { pos=0; dir=1; }
+  };
+  overlay.querySelector('#lpSkip').onclick=()=>{ cleanup(); done('jam'); };
+}
+
+// показать результат открытия сундука
+function showChestResult(tier, loot, result){
+  const ct=chestType(tier);
+  const resultLabel = result==='perfect' ? '<span style="color:var(--gold)">💎 Идеальный подбор! Бонусный лут!</span>'
+    : result==='jam' ? '<span style="color:var(--ink-dim)">Замок заело — открыт с базовым лутом.</span>'
+    : result==='forge' ? '<span style="color:var(--ink-dim)">Вскрыт в кузне.</span>'
+    : '<span style="color:var(--gold-soft)">Замок поддался!</span>';
+  let items='';
+  loot.items.forEach(it=>{
+    if(it.type==='art') items+=`<div class="chest-item">${it.art.icon} <b>${it.art.name}</b> ${'★'.repeat(it.art.rarity)}</div>`;
+    if(it.type==='deco') items+=`<div class="chest-item">${it.deco.icon} украшение <b>${it.deco.name}</b></div>`;
+    if(it.type==='egg') items+=`<div class="chest-item">🥚 яйцо-ядро (${ELEMENTS[it.el].name})</div>`;
+  });
+  toast(`<b>${ct.icon} ${ct.name} открыт!</b> ${resultLabel}<br>+${loot.gold}🪙 +${loot.dust}✦${items?'<br>'+items:''}`);
+  // обновить экраны
+  if($('#forge')&&$('#forge').classList.contains('on')) renderForge();
+  if($('#hub')&&$('#hub').classList.contains('on')) renderHub();
+}
 /* ======================= ТОЧКИ ИНТЕРЕСА (ПОЛЁТ-ИССЛЕДОВАНИЕ) =======================
-   При каждом заходе на карте биома появляется 3-4 случайные точки.
-   kind определяет, что произойдёт, когда дракон долетит:
-   - treasure: сразу награда золотом/пылью
-   - egg: находит яйцо
-   - relic: находит реликвию
-   - choice: добрый выбор из двух (каждый даёт разную награду)
-   - beast: лёгкая стычка (переходит в обычный бой), победа = крупная награда
-   - friend: дружелюбная встреча, дарит немного всего и радость */
+   При каждом заходе на карте биома появляется 3-4 случайные точки. */
 const POI_TYPES = [
-  {kind:'treasure', icon:'💎', label:'Блестящая находка', weight:24},
-  {kind:'treasure', icon:'🪙', label:'Мешочек золота',    weight:20},
-  {kind:'egg',      icon:'🥚', label:'Брошенное яйцо',    weight:16},
-  {kind:'relic',    icon:'📦', label:'Старый сундучок',   weight:14},
-  {kind:'choice',   icon:'❓', label:'Загадочное место',  weight:16},
-  {kind:'beast',    icon:'👹', label:'Чьё-то логово',     weight:12},
-  {kind:'friend',   icon:'🐣', label:'Дружелюбный зверёк',weight:12},
+  {kind:'treasure', icon:'💎', label:'Блестящая находка', weight:22},
+  {kind:'treasure', icon:'🪙', label:'Мешочек золота',    weight:18},
+  {kind:'egg',      icon:'🥚', label:'Брошенное яйцо',    weight:14},
+  {kind:'relic',    icon:'📦', label:'Старый сундучок',   weight:12},
+  {kind:'choice',   icon:'❓', label:'Загадочное место',  weight:14},
+  {kind:'beast',    icon:'👹', label:'Чьё-то логово',     weight:11},
+  {kind:'friend',   icon:'🐣', label:'Дружелюбный зверёк',weight:10},
+  {kind:'chest',    icon:'🎁', label:'Запертый сундук',   weight:11},
+  {kind:'key',      icon:'🔑', label:'Забытый ключ',      weight:10},
 ];
 // добрые выборы для точек kind:'choice' (две опции с разными наградами)
 const POI_CHOICES = [
@@ -1176,11 +1497,15 @@ const POI_CHOICES = [
    a:{t:'✨ Собрать спор', reward:'dust'}, b:{t:'🪙 Обойти и найти клад', reward:'gold'}},
 ];
 
-/* ======================= АРТЕФАКТЫ ======================= */
-/* Каждый артефакт даёт баффы к статам. Бонус растёт с уровнем ковки.
-   base — бонус на 1 уровне; per — прибавка за каждый уровень ковки.
-   slot — гнездо экипировки (на драконе по одному артефакту каждого типа). */
+/* ======================= АРТЕФАКТЫ =======================
+   base — бонус на 1 уровне; per — прибавка за уровень ковки.
+   Новые поля (для легендарных/мифических):
+   - fx: спец-эффекты {critPct, manaMax, manaRegen, healPct, vampPct} на 1 ур
+   - fxPer: прирост эффектов за уровень ковки
+   - malus: дебаф (отрицательные статы/эффекты), фиксированный (трейд-офф)
+   - world: к какому миру привязан (добывается в биоме III этого мира) */
 const ARTIFACTS = [
+  // — базовые (обычные, чистые бонусы) —
   {id:'emberfang',  name:'Клык Жароеда',     icon:'🦷', slot:'weapon', rarity:1, el:'fire',
    base:{atk:3}, per:{atk:2}, lore:'Клык древнего дракона, что вечно тлеет изнутри.'},
   {id:'frostshard', name:'Осколок Вечнольда', icon:'🔹', slot:'armor', rarity:2, el:'frost',
@@ -1195,7 +1520,67 @@ const ARTIFACTS = [
    base:{atk:6,spd:1}, per:{atk:3,spd:1}, lore:'Меч, выкованный в жерле спящего вулкана.'},
   {id:'worldheart', name:'Сердце Мироздания', icon:'💠', slot:'charm', rarity:5, el:'venom',
    base:{hp:14,atk:3,def:3,spd:2}, per:{hp:8,atk:2,def:2,spd:1}, lore:'Осколок первотворения. Дарует силу всем чешуйкам разом.'},
+
+  /* ===== ОГНЕННЫЙ МИР (биом III: Сердце Вулкана) ===== */
+  {id:'infernomaw', name:'Пасть Инферно', icon:'🌋', slot:'weapon', rarity:4, el:'fire', world:'emberreach',
+   base:{atk:10}, per:{atk:4}, fx:{critPct:8}, fxPer:{critPct:2}, malus:{def:-6},
+   lore:'Оружие берсерка: испепеляет врага, но открывает носителя ударам.'},
+  {id:'magmaheart', name:'Магмовое Сердце', icon:'🔥', slot:'charm', rarity:5, el:'fire', world:'emberreach',
+   base:{atk:8,hp:20}, per:{atk:3,hp:10}, fx:{vampPct:6}, fxPer:{vampPct:1}, malus:{spd:-8},
+   lore:'Пульсирующее ядро вулкана: выпивает жизнь врага, но тяжело носить.'},
+  {id:'cindercrown',name:'Венец Пепла', icon:'👑', slot:'armor', rarity:4, el:'fire', world:'emberreach',
+   base:{def:8,hp:14}, per:{def:3,hp:8}, fx:{healPct:5}, fxPer:{healPct:1}, malus:{atk:-5},
+   lore:'Корона, что заживляет раны носителя жаром, притупляя его ярость.'},
+
+  /* ===== ЯДОВИТЫЙ МИР (биом III: Улей Спор) ===== */
+  {id:'plaguefang', name:'Клык Мора', icon:'🦠', slot:'weapon', rarity:4, el:'venom', world:'mirelot',
+   base:{atk:8,spd:4}, per:{atk:3,spd:2}, fx:{vampPct:8}, fxPer:{vampPct:1}, malus:{hp:-18},
+   lore:'Отравленный клык: возвращает здоровье с каждой раной, но носитель хрупок.'},
+  {id:'sporecrown', name:'Корона Спор', icon:'🍄', slot:'charm', rarity:5, el:'venom', world:'mirelot',
+   base:{spd:8,atk:5}, per:{spd:4,atk:2}, fx:{critPct:10,manaRegen:1}, fxPer:{critPct:2}, malus:{def:-12},
+   lore:'Живой венец грибницы: обостряет чутьё до смертельной точности ценой брони.'},
+  {id:'mirebulwark',name:'Оплот Топей', icon:'🐢', slot:'armor', rarity:4, el:'venom', world:'mirelot',
+   base:{def:12,hp:22}, per:{def:4,hp:12}, fx:{healPct:6}, fxPer:{healPct:1}, malus:{spd:-10},
+   lore:'Панцирь болотного исполина: почти непробиваем, но неповоротлив.'},
+
+  /* ===== ЛЕДЯНОЙ МИР (биом III: Замёрзшая Бездна) ===== */
+  {id:'frostcrown', name:'Корона Мерзлоты', icon:'❄️', slot:'charm', rarity:5, el:'frost', world:'glacior',
+   base:{def:6,hp:16}, per:{def:3,hp:8}, fx:{manaMax:3,manaRegen:1}, fxPer:{}, malus:{spd:-8},
+   lore:'Ледяной венец, хранящий бездонный резерв маны — но сковывающий движения.'},
+  {id:'glacialedge',name:'Грань Ледника', icon:'🧊', slot:'weapon', rarity:4, el:'frost', world:'glacior',
+   base:{atk:9,def:4}, per:{atk:3,def:2}, fx:{critPct:7}, fxPer:{critPct:2}, malus:{spd:-6},
+   lore:'Клинок из вечного льда: рубит наверняка, но тяжёл и холоден.'},
+  {id:'rimeheart',  name:'Сердце Инея', icon:'💙', slot:'armor', rarity:4, el:'frost', world:'glacior',
+   base:{hp:26,def:8}, per:{hp:14,def:3}, fx:{healPct:7}, fxPer:{healPct:1}, malus:{atk:-6},
+   lore:'Ледяное сердце медленно затягивает раны стужей, охлаждая и пыл атаки.'},
+
+  /* ===== ШТОРМОВОЙ МИР (биом III: Громовой Трон) ===== */
+  {id:'thunderfang',name:'Клык Грозы', icon:'⚡', slot:'weapon', rarity:5, el:'storm', world:'stormpeak',
+   base:{atk:11,spd:6}, per:{atk:4,spd:3}, fx:{critPct:12}, fxPer:{critPct:2}, malus:{def:-10,hp:-10},
+   lore:'Молния, скованная в клинок: сокрушительный крит ценой всякой защиты.'},
+  {id:'stormeye',   name:'Око Бури', icon:'🌀', slot:'charm', rarity:5, el:'storm', world:'stormpeak',
+   base:{spd:10}, per:{spd:4}, fx:{manaMax:4,manaRegen:2}, fxPer:{}, malus:{hp:-14},
+   lore:'Взор урагана: неиссякаемый поток маны для заклинателя, но тело истончается.'},
+  {id:'galeplate',  name:'Доспех Вихря', icon:'🌫️', slot:'armor', rarity:4, el:'storm', world:'stormpeak',
+   base:{def:7,spd:6}, per:{def:3,spd:3}, fx:{critPct:5}, fxPer:{critPct:1}, malus:{hp:-8},
+   lore:'Лёгкая броня из сгустков ветра — стремительна, но почти невесома.'},
+
+  /* ===== ТЕНЕВОЙ МИР (биом III: Беззвёздное Ядро) ===== */
+  {id:'voidreaper', name:'Жнец Пустоты', icon:'🌑', slot:'weapon', rarity:5, el:'shade', world:'voidedge',
+   base:{atk:13}, per:{atk:5}, fx:{vampPct:10,critPct:6}, fxPer:{vampPct:1,critPct:1}, malus:{def:-14,spd:-6},
+   lore:'Коса из антисвета: пожирает жизнь и бьёт без промаха, но носитель беззащитен.'},
+  {id:'starlessorb',name:'Беззвёздная Сфера', icon:'⚫', slot:'charm', rarity:5, el:'shade', world:'voidedge',
+   base:{atk:4,hp:18}, per:{atk:2,hp:10}, fx:{manaMax:5,manaRegen:2,critPct:6}, fxPer:{}, malus:{def:-16},
+   lore:'Сфера чистой пустоты: бездонная мана и острый ум ценой всякой защиты.'},
+  {id:'shroudmantle',name:'Мантия Мрака', icon:'🕸️', slot:'armor', rarity:5, el:'shade', world:'voidedge',
+   base:{def:14,hp:30}, per:{def:5,hp:16}, fx:{healPct:8,vampPct:4}, fxPer:{healPct:1}, malus:{atk:-10},
+   lore:'Плащ из сгущённой ночи: затягивает раны и питает тьмой, но глушит удары носителя.'},
 ];
+// эффекты, которые не являются базовыми статами
+const FX_KEYS=['critPct','manaMax','manaRegen','healPct','vampPct'];
+const FX_LABEL={critPct:'крит', manaMax:'макс. мана', manaRegen:'реген маны', healPct:'лечение/ход', vampPct:'вампиризм'};
+const FX_ICON={critPct:'🎯', manaMax:'💧', manaRegen:'♒', healPct:'✚', vampPct:'🩸'};
+const FX_SUFFIX={critPct:'%', manaMax:'', manaRegen:'/ход', healPct:'%', vampPct:'%'};
 const SLOT_NAME = {weapon:'Оружие', armor:'Броня', charm:'Талисман'};
 const SLOT_ICON = {weapon:'⚔️', armor:'🛡️', charm:'🔮'};
 const artifactById = id => ARTIFACTS.find(a=>a.id===id);
@@ -1210,23 +1595,64 @@ function forgeDustCost(level){
 }
 const FORGE_MAX = 8;
 
-// суммарные бонусы конкретного экземпляра артефакта с учётом уровня ковки
+/* ===== УРОВНИ КУЗНИЦЫ =====
+   Уровень кузни (S.forgeLevel 3..5) = потолок редкости, которую можно ковать.
+   Старт на ур.3 (редкие доступны). Улучшение до 4/5 открывает ковку легендарных/мифических. */
+const SMITHY_MIN=3, SMITHY_MAX=5;
+const SMITHY_RARITY_NAME=['','обычные','необычные','редкие','легендарные','мифические'];
+function forgeLevel(){ return Math.max(SMITHY_MIN, Math.min(SMITHY_MAX, S.forgeLevel||SMITHY_MIN)); }
+// можно ли ковать артефакт данной редкости при текущем уровне кузни
+function canForgeRarity(rarity){ return rarity <= forgeLevel(); }
+// стоимость улучшения кузни с уровня lvl на lvl+1
+function smithyCost(lvl){ return {gold:Math.round(600*Math.pow(2.0,lvl-3)), dust:(lvl-2)*30}; }
+
+// суммарные бонусы к статам конкретного экземпляра (с учётом уровня ковки и дебафов)
 function artifactBonus(inst){
   const art=artifactById(inst.id); if(!art) return {};
   const lvl=inst.level;
   const out={};
   for(const k of ['hp','atk','def','spd']){
-    const b=(art.base[k]||0) + (art.per[k]||0)*(lvl-1);
+    let b=(art.base[k]||0) + (art.per[k]||0)*(lvl-1);
+    if(art.malus && art.malus[k]) b += art.malus[k]; // дебаф к стату (фиксированный)
     if(b) out[k]=b;
+  }
+  return out;
+}
+// спец-эффекты экземпляра (крит/мана/лечение/вампиризм) с учётом ковки и дебафов
+function artifactFx(inst){
+  const art=artifactById(inst.id); if(!art) return {};
+  const lvl=inst.level;
+  const out={};
+  for(const k of FX_KEYS){
+    let v=((art.fx&&art.fx[k])||0) + ((art.fxPer&&art.fxPer[k])||0)*(lvl-1);
+    if(art.malus && art.malus[k]) v += art.malus[k];
+    if(v) out[k]=v;
+  }
+  return out;
+}
+// суммарные эффекты всех надетых артефактов дракона
+function equipFx(d){
+  const out={critPct:0,manaMax:0,manaRegen:0,healPct:0,vampPct:0};
+  if(!d.equip) return out;
+  for(const invUid of Object.values(d.equip)){
+    const inst=artInst(invUid); if(!inst) continue;
+    const fx=artifactFx(inst);
+    for(const k in fx) out[k]+=fx[k];
   }
   return out;
 }
 
 /* ======================= СОСТОЯНИЕ ======================= */
 let S = {
-  gold:300, eggs:4, dust:0,
+  gold:300, eggs:[{el:'fire',tier:1},{el:'frost',tier:1},{el:'venom',tier:1},{el:'storm',tier:1}], dust:0,
   settlement:'Драконьи Земли',
-  dragons:[],      // {uid,id,level,xp,curHp,morph,equip,genes,gen}
+  portalLevel:1,
+  forgeLevel:3,
+  chests:[],       // накопленные сундуки [{tier}]
+  keys:{1:0,2:0,3:0}, // ключи по уровням
+  decorations:{},  // размещённые украшения {slotIndex: decorId}
+  decorOwned:[],   // список полученных id украшений (для инвентаря)
+  dragons:[],      // {uid,id,level,xp,curHp,morph,equip,genes,gen,nature}
   discovered:{},   // species id -> true
   morphsSeen:{},   // species id -> {morphId:true}
   artifacts:[],    // {invUid,id,level}  — экземпляры в инвентаре
@@ -1277,22 +1703,71 @@ const GENE_MAX=6;
 const geneMult=allele=>0.85 + allele*0.075;
 const SPARK_BONUS=0.08;
 
-function randomGenes(floor=0,ceil=3){
-  const g={};
-  for(const k of GENE_KEYS) g[k]=rnd(floor,ceil);
+/* ===== ХАРАКТЕРЫ (natures): врождённая черта, задаёт роль ===== */
+// up усиливает стат, down ослабляет; по мощности сумма = 0 (кроме balanced)
+const NATURE_AMT=0.12;
+const NATURES=[
+  {id:'balanced', name:'Уравновешенный', icon:'☯️', up:null,  down:null,  desc:'Ровный во всём'},
+  {id:'fierce',   name:'Яростный',       icon:'🔥', up:'atk', down:'def', desc:'Бьёт сильнее, но хрупче'},
+  {id:'stalwart', name:'Стойкий',        icon:'🛡️', up:'def', down:'atk', desc:'Держит удар, бьёт слабее'},
+  {id:'vital',    name:'Живучий',        icon:'❤️', up:'hp',  down:'spd', desc:'Много жизни, медлителен'},
+  {id:'swift',    name:'Стремительный',  icon:'💨', up:'spd', down:'hp',  desc:'Быстрый, но хрупкий'},
+  {id:'savage',   name:'Свирепый',       icon:'⚔️', up:'atk', down:'hp',  desc:'Урон ценой живучести'},
+  {id:'tough',    name:'Крепкий',        icon:'🪨', up:'hp',  down:'atk', desc:'Живучий, но бьёт мягче'},
+  {id:'nimble',   name:'Юркий',          icon:'🌀', up:'spd', down:'def', desc:'Резвый, но незащищённый'},
+  {id:'guarded',  name:'Осторожный',     icon:'⛨',  up:'def', down:'spd', desc:'Защита ценой скорости'},
+];
+const natureById=id=>NATURES.find(n=>n.id===id)||NATURES[0];
+function rollNature(){ return NATURES[rnd(0,NATURES.length-1)].id; }
+// множитель характера для конкретного стата (в долях, +/-)
+function natureMod(natureId,key){
+  const n=natureById(natureId);
+  if(n.up===key) return NATURE_AMT;
+  if(n.down===key) return -NATURE_AMT;
+  return 0;
+}
+
+/* ===== БЮДЖЕТНАЯ ГЕНЕТИКА =====
+   Сумма очков генома фиксирована (GENE_BUDGET). Профиль распределён неравномерно:
+   усилил один стат — просел другой. Мощность у всех драконов ровная,
+   различается только СТИЛЬ. Мутация перераспределяет; редко растит бюджет. */
+const GENE_BUDGET=12;      // базовая сумма очков (4 стата × 3)
+const GENE_BUDGET_MAX=20;  // потолок бюджета при редких «ростовых» мутациях
+
+// случайное распределение заданного бюджета по 4 статам (каждый 0..GENE_MAX)
+function distributeBudget(budget){
+  const g={atk:0,def:0,hp:0,spd:0};
+  let pts=budget;
+  while(pts>0){
+    const avail=GENE_KEYS.filter(k=>g[k]<GENE_MAX);
+    if(!avail.length)break;
+    const k=avail[rnd(0,avail.length-1)];
+    g[k]++; pts--;
+  }
+  return g;
+}
+function randomGenes(floorUnused=0,ceilUnused=3){
+  // небольшой разброс бюджета на старте, чтобы даже новорождённые различались
+  const budget=GENE_BUDGET + rnd(-1,1);
+  const g=distributeBudget(Math.max(8,budget));
   g.spark = Math.random()<0.04; // 4% дикая искра
   return g;
 }
-// оценка «чистоты» генома 0..100 — насколько близок к идеалу
+// текущая сумма очков генома
+const geneSum=genes=>GENE_KEYS.reduce((a,k)=>a+(genes[k]||0),0);
+
+// оценка «редкости/силы» генома 0..100 — теперь по бюджету, а не по «все на макс»
 function genomeScore(genes){
   if(!genes) return 0;
-  const sum=GENE_KEYS.reduce((a,k)=>a+(genes[k]||0),0);
-  let pct = sum/(GENE_KEYS.length*GENE_MAX)*100;
+  const sum=geneSum(genes);
+  let pct = (sum-8)/(GENE_BUDGET_MAX-8)*100; // 8 очков=0%, макс бюджет=100%
+  pct=Math.max(0,Math.min(100,pct));
   if(genes.spark) pct=Math.min(100,pct+8);
   return Math.round(pct);
 }
 function isPerfect(genes){
-  return genes && genes.spark && GENE_KEYS.every(k=>genes[k]>=GENE_MAX);
+  // «идеал» = редкий, с высоким бюджетом и искрой
+  return genes && genes.spark && geneSum(genes)>=GENE_BUDGET_MAX;
 }
 // средний множитель генома (для краткой подписи)
 function genomeAvgMult(genes){
@@ -1331,9 +1806,10 @@ function statsOf(d){
   const gn = d.genes || {};
   const spark = gn.spark ? (1+SPARK_BONUS) : 1;
   const tal = talentMods(d); // множители от древа талантов (в долях)
+  const nat = d.nature || 'balanced'; // характер
   const g = (lvl,base,grow)=> base + (lvl-1)*grow;
-  // геном и таланты множат "природную" часть стата, затем добавляются окрас и реликвии
-  const natural=(lvl,base,grow,key)=> Math.round( g(lvl,base,grow) * geneMult(gn[key]!=null?gn[key]:3) * spark * (1+(tal[key]||0)) );
+  // геном, характер и таланты множат "природную" часть стата, затем добавляются окрас и реликвии
+  const natural=(lvl,base,grow,key)=> Math.round( g(lvl,base,grow) * geneMult(gn[key]!=null?gn[key]:3) * spark * (1+(tal[key]||0)) * (1+natureMod(nat,key)) );
   return {
     maxHp: natural(d.level, sp.hp, sp.hp*0.16, 'hp') + (m.hp||0) + eq.hp,
     atk:   natural(d.level, sp.atk, sp.atk*0.14, 'atk') + (m.atk||0) + eq.atk,
@@ -1342,10 +1818,11 @@ function statsOf(d){
   };
 }
 
-function addDragon(speciesId, level=1, morph=null, genes=null, gen=1){
+function addDragon(speciesId, level=1, morph=null, genes=null, gen=1, nature=null){
   const sp=speciesById(speciesId);
   const d={uid:S.nextUid++, id:speciesId, level, xp:0, curHp:0,
            morph: morph || rollMorph(), genes: genes || randomGenes(0,3), gen,
+           nature: nature || rollNature(),
            name:null, happy:5, lastFed:0, talentPicks:{}};
   d.curHp=statsOf(d).maxHp;
   S.dragons.push(d);
@@ -1478,6 +1955,43 @@ function weightedSpecies(){
   return SPECIES[0];
 }
 
+/* ===== ТИПИЗИРОВАННЫЕ ЯЙЦА =====
+   Яйцо хранит стихию (el) и глубину биома (tier 1..3).
+   Вид дракона выбирается из пула этой стихии; глубже биом — выше шанс редких. */
+// нормализуем S.eggs: раньше было число, теперь массив {el,tier}
+function eggsArray(){
+  if(Array.isArray(S.eggs)) return S.eggs;
+  // миграция: старое число → столько же «нейтральных» яиц случайных стихий
+  const n=(typeof S.eggs==='number')?S.eggs:0;
+  const arr=[];
+  for(let i=0;i<n;i++) arr.push({el:ELEMENTS_LIST[rnd(0,ELEMENTS_LIST.length-1)], tier:1});
+  S.eggs=arr;
+  return arr;
+}
+const ELEMENTS_LIST=['fire','frost','venom','storm','shade'];
+function eggCount(){ return eggsArray().length; }
+function addEgg(el, tier=1){
+  eggsArray().push({el:el||ELEMENTS_LIST[rnd(0,ELEMENTS_LIST.length-1)], tier:tier||1});
+}
+// выбрать вид дракона из яйца: стихия фиксирована, редкость зависит от глубины
+function speciesFromEgg(egg){
+  const el=egg.el, tier=egg.tier||1;
+  const pool=SPECIES.filter(s=>s.el===el);
+  if(!pool.length) return weightedSpecies();
+  // глубже биом → сильнее уклон к редким видам этой стихии
+  const adj=pool.map(s=>{
+    let w;
+    if(tier>=3) w=Math.pow(1.6, s.rarity);        // ядро: редкие частые
+    else if(tier===2) w=Math.pow(1.15, s.rarity); // глубина: чуть чаще редкие
+    else w=Math.pow(0.4, s.rarity-1);             // поверхность: обычные
+    return {s, w:w*100};
+  });
+  const total=adj.reduce((a,b)=>a+b.w,0);
+  let r=Math.random()*total;
+  for(const x of adj){ if((r-=x.w)<=0) return x.s; }
+  return pool[0];
+}
+
 /* ===== АРТЕФАКТЫ: выдача и дроп ===== */
 function addArtifact(artId, level=1){
   const inst={invUid:S.nextArt++, id:artId, level};
@@ -1486,16 +2000,55 @@ function addArtifact(artId, level=1){
   return inst;
 }
 function weightedArtifact(maxRarity){
-  const pool=ARTIFACTS.filter(a=>a.rarity<=maxRarity);
+  // общий пул исключает мировые легендарки (они падают только в биоме III своего мира)
+  const pool=ARTIFACTS.filter(a=>a.rarity<=maxRarity && !a.world);
   const weights=pool.map(a=>({a,w:Math.pow(0.45, a.rarity-1)*100}));
   const total=weights.reduce((s,x)=>s+x.w,0);
   let r=Math.random()*total;
   for(const x of weights){if((r-=x.w)<=0)return x.a;}
   return pool[0];
 }
+// артефакт-находка с учётом биома: в ядре (биом III) есть шанс на мировую легендарку
+function biomeArtifact(region){
+  const maxR=Math.min(5, (region.tier||1)+1);
+  if(region.biomeN>=3 && region.worldId){
+    const worldLegs=ARTIFACTS.filter(a=>a.world===region.worldId);
+    if(worldLegs.length && Math.random()<0.45){
+      return worldLegs[rnd(0,worldLegs.length-1)];
+    }
+  }
+  // в биоме II изредка тоже проскакивает мировая легендарка
+  if(region.biomeN>=2 && region.worldId && Math.random()<0.12){
+    const worldLegs=ARTIFACTS.filter(a=>a.world===region.worldId);
+    if(worldLegs.length) return worldLegs[rnd(0,worldLegs.length-1)];
+  }
+  return weightedArtifact(maxR);
+}
 function bonusText(b){
   const lab={hp:'жизни',atk:'атк',def:'защ',spd:'прыть'};
-  return Object.entries(b).filter(([k,v])=>v).map(([k,v])=>`+${v} ${lab[k]}`).join(' · ');
+  return Object.entries(b).filter(([k,v])=>v).map(([k,v])=>`${v>0?'+':''}${v} ${lab[k]}`).join(' · ');
+}
+// текст спец-эффектов артефакта (крит/мана/лечение/вампиризм)
+function fxText(fx){
+  return FX_KEYS.filter(k=>fx[k]).map(k=>`${FX_ICON[k]} ${fx[k]>0?'+':''}${fx[k]}${FX_SUFFIX[k]} ${FX_LABEL[k]}`).join(' · ');
+}
+// полное описание экземпляра: статы, эффекты, дебаф
+function artFullText(inst){
+  const art=artifactById(inst.id);
+  const b=artifactBonus(inst), fx=artifactFx(inst);
+  const parts=[];
+  const pos={}, neg={};
+  for(const k in b){ if(b[k]>0)pos[k]=b[k]; else if(b[k]<0)neg[k]=b[k]; }
+  const posFx={}, negFx={};
+  for(const k in fx){ if(fx[k]>0)posFx[k]=fx[k]; else if(fx[k]<0)negFx[k]=fx[k]; }
+  let html='';
+  const goodStat=bonusText(pos), goodFx=fxText(posFx);
+  const good=[goodStat,goodFx].filter(Boolean).join(' · ');
+  if(good) html+=`<div class="art-good">${good}</div>`;
+  const badStat=bonusText(neg), badFx=fxText(negFx);
+  const bad=[badStat,badFx].filter(Boolean).join(' · ');
+  if(bad) html+=`<div class="art-malus">⚠ ${bad}</div>`;
+  return html;
 }
 
 /* ===== ПЕРЕРАБОТКА АРТЕФАКТОВ В ПЫЛЬ ===== */
@@ -1538,15 +2091,19 @@ function canBreed(a,b){
 function breedGenes(ga,gb){
   const child={};
   for(const k of GENE_KEYS){
-    let v = Math.random()<0.5 ? ga[k] : gb[k];
-    // лёгкий уклон к лучшему родителю
-    if(Math.random()<0.25) v=Math.max(ga[k],gb[k]);
-    const roll=Math.random();
-    if(roll<0.16) v+=1;                 // благоприятная мутация
-    else if(roll<0.22) v+=2;            // редкий скачок
-    else if(roll<0.32) v-=1;            // неблагоприятная
+    // наследуем «склонность» стата от одного из родителей, с лёгким уклоном к лучшему
+    let v = Math.random()<0.5 ? (ga[k]||0) : (gb[k]||0);
+    if(Math.random()<0.25) v=Math.max(ga[k]||0,gb[k]||0);
     child[k]=Math.max(0,Math.min(GENE_MAX,v));
   }
+  // целевой бюджет = средний бюджет родителей ± небольшой разброс, с редким «ростом рода»
+  const parentBudget=Math.round((geneSum(ga)+geneSum(gb))/2);
+  let target=Math.max(8, Math.min(GENE_BUDGET_MAX, parentBudget + rnd(-1,1)));
+  if(Math.random()<0.08) target=Math.min(GENE_BUDGET_MAX, target+1); // редкое улучшение рода
+  // подгоняем сумму профиля под target, сохраняя пропорции (профиль наследуется, мощность нормируется)
+  let s=geneSum(child);
+  while(s>target){ const k=GENE_KEYS.filter(k=>child[k]>0).sort((a,b)=>child[b]-child[a])[0]; child[k]--; s--; }
+  while(s<target){ const k=GENE_KEYS.filter(k=>child[k]<GENE_MAX).sort((a,b)=>child[a]-child[b])[0]; child[k]++; s++; }
   // искра: наследуется если есть у родителя; иначе редкий шанс вспыхнуть
   if(ga.spark||gb.spark) child.spark = Math.random()<0.6;
   else child.spark = Math.random()<0.05;
@@ -1561,7 +2118,9 @@ function breedDragons(a,b){
   // окрас потомка: чаще от одного из родителей, иногда новый бросок
   const childMorph = Math.random()<0.7 ? (Math.random()<0.5?a.morph:b.morph) : rollMorph();
   const gen=Math.max(a.gen||1,b.gen||1)+1;
-  const child=addDragon(a.id,1,childMorph,childGenes,gen);
+  // характер потомка: чаще от родителя, иногда новый
+  const childNature = Math.random()<0.75 ? (Math.random()<0.5?a.nature:b.nature) : rollNature();
+  const child=addDragon(a.id,1,childMorph,childGenes,gen,childNature);
   questEvent('breed'); persist();
   return child;
 }
@@ -1570,27 +2129,41 @@ function mutateCost(d){
   const n=d.mutations||0;
   return MUTATE_DUST + n*6; // 8,14,20,26,...
 }
-// точечная мутация одного гена за пыль (±, с уклоном вверх)
+// точечная мутация: усиливает выбранный стат за счёт другого (перераспределение),
+// с редким шансом вырастить общий бюджет генома (без потери другого стата).
 function mutateGene(d,key){
   const cost=mutateCost(d);
   if(S.dust<cost){toast(`Недостаёт пыли для мутации (нужно ${cost}✦).`);return;}
+  if((d.genes[key]||0)>=GENE_MAX){toast(`<b>${GENE_LABEL[key]}</b> уже на максимуме (${GENE_MAX}/${GENE_MAX}).`);return;}
   S.dust-=cost;
   d.mutations=(d.mutations||0)+1;
-  const roll=Math.random();
-  let delta;
-  if(roll<0.55) delta=1;          // чаще улучшение
-  else if(roll<0.70) delta=2;     // редкий скачок
-  else if(roll<0.90) delta=0;     // ген устойчив
-  else delta=-1;                  // откат
-  const old=d.genes[key]||0;
-  d.genes[key]=Math.max(0,Math.min(GENE_MAX,old+delta));
+
+  const sum=geneSum(d.genes);
+  const growChance=0.15; // редкий рост бюджета
+  const canGrow = sum<GENE_BUDGET_MAX;
+  const doGrow = canGrow && Math.random()<growChance;
+
+  if(doGrow){
+    // редкая удача: бюджет растёт, выбранный стат +1 без штрафа
+    d.genes[key]=Math.min(GENE_MAX,(d.genes[key]||0)+1);
+    floatText(`✦ Бюджет генома вырос!`, '#ffd24a');
+    toast(`<b>Редкая мутация!</b> Геном окреп — <b>${GENE_LABEL[key]}</b> вырос до ${d.genes[key]}/${GENE_MAX}, а общая мощь дракона поднялась.`);
+  } else {
+    // обычная: +1 выбранному, −1 самому «богатому» из остальных (перераспределение)
+    const donors=GENE_KEYS.filter(k=>k!==key && (d.genes[k]||0)>0);
+    if(!donors.length){
+      // некому отдать очко — просто вернём пыль-эффект как «устоял»
+      toast(`Другим статам нечего отдать — <b>${GENE_LABEL[key]}</b> не изменился.`);
+      questEvent('mutate'); persist(); renderLedger(); renderLair(); return;
+    }
+    donors.sort((a,b)=>(d.genes[b]||0)-(d.genes[a]||0));
+    const donor=donors[0];
+    d.genes[key]=Math.min(GENE_MAX,(d.genes[key]||0)+1);
+    d.genes[donor]=Math.max(0,(d.genes[donor]||0)-1);
+    floatText(`${GENE_LABEL[key]} ↑ · ${GENE_LABEL[donor]} ↓`, '#d9a441');
+    toast(`Перераспределение: <b>${GENE_LABEL[key]}</b> ↑ до ${d.genes[key]}/${GENE_MAX} ценой <b>${GENE_LABEL[donor]}</b> ↓ до ${d.genes[donor]}/${GENE_MAX}.`);
+  }
   d.curHp=Math.min(d.curHp,statsOf(d).maxHp);
-  const diff=d.genes[key]-old;
-  floatText(diff>0?`${GENE_LABEL[key]} ↑`:(diff<0?`${GENE_LABEL[key]} ↓`:'без эффекта'),
-            diff>0?'#7fb24a':(diff<0?'#c5544a':'#a8987a'));
-  toast(diff>0?`Мутация удалась! <b>${GENE_LABEL[key]}</b> вырос до ${d.genes[key]}/${GENE_MAX}.`
-       :diff<0?`Мутация откатила <b>${GENE_LABEL[key]}</b> до ${d.genes[key]}/${GENE_MAX}.`
-       :`Ген <b>${GENE_LABEL[key]}</b> устоял.`);
   questEvent('mutate'); persist();
   renderLedger();renderLair();
 }
@@ -1615,14 +2188,12 @@ function igniteSpark(d){
 /* ======================= РЕНДЕР ======================= */
 function renderLedger(){
   $('#gold').textContent=S.gold;
-  $('#eggs').textContent=S.eggs;
+  $('#eggs').textContent=eggCount();
   $('#count').textContent=S.dragons.length;
   $('#species').textContent=SPECIES.length;
   $('#relics').textContent=S.artifacts.length;
   $('#dust').textContent=S.dust;
   const pl=$('#tbPlace'); if(pl) pl.textContent=S.settlement||'Драконьи Земли';
-  if($('#hatchBtn')) $('#hatchBtn').disabled = S.eggs<1;
-  if($('#buyEggBtn')) $('#buyEggBtn').disabled = S.gold<30;
 }
 
 function elTag(el){const e=ELEMENTS[el];return `<span class="elem-tag ${e.cls}">${e.name}</span>`;}
@@ -1794,10 +2365,15 @@ function renderDetail(d){
           <div id="equipPicker"></div>
         </div>
         <div class="gene-block">
+          <div class="nature-line">
+            <span class="nature-badge">${natureById(d.nature).icon} ${natureById(d.nature).name}</span>
+            <span class="nature-desc">${natureById(d.nature).desc}${natureById(d.nature).up?` (${GENE_ICON[natureById(d.nature).up]}+ / ${GENE_ICON[natureById(d.nature).down]}−)`:''}</span>
+          </div>
           <div class="equip-head">Геном
             <span class="gene-gen">поколение ${d.gen||1}</span>
-            <span class="equip-sum">чистота ${genomeScore(d.genes)}%${isPerfect(d.genes)?' · <b style="color:var(--gold)">ИДЕАЛ ✦</b>':''}</span>
+            <span class="equip-sum">бюджет ${geneSum(d.genes)}/${GENE_BUDGET_MAX}${isPerfect(d.genes)?' · <b style="color:var(--gold)">ИДЕАЛ ✦</b>':''}</span>
           </div>
+          <div class="gene-hint-mut">Мутация усиливает выбранный стат ценой другого. Изредка — растит общий бюджет.</div>
           <div class="gene-rows">
             ${GENE_KEYS.map(k=>{
               const v=d.genes[k]||0;
@@ -1807,7 +2383,7 @@ function renderDetail(d){
                 <span class="gene-name">${GENE_ICON[k]} ${GENE_LABEL[k]}</span>
                 <span class="pips big">${pips}</span>
                 <span class="gene-val">${v}/${GENE_MAX}</span>
-                <button class="gene-mut" data-mut="${k}" ${S.dust<mcost||v>=GENE_MAX?'disabled':''} title="Мутировать ген за ${mcost} пыли">⟳ ${mcost}✦</button>
+                <button class="gene-mut" data-mut="${k}" ${S.dust<mcost||v>=GENE_MAX?'disabled':''} title="Усилить ${GENE_LABEL[k]} за ${mcost} пыли (ценой другого стата)">⟳ ${mcost}✦</button>
               </div>`;
             }).join('')}
           </div>
@@ -1879,27 +2455,100 @@ function restDragon(d){
 }
 
 /* ===== ГНЕЗДО ===== */
-function hatchEgg(){
-  if(S.eggs<1)return;
-  S.eggs--;
-  const sp=weightedSpecies();
-  const ev=$('#eggVisual');
-  ev.textContent='🥚';ev.style.animation='shake .4s 2';ev.style.filter='';
+/* ===== ГНЕЗДО: карусель яиц-ям ===== */
+// отдельный дизайн яйца для каждой стихии (SVG)
+function eggSVG(el, tier){
+  const c=EGG_COLORS[el]||EGG_COLORS.fire;
+  const spots = el==='shade'
+    ? `<circle cx="46" cy="52" r="4" fill="${c.spot}" opacity=".8"/><circle cx="60" cy="70" r="3" fill="${c.spot}" opacity=".7"/><circle cx="52" cy="86" r="3.5" fill="${c.spot}" opacity=".7"/>`
+    : `<ellipse cx="44" cy="54" rx="4" ry="5" fill="${c.spot}" opacity=".75"/><ellipse cx="62" cy="66" rx="3.5" ry="4.5" fill="${c.spot}" opacity=".7"/><ellipse cx="50" cy="82" rx="4" ry="5" fill="${c.spot}" opacity=".7"/><ellipse cx="66" cy="86" rx="3" ry="4" fill="${c.spot}" opacity=".6"/>`;
+  // тир-корона: чем глубже биом, тем «богаче» яйцо (сияние)
+  const glow = tier>=3 ? `<ellipse cx="54" cy="64" rx="40" ry="46" fill="${c.light}" opacity=".18"/>` : (tier===2?`<ellipse cx="54" cy="64" rx="36" ry="42" fill="${c.light}" opacity=".1"/>`:'');
+  return `<svg viewBox="0 0 108 128" xmlns="http://www.w3.org/2000/svg">
+    ${glow}
+    <defs><radialGradient id="eg${el}${tier}" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="${c.light}"/><stop offset="60%" stop-color="${c.base}"/><stop offset="100%" stop-color="${c.dark}"/>
+    </radialGradient></defs>
+    <ellipse cx="54" cy="64" rx="34" ry="44" fill="url(#eg${el}${tier})" stroke="${c.dark}" stroke-width="2"/>
+    <ellipse cx="44" cy="44" rx="10" ry="14" fill="#fff" opacity=".22"/>
+    ${spots}
+    ${tier>=3?`<path d="M54 20 l3 7 l7 1 l-5 5 l1 7 l-6 -3 l-6 3 l1 -7 l-5 -5 l7 -1 Z" fill="${c.light}" opacity=".9"/>`:''}
+  </svg>`;
+}
+const EGG_COLORS={
+  fire:  {base:'#c0392b', dark:'#7a1e12', light:'#ff9a6b', spot:'#5a1408'},
+  frost: {base:'#5aa0c8', dark:'#2c5f80', light:'#bfe6ff', spot:'#1e4258'},
+  venom: {base:'#6ba83a', dark:'#3d6420', light:'#c5e88a', spot:'#2a4514'},
+  storm: {base:'#8a6fc8', dark:'#4e3a80', light:'#c9b8ff', spot:'#33245a'},
+  shade: {base:'#5a4a6e', dark:'#2e2440', light:'#a890c8', spot:'#1a1428'},
+};
+
+let hatchSel=0; // индекс выбранного яйца в карусели
+function renderHatch(){
+  const wrap=$('#hatchWrap'); if(!wrap) return;
+  const eggs=eggsArray();
+  if(!eggs.length){
+    wrap.innerHTML=`<div class="nest-empty">
+      <div class="nest-empty-art">🪹</div>
+      <p class="hint">Гнездо пусто. Отправляйся в <b>Странствия</b> — там, в биомах разных миров, находят драконьи яйца. Стихия биома определяет, чьё яйцо ты найдёшь.</p>
+    </div>`;
+    return;
+  }
+  if(hatchSel>=eggs.length) hatchSel=eggs.length-1;
+  if(hatchSel<0) hatchSel=0;
+  const cards=eggs.map((egg,i)=>{
+    const el=ELEMENTS[egg.el];
+    return `<div class="carousel-card egg-card" data-idx="${i}">
+      <div class="egg-pit">
+        <div class="egg-visual" id="eggVis${i}">${eggSVG(egg.el, egg.tier)}</div>
+      </div>
+      <div class="egg-info">
+        <div class="egg-el">${el.name}</div>
+        <div class="egg-tier">${BIOME_TIERLABEL[egg.tier||1].split(' · ')[1]||'Поверхность'}</div>
+      </div>
+      <button class="btn hatch-one" data-hatch="${i}">Высидеть 🥚</button>
+    </div>`;
+  }).join('');
+  wrap.innerHTML=`
+    <div class="nest-count">В гнезде яиц: <b>${eggs.length}</b></div>
+    <div class="carousel">
+      <button class="carousel-arrow" id="eggPrev">‹</button>
+      <div class="carousel-track" id="eggTrack">${cards}</div>
+      <button class="carousel-arrow" id="eggNext">›</button>
+    </div>
+    <p class="hint" style="text-align:center;margin-top:10px">Из яйца дракон рождается в случайном окрасе и с уникальным характером. Глубокие биомы дарят редкие виды.</p>`;
+  const track=$('#eggTrack');
+  const scrollTo=i=>{const card=track.children[i];if(card)card.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});};
+  $('#eggPrev').onclick=()=>{hatchSel=Math.max(0,hatchSel-1);scrollTo(hatchSel);};
+  $('#eggNext').onclick=()=>{hatchSel=Math.min(eggs.length-1,hatchSel+1);scrollTo(hatchSel);};
+  wrap.querySelectorAll('[data-hatch]').forEach(b=>b.onclick=()=>hatchEggAt(+b.dataset.hatch));
+  setTimeout(()=>scrollTo(hatchSel),30);
+}
+
+// высиживание конкретного яйца по индексу; после — гнездо обновляется, показывая остаток
+function hatchEggAt(idx){
+  const eggs=eggsArray();
+  if(idx<0||idx>=eggs.length) return;
+  const egg=eggs[idx];
+  const sp=speciesFromEgg(egg);
+  const visEl=$('#eggVis'+idx);
+  if(visEl){ visEl.style.animation='shake .4s 2'; }
   setTimeout(()=>{
+    // удаляем высиженное яйцо
+    eggs.splice(idx,1);
     const wasNew=!S.discovered[sp.id];
     const d=addDragon(sp.id,1);
     const m=morphById(d.morph);
-    ev.style.animation='';ev.innerHTML=dragonVisual(sp.id, 1);ev.style.filter=m.filter||'none';
-    renderAll();
     floatText('🎉',ELEMENTS[sp.el].color);
     const morphTxt = m.id==='common' ? '' : ` <span style="color:${m.swatch}">· окрас «${m.name}»${m.shiny?' ✨':''}</span>`;
-    toast(`Вылупился <b>${sp.name}</b>! ${RARITY_STAR(sp.rarity)}${morphTxt} ${wasNew?'<span style="color:var(--gold)">· новый вид!</span>':''}`);
-    questEvent('hatch'); persist();
-  },820);
-}
-function buyEgg(){
-  if(S.gold<30){toast('Маловато золота. Сходи в путешествие или загляни за подарком дня!');return;}
-  S.gold-=30;S.eggs++;renderLedger();persist();toast('Куплено яйцо! Оно ждёт в Гнезде 🥚');
+    toast(`Вылупился <b>${sp.name}</b>! ${RARITY_STAR(sp.rarity)}${morphTxt} · характер «${natureById(d.nature).name}» ${wasNew?'<span style="color:var(--gold)">· новый вид!</span>':''}`);
+    questEvent('hatch');
+    // курсор карусели остаётся на месте (следующее яйцо из остатка)
+    if(hatchSel>=eggs.length) hatchSel=Math.max(0,eggs.length-1);
+    persist();
+    renderLedger();
+    renderHatch(); // гнездо обновляется: остаток яиц или пустое гнездо
+  },500);
 }
 
 /* ===== СТРАНСТВИЕ ===== */
@@ -2005,7 +2654,7 @@ function hubSpotArt(art){
 function hubBadge(v){
   if(v==='lair' && S.chestReady) return '🎁';
   if(v==='spire'){ const n=S.dragons.reduce((a,d)=>a+pendingForks(d).length,0); if(n) return '●'; }
-  if(v==='hatch' && S.eggs>0) return String(S.eggs);
+  if(v==='hatch' && eggCount()>0) return String(eggCount());
   return '';
 }
 function renderHub(){
@@ -2019,14 +2668,93 @@ function renderHub(){
       ${badge?`<span class="hub-zone-badge">${badge}</span>`:''}
     </button>`;
   }).join('');
+  // размещённые украшения на карте хаба
+  const decos=(S.decorations&&typeof S.decorations==='object')?S.decorations:{};
+  const decoEls=DECO_SLOTS.map(slot=>{
+    const decoId=decos[slot.i];
+    if(!decoId) return '';
+    const deco=decorById(decoId); if(!deco) return '';
+    return `<div class="hub-deco" style="left:${slot.x}%;top:${slot.y}%" title="${deco.name}">${deco.icon}</div>`;
+  }).join('');
+  const ownedCount=(S.decorOwned||[]).length;
   wrap.innerHTML=`
     <div class="hub-stage hub-stage-photo">
       <img class="hub-bg" src="images/hub_bg.png" alt=""
         onerror="this.style.display='none';this.parentNode.classList.add('hub-bg-fallback')">
+      ${decoEls}
       ${spots}
     </div>
-    <p class="hub-hint">Нажми на любое строение, чтобы отправиться туда. Драконьи земли ждут тебя!</p>`;
+    <div class="hub-hint-row">
+      <p class="hub-hint">Нажми на любое строение, чтобы отправиться туда.</p>
+      ${ownedCount?`<button class="btn ghost hub-deco-btn" id="decoBtn">🎨 Украшения (${ownedCount})</button>`:''}
+    </div>`;
   wrap.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
+  const db=$('#decoBtn'); if(db) db.onclick=openDecorManager;
+}
+
+// управление украшениями: разместить/убрать по слотам
+function openDecorManager(){
+  const owned=S.decorOwned||[];
+  if(!owned.length){ toast('Украшений пока нет. Их находят в сундуках!'); return; }
+  const decos=S.decorations||{};
+  // подсчёт: сколько каждого типа есть и сколько размещено
+  const placedCount={};
+  Object.values(decos).forEach(id=>{placedCount[id]=(placedCount[id]||0)+1;});
+  const ownedCount={};
+  owned.forEach(id=>{ownedCount[id]=(ownedCount[id]||0)+1;});
+  const wrap=$('#hubWrap');
+  const slotRows=DECO_SLOTS.map(slot=>{
+    const cur=decos[slot.i];
+    const curDeco=cur?decorById(cur):null;
+    return `<div class="deco-slot-row">
+      <span class="deco-slot-label">Место ${slot.i+1}</span>
+      <span class="deco-slot-cur">${curDeco?`${curDeco.icon} ${curDeco.name}`:'— пусто —'}</span>
+      <button class="btn ghost deco-place" data-slot="${slot.i}">Выбрать</button>
+      ${cur?`<button class="btn ghost deco-clear" data-clear="${slot.i}">Убрать</button>`:''}
+    </div>`;
+  }).join('');
+  const invRows=Object.keys(ownedCount).map(id=>{
+    const d=decorById(id); if(!d) return '';
+    const placed=placedCount[id]||0;
+    return `<div class="deco-inv-item"><span>${d.icon} ${d.name} ${'★'.repeat(d.rarity)}</span><span class="dmeta">${placed}/${ownedCount[id]} размещено</span></div>`;
+  }).join('');
+  wrap.innerHTML=`<div class="panel" style="margin:0">
+    <h2>🎨 Украшения поселения</h2>
+    <p class="lede">Расставь найденные украшения по местам на карте поселения.</p>
+    <div class="deco-slots">${slotRows}</div>
+    <h3 class="forge-sub" style="margin-top:16px">Коллекция украшений</h3>
+    <div class="deco-inv">${invRows}</div>
+    <div class="btnrow" style="margin-top:14px"><button class="btn" id="decoBack">← К поселению</button></div>
+  </div>`;
+  $('#decoBack').onclick=renderHub;
+  wrap.querySelectorAll('[data-slot]').forEach(b=>b.onclick=()=>pickDecorForSlot(+b.dataset.slot));
+  wrap.querySelectorAll('[data-clear]').forEach(b=>b.onclick=()=>{
+    delete S.decorations[+b.dataset.clear]; persist(); openDecorManager();
+  });
+}
+function pickDecorForSlot(slotIdx){
+  const owned=S.decorOwned||[];
+  const decos=S.decorations||{};
+  const placedCount={};
+  Object.entries(decos).forEach(([s,id])=>{ if(+s!==slotIdx) placedCount[id]=(placedCount[id]||0)+1; });
+  const ownedCount={};
+  owned.forEach(id=>{ownedCount[id]=(ownedCount[id]||0)+1;});
+  // доступные (ещё не все размещены в других слотах)
+  const avail=Object.keys(ownedCount).filter(id=>(placedCount[id]||0)<ownedCount[id]);
+  if(!avail.length){ toast('Все украшения этого типа уже размещены.'); return; }
+  const wrap=$('#hubWrap');
+  const opts=avail.map(id=>{const d=decorById(id);return `<button class="btn ghost deco-opt" data-pick="${id}">${d.icon} ${d.name}</button>`;}).join('');
+  wrap.innerHTML=`<div class="panel" style="margin:0">
+    <h2>Выбор украшения для места ${slotIdx+1}</h2>
+    <div class="deco-opts">${opts}</div>
+    <div class="btnrow" style="margin-top:14px"><button class="btn ghost" id="decoCancel">← Назад</button></div>
+  </div>`;
+  $('#decoCancel').onclick=openDecorManager;
+  wrap.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{
+    S.decorations=S.decorations||{}; S.decorations[slotIdx]=b.dataset.pick;
+    persist(); toast(`${decorById(b.dataset.pick).icon} <b>${decorById(b.dataset.pick).name}</b> установлено!`);
+    openDecorManager();
+  });
 }
 
 /* ОГНЕННАЯ: вулканы, потоки лавы, искры */
@@ -2200,30 +2928,91 @@ function shadeScene(W,H,id){
 
 function renderMap(){
   const m=$('#map');m.innerHTML='';
-  REGIONS.forEach(r=>{
-    const locked=S.dragons.length<r.unlock || maxLevel()<r.unlock;
-    const el=ELEMENTS[r.el];
+  const ps=portalState();
+  // шапка с уровнем портала
+  const header=document.createElement('div');
+  header.className='portal-header';
+  header.style.gridColumn='1/-1';
+  header.innerHTML=`
+    <div class="portal-info">
+      <span class="portal-lvl">🌀 Портал ур. ${S.portalLevel||1}/${PORTAL_MAX}</span>
+      <span class="portal-sub">Открыто миров: ${ps.worlds}/5 · глубина биомов: ${['','I','II','III'][ps.maxBiome]}</span>
+    </div>
+    ${(S.portalLevel||1)<PORTAL_MAX?`<button class="btn" id="portalUpBtn">Улучшить портал</button>`:'<span class="portal-max">Портал раскрыт полностью ✦</span>'}`;
+  m.appendChild(header);
+  if((S.portalLevel||1)<PORTAL_MAX){
+    header.querySelector('#portalUpBtn').onclick=openPortalUpgrade;
+  }
+  // список миров
+  WORLDS.forEach(w=>{
+    const wUnlocked=worldUnlocked(w);
     const div=document.createElement('div');
-    div.className='region region--'+r.scene+(locked?' locked':'');
+    div.className='region region--'+w.scene+(wUnlocked?'':' locked');
+    const biomeRows=w.biomes.map(b=>{
+      const u=biomeUnlocked(w,b.n);
+      let status='';
+      if(u.ok) status=`<span class="biome-go" data-w="${w.id}" data-b="${b.n}">Странствовать →</span>`;
+      else if(u.reason==='level') status=`<span class="biome-lock">🔒 нужен дракон ур. ${u.need}+</span>`;
+      else status=`<span class="biome-lock">🔒 улучши портал</span>`;
+      return `<div class="biome-row ${u.ok?'':'off'}">
+        <span class="biome-tier">${BIOME_TIERLABEL[b.n]}</span>
+        <span class="biome-name">${b.name}</span>
+        <span class="biome-meta">🪙${b.gold[0]}–${b.gold[1]} · 🥚${Math.round(b.eggChance*100)}%</span>
+        ${status}
+      </div>`;
+    }).join('');
     div.innerHTML=`
-      <div class="region-art">${sceneSVG(r.scene, r.id)}
-        ${locked?'<div class="region-lock">🔒</div>':''}
-        <div class="region-biome">${r.biome}</div>
+      <div class="region-art">${sceneSVG(w.scene, w.id)}
+        ${wUnlocked?'':'<div class="region-lock">🔒</div>'}
+        <div class="region-biome">${w.name}</div>
       </div>
       <div class="region-body">
-        <h3>${r.name} ${elTag(r.el)}</h3>
-        <p>${r.desc}</p>
-        <div class="tier-row">
-          <span class="tier">Опасность ${'◆'.repeat(r.tier)}${'◇'.repeat(4-r.tier)}</span>
-          <span class="tier-meta">🪙${r.gold[0]}–${r.gold[1]} · 🥚${Math.round(r.eggChance*100)}%</span>
-        </div>
-        <div class="btnrow">${locked
-          ? `<span class="hint">Откроется, когда драконов станет ${r.unlock} и появится дракон ур. ${r.unlock}+</span>`
-          : `<button class="btn">Отправить в странствие</button>`}</div>
+        <h3>${w.name} ${elTag(w.el)}</h3>
+        <p>${w.desc}</p>
+        ${wUnlocked ? `<div class="biome-list">${biomeRows}</div>`
+          : `<div class="btnrow"><span class="hint">Откроется при улучшении портала (ур. ${w.worldIdx})</span></div>`}
       </div>`;
-    if(!locked) div.querySelector('button').onclick=()=>openExpedition(r);
+    if(wUnlocked){
+      div.querySelectorAll('.biome-go').forEach(el=>el.onclick=()=>{
+        const world=WORLDS.find(x=>x.id===el.dataset.w);
+        openExpedition(makeRegion(world, +el.dataset.b));
+      });
+    }
     m.appendChild(div);
   });
+}
+
+// экран улучшения портала
+function openPortalUpgrade(){
+  const lvl=S.portalLevel||1;
+  if(lvl>=PORTAL_MAX)return;
+  const cost=portalCost(lvl);
+  const next=PORTAL_TABLE[lvl+1];
+  const cur=PORTAL_TABLE[lvl];
+  let unlockNote='';
+  if(next.worlds>cur.worlds) unlockNote=`Откроется новый мир: <b>${WORLDS[next.worlds-1].name}</b>`;
+  else if(next.maxBiome>cur.maxBiome) unlockNote=`Откроется глубина: <b>биом ${['','I','II','III'][next.maxBiome]}</b> (нужен дракон ур. ${BIOME_MIN_LEVEL[next.maxBiome]}+)`;
+  else unlockNote='Усилит награды странствий';
+  const canPay=S.gold>=cost.gold && S.dust>=(cost.dust||0);
+  const m=$('#map');
+  m.innerHTML=`<div class="panel" style="grid-column:1/-1">
+    <h2>🌀 Улучшение портала</h2>
+    <p class="lede">Портал ур. ${lvl} → <b>${lvl+1}</b></p>
+    <p>${unlockNote}</p>
+    <div class="portal-cost">Стоимость: <b>🪙 ${cost.gold}</b>${cost.dust?` + <b>✦ ${cost.dust}</b>`:''}</div>
+    <div class="btnrow" style="margin-top:14px">
+      <button class="btn" id="doPortalUp" ${canPay?'':'disabled'}>${canPay?'Улучшить':'Недостаёт ресурсов'}</button>
+      <button class="btn ghost" id="portalBack">← Назад</button>
+    </div>
+  </div>`;
+  $('#portalBack').onclick=renderMap;
+  if(canPay) $('#doPortalUp').onclick=()=>{
+    S.gold-=cost.gold; if(cost.dust)S.dust-=cost.dust;
+    S.portalLevel=lvl+1;
+    persist(); renderLedger();
+    toast(`<b>Портал улучшен до ур. ${S.portalLevel}!</b> ${unlockNote}`);
+    renderMap();
+  };
 }
 function maxLevel(){return S.dragons.reduce((a,d)=>Math.max(a,d.level),0);}
 function highestDragonLevel(){return maxLevel();}
@@ -2362,13 +3151,23 @@ function resolvePOI(idx){
     const g=rnd(region.gold[0],region.gold[1]);
     S.gold+=g; f.stats.gold+=g; msg=`Найдено <b>${g}🪙</b>!`;
   } else if(p.kind==='egg'){
-    S.eggs++; f.stats.eggs++; msg='Найдено <b>🥚 яйцо</b>!';
+    addEgg(region.el,region.biomeN); f.stats.eggs++; msg='Найдено <b>🥚 яйцо '+ELEMENTS[region.el].name+'</b>!';
   } else if(p.kind==='relic'){
-    const art=weightedArtifact(region.tier+1);
+    const art=biomeArtifact(region);
     addArtifact(art.id,1); f.stats.relics++; msg=`Внутри реликвия <b>${art.icon} ${art.name}</b>!`;
+  } else if(p.kind==='chest'){
+    const tier=region.biomeN||1;
+    addChest(tier); f.stats.relics=(f.stats.relics||0);
+    const ct=chestType(tier);
+    msg=`Найден <b>${ct.icon} ${ct.name}</b>! Открой его в поселении ключом или в кузне.`;
+  } else if(p.kind==='key'){
+    const tier=region.biomeN||1;
+    addKey(tier);
+    const ct=chestType(tier);
+    msg=`Найден <b>${ct.keyIcon} ${ct.keyName}</b>! Им можно открыть ${ct.name.toLowerCase()}.`;
   } else if(p.kind==='friend'){
     const g=rnd(region.gold[0],region.gold[1])/2|0;
-    S.gold+=g; f.stats.gold+=g; if(Math.random()<0.4){S.eggs++;f.stats.eggs++;}
+    S.gold+=g; f.stats.gold+=g; if(Math.random()<0.4){addEgg(region.el,region.biomeN);f.stats.eggs++;}
     d.happy=Math.min(HAPPY_MAX,(d.happy||0)+1);
     msg=`Зверёк подружился с драконом! +${g}🪙 и капелька радости 💖`;
   }
@@ -2457,8 +3256,8 @@ function applyChoiceReward(idx, reward){
   const leveled=grantXp(d,xp); f.stats.xp+=xp;
   if(reward==='gold'){const g=rnd(region.gold[0],region.gold[1]);S.gold+=g;f.stats.gold+=g;msg=`+<b>${g}🪙</b>!`;}
   else if(reward==='dust'){const du=rnd(8,18);S.dust+=du;msg=`+<b>${du}✦ пыли</b>!`;}
-  else if(reward==='egg'){S.eggs++;f.stats.eggs++;msg='Найдено <b>🥚 яйцо</b>!';}
-  else if(reward==='relic'){const art=weightedArtifact(region.tier+1);addArtifact(art.id,1);f.stats.relics++;msg=`Реликвия <b>${art.icon} ${art.name}</b>!`;}
+  else if(reward==='egg'){addEgg(region.el,region.biomeN);f.stats.eggs++;msg='Найдено <b>🥚 яйцо</b>!';}
+  else if(reward==='relic'){const art=biomeArtifact(region);addArtifact(art.id,1);f.stats.relics++;msg=`Реликвия <b>${art.icon} ${art.name}</b>!`;}
   finishPOI(idx, msg, `+${xp} опыта`+(leveled?' · <span style="color:var(--gold)">новый уровень!</span>':''));
 }
 
@@ -2576,11 +3375,13 @@ function makeCombatant(d,isFoe){
   const topSpell = spells.length? spells[spells.length-1] : null;
   const topUlt = ults.length? ults[ults.length-1] : null;
   // мана: «магические» стихии (буря, тень) выносливее; старт — треть
-  const manaMax = (sp.el==='storm'||sp.el==='shade') ? 8 : 6;
+  const fx = isFoe ? {critPct:0,manaMax:0,manaRegen:0,healPct:0,vampPct:0} : equipFx(d);
+  const manaMax = ((sp.el==='storm'||sp.el==='shade') ? 8 : 6) + (fx.manaMax||0);
   return {uid:d.uid,ref:isFoe?null:d,sp,el:sp.el,morph:d.morph||'common',
     level:d.level,maxHp:st.maxHp,hp:isFoe?st.maxHp:d.curHp,
     atk:st.atk,def:st.def,spd:st.spd,isFoe,
     mana:2, manaMax,
+    fx, // эффекты от артефактов: critPct, manaRegen, healPct, vampPct
     spell: topSpell? {n:topSpell.name, icon:topSpell.icon, pow:1.45, t:topSpell.desc, isSpell:true, manaCost:3} : null,
     ult: topUlt? {n:topUlt.name, icon:topUlt.icon, pow:2.4, t:topUlt.desc, isUlt:true, heal: topUlt.lvl===100, manaCost:6} : null,
     ultUsed:false};
@@ -2691,7 +3492,8 @@ function doStrike(att,def,move,labelClass,accMult){
   const mult=advMult(att.el,def.el);
   dmg=Math.round(dmg*mult);
   if(def.guarding){dmg=Math.round(dmg*0.55);def.guarding=false;}
-  const crit=(accMult>=2)|| Math.random()<0.06;
+  const critChance = 0.06 + ((att.fx&&att.fx.critPct)||0)/100;
+  const crit=(accMult>=2)|| Math.random()<critChance;
   if(crit && accMult<2)dmg=Math.round(dmg*1.6);
   def.hp-=dmg;
   let extra='';
@@ -2699,6 +3501,9 @@ function doStrike(att,def,move,labelClass,accMult){
   else if(mult<1)extra=' <span style="color:var(--ink-dim)">(стихия слаба)</span>';
   const label = move.isUlt?'⭐ применяет УЛЬТУ':(move.isSpell?'колдует':'применяет');
   pushLog(`${att.sp.name} ${label} <b>${move.n}</b> — <span class="dmg">${dmg} урона</span>${crit?' <span class="crit">КРИТ!</span>':''}${extra}`);
+  // вампиризм от артефактов: лечит атакующего на % нанесённого урона
+  const vamp=(att.fx&&att.fx.vampPct)||0;
+  if(vamp>0 && dmg>0){const heal=Math.max(1,Math.round(dmg*vamp/100));att.hp=Math.min(att.maxHp,att.hp+heal);pushLog(`<span class="heal">🩸 ${att.sp.name} впитывает ${heal} жизни (вампиризм).</span>`);}
   // лечение от тени/поглощения и от лечащих ульт
   if(move.n==='Поглощение'){const heal=Math.round(dmg*0.4);att.hp=Math.min(att.maxHp,att.hp+heal);pushLog(`<span class="heal">${att.sp.name} впитывает ${heal} жизни.</span>`);}
   if(move.heal){const heal=Math.round(att.maxHp*0.5);att.hp=Math.min(att.maxHp,att.hp+heal);pushLog(`<span class="heal">${att.sp.name} исцеляется на ${heal}!</span>`);}
@@ -2754,6 +3559,14 @@ function resolvePlayerStrike(move, accMult){
 }
 function afterPlayerMove(){
   const b=battle;
+  // эффекты артефактов игрока в конце его хода: лечение/ход и доп. реген маны
+  const fx=b.me.fx||{};
+  if(fx.healPct>0 && b.me.hp>0){
+    const heal=Math.max(1,Math.round(b.me.maxHp*fx.healPct/100));
+    b.me.hp=Math.min(b.me.maxHp,b.me.hp+heal);
+    pushLog(`<span class="heal">✚ Реликвия исцеляет ${b.me.sp.name} на ${heal}.</span>`);
+  }
+  if(fx.manaRegen>0){ b.me.mana=Math.min(b.me.manaMax, b.me.mana+fx.manaRegen); }
   renderHpOnly();
   if(b.foe.hp<=0){return endBattle(true);}
   setTimeout(foeTurn,650);
@@ -2946,7 +3759,7 @@ function endBattle(win){
     S.gold+=gold;
     const leveled=grantXp(me,xp);
     let eggMsg='';
-    if(Math.random()<0.3){S.eggs++;eggMsg=' Враг обронил <b>🥚 яйцо</b>!';}
+    if(Math.random()<0.3){const bt=(battle.fromFlight&&flight)?flight.region.biomeN:1; addEgg(b.foe.el,bt); eggMsg=' Враг обронил <b>🥚 яйцо</b>!';}
     let artMsg='';
     if(Math.random()<0.22){
       const maxR=Math.min(5, Math.max(1, Math.ceil(b.foe.level/3)+1));
@@ -3102,7 +3915,7 @@ function artChip(inst,{selectable,onclick,showWearer}={}){
     <div class="art-icon">${art.icon}</div>
     <div class="art-name">${art.name}</div>
     <div class="art-slot">${SLOT_ICON[art.slot]} ${SLOT_NAME[art.slot]} ${elTag(art.el)}</div>
-    <div class="art-bonus">${bonusText(b)}</div>
+    <div class="art-bonus">${artFullText(inst)}</div>
     ${wearer?`<div class="art-wearer">носит: ${speciesById(wearer.id).name}</div>`:''}`;
   if(onclick) div.onclick=()=>onclick(inst);
   return div;
@@ -3110,30 +3923,71 @@ function artChip(inst,{selectable,onclick,showWearer}={}){
 
 function renderForge(){
   const body=$('#forgeBody');
-  if(!S.artifacts.length){
-    body.innerHTML=`<div class="empty">Сундук реликвий пуст. Артефакты находят в странствиях и роняют поверженные враги на Арене.</div>`;
-    return;
+  const noArt=!S.artifacts.length;
+  // выбранный по умолчанию — первый (если есть артефакты)
+  if(!noArt && (!S.forgeSel || !artInst(S.forgeSel))) S.forgeSel=S.artifacts[0].invUid;
+  const inst=noArt?null:artInst(S.forgeSel);
+
+  const fl=forgeLevel();
+  const smithyHeader=`<div class="smithy-header">
+    <div class="smithy-info">
+      <span class="smithy-lvl">⚒️ Кузня ур. ${fl}/${SMITHY_MAX}</span>
+      <span class="smithy-sub">Куёт до: ${SMITHY_RARITY_NAME[fl]} ${'★'.repeat(fl)}</span>
+    </div>
+    ${fl<SMITHY_MAX?`<button class="btn" id="smithyUpBtn">Улучшить кузню</button>`:'<span class="smithy-max">Мастерская мастеров ✦</span>'}
+  </div>`;
+  // сокровищница сундуков
+  const chests=chestsArr();
+  let chestBlock='';
+  if(chests.length){
+    const rows=chests.map((c,i)=>{
+      const ct=chestType(c.tier);
+      const haveKey=keyCount(c.tier)>0;
+      const fc=ct.forgeCost;
+      const canForgeOpen=S.gold>=fc.gold&&S.dust>=fc.dust;
+      return `<div class="chest-row">
+        <span class="chest-ic">${ct.icon}</span>
+        <span class="chest-name">${ct.name}<br><span class="chest-sub">${ct.zones} ${ct.zones===1?'замок':'замка'}</span></span>
+        <button class="btn ${haveKey?'':'ghost'} chest-key" data-open="${i}" ${haveKey?'':'disabled'}>${ct.keyIcon} Ключ${haveKey?` (${keyCount(c.tier)})`:' нет'}</button>
+        <button class="btn ghost chest-forge" data-forge="${i}" ${canForgeOpen?'':'disabled'}>⚒️ ${fc.gold}🪙+${fc.dust}✦</button>
+      </div>`;
+    }).join('');
+    const keyInv=[1,2,3].filter(t=>keyCount(t)>0).map(t=>`${chestType(t).keyIcon}×${keyCount(t)}`).join(' · ')||'нет ключей';
+    chestBlock=`<div class="chest-panel">
+      <h3 class="forge-sub">🎁 Сундуки <span class="dmeta">(${chests.length})</span></h3>
+      <div class="chest-keys-inv">Ключи: ${keyInv}</div>
+      <div class="chest-list">${rows}</div>
+      <p class="hint">Ключ запускает подбор замка (мастерство → лучший лут). Кузня вскрывает за ресурсы наверняка.</p>
+    </div>`;
   }
-  // выбранный по умолчанию — первый
-  if(!S.forgeSel || !artInst(S.forgeSel)) S.forgeSel=S.artifacts[0].invUid;
-  const inst=artInst(S.forgeSel);
-  const art=artifactById(inst.id);
-  const curB=artifactBonus(inst);
-  const atMax=inst.level>=FORGE_MAX;
-  const nextB = atMax?null:artifactBonus({...inst,level:inst.level+1});
-  const cost = atMax?0:forgeCost(art,inst.level);
-  const dustCost = atMax?0:forgeDustCost(inst.level);
-  const canForge = !atMax && S.gold>=cost && S.dust>=dustCost;
-  const wearer=wearerOf(inst.invUid);
 
-  // diff бонусов
-  const diffRows=['atk','def','hp','spd'].filter(k=>curB[k]||(nextB&&nextB[k])).map(k=>{
-    const lab={atk:'⚔️ Атака',def:'🛡️ Защита',hp:'❤️ Жизнь',spd:'💨 Прыть'}[k];
-    const cur=curB[k]||0, nxt=nextB?(nextB[k]||0):cur;
-    return `<div class="forge-stat"><span>${lab}</span><b>+${cur}${nxt>cur?` <span class="up">→ +${nxt}</span>`:''}</b></div>`;
-  }).join('');
-
-  body.innerHTML=`
+  // артефактная часть (только если есть артефакты)
+  let artLayout='';
+  if(noArt){
+    artLayout=`<div class="empty">Сундук реликвий пуст. Артефакты находят в странствиях, роняют враги, и они лежат в сундуках.</div>`;
+  } else {
+    const art=artifactById(inst.id);
+    const curB=artifactBonus(inst);
+    const atMax=inst.level>=FORGE_MAX;
+    const nextB = atMax?null:artifactBonus({...inst,level:inst.level+1});
+    const cost = atMax?0:forgeCost(art,inst.level);
+    const dustCost = atMax?0:forgeDustCost(inst.level);
+    const rarityLocked = !canForgeRarity(art.rarity);
+    const canForge = !atMax && !rarityLocked && S.gold>=cost && S.dust>=dustCost;
+    const wearer=wearerOf(inst.invUid);
+    const diffRows=['atk','def','hp','spd'].filter(k=>curB[k]||(nextB&&nextB[k])).map(k=>{
+      const lab={atk:'⚔️ Атака',def:'🛡️ Защита',hp:'❤️ Жизнь',spd:'💨 Прыть'}[k];
+      const cur=curB[k]||0, nxt=nextB?(nextB[k]||0):cur;
+      const cls=cur<0?'malus':'';
+      return `<div class="forge-stat ${cls}"><span>${lab}</span><b>${cur>0?'+':''}${cur}${nxt!==cur?` <span class="up">→ ${nxt>0?'+':''}${nxt}</span>`:''}</b></div>`;
+    }).join('');
+    const curFx=artifactFx(inst), nextFx=atMax?null:artifactFx({...inst,level:inst.level+1});
+    const fxRows=FX_KEYS.filter(k=>curFx[k]||(nextFx&&nextFx[k])).map(k=>{
+      const cur=curFx[k]||0, nxt=nextFx?(nextFx[k]||0):cur;
+      const cls=cur<0?'malus':'';
+      return `<div class="forge-stat ${cls}"><span>${FX_ICON[k]} ${FX_LABEL[k]}</span><b>${cur>0?'+':''}${cur}${FX_SUFFIX[k]}${nxt!==cur?` <span class="up">→ ${nxt>0?'+':''}${nxt}${FX_SUFFIX[k]}</span>`:''}</b></div>`;
+    }).join('');
+    artLayout=`
     <div class="forge-layout">
       <div class="forge-anvil">
         <div class="anvil-art" id="anvilArt">
@@ -3143,15 +3997,18 @@ function renderForge(){
         <div class="forge-title">${art.name} <span class="art-lvl-inline">+${inst.level}</span></div>
         <div class="art-slot" style="justify-content:center">${SLOT_ICON[art.slot]} ${SLOT_NAME[art.slot]} ${elTag(art.el)} <span class="art-star">${RARITY_STAR(art.rarity)}</span></div>
         <p class="lede" style="text-align:center;margin:10px 0">${art.lore}</p>
-        <div class="forge-stats">${diffRows}</div>
+        <div class="forge-stats">${diffRows}${fxRows}</div>
         ${wearer?`<div class="hint" style="text-align:center">Сейчас носит: <b>${speciesById(wearer.id).name}</b></div>`:''}
         <div class="btnrow" style="justify-content:center">
           ${atMax
             ? `<button class="btn" disabled>Выкован до предела (+${FORGE_MAX})</button>`
-            : `<button class="btn" id="forgeBtn" ${canForge?'':'disabled'}>Ковать&nbsp;·&nbsp;🪙${cost}${dustCost?`&nbsp;+&nbsp;✦${dustCost}`:''}</button>`}
+            : rarityLocked
+              ? `<button class="btn" disabled>🔒 Нужна кузня ур.${art.rarity}</button>`
+              : `<button class="btn" id="forgeBtn" ${canForge?'':'disabled'}>Ковать&nbsp;·&nbsp;🪙${cost}${dustCost?`&nbsp;+&nbsp;✦${dustCost}`:''}</button>`}
           <button class="btn ghost" id="recycleBtn">Распылить&nbsp;·&nbsp;+${recycleYield(inst)}✦</button>
         </div>
-        ${!atMax&&!canForge?`<p class="hint" style="text-align:center">Не хватает золота: нужно ${cost}🪙</p>`:''}
+        ${rarityLocked?`<p class="hint" style="text-align:center;color:#e08a7a">Кузня ур.${forgeLevel()} куёт только до ${SMITHY_RARITY_NAME[forgeLevel()]} (${'★'.repeat(forgeLevel())}). Улучши кузню, чтобы ковать ${SMITHY_RARITY_NAME[art.rarity]}.</p>`:''}
+        ${!atMax&&!canForge&&!rarityLocked?`<p class="hint" style="text-align:center">Не хватает ресурсов: нужно ${cost}🪙${dustCost?` + ${dustCost}✦`:''}</p>`:''}
         <p class="hint" style="text-align:center">Распыление обращает реликвию в ✦ пыль для селекции драконов.</p>
       </div>
       <div class="forge-stock">
@@ -3160,19 +4017,63 @@ function renderForge(){
         <p class="hint">Выбери реликвию, чтобы рассмотреть, ковать или распылить. Надеть артефакт на дракона можно в его свитке в Логове.</p>
       </div>
     </div>`;
+  }
 
-  const grid=$('#artGrid');
-  S.artifacts.forEach(a=>grid.appendChild(artChip(a,{selectable:true,showWearer:true,onclick:i=>{S.forgeSel=i.invUid;renderForge();}})));
+  body.innerHTML=`
+    ${smithyHeader}
+    ${chestBlock}
+    ${artLayout}`;
 
-  const fb=$('#forgeBtn');
-  if(fb) fb.onclick=()=>doForge(inst);
-  const rb=$('#recycleBtn');
-  if(rb) rb.onclick=()=>recycleArtifact(inst.invUid);
+  if(!noArt){
+    const grid=$('#artGrid');
+    S.artifacts.forEach(a=>grid.appendChild(artChip(a,{selectable:true,showWearer:true,onclick:i=>{S.forgeSel=i.invUid;renderForge();}})));
+    const fb=$('#forgeBtn');
+    if(fb) fb.onclick=()=>doForge(inst);
+    const rb=$('#recycleBtn');
+    if(rb) rb.onclick=()=>recycleArtifact(inst.invUid);
+  }
+  // сундуки: обработчики
+  body.querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>openChestWithKey(+b.dataset.open));
+  body.querySelectorAll('[data-forge]').forEach(b=>b.onclick=()=>openChestWithForge(+b.dataset.forge));
+  const sb=$('#smithyUpBtn');
+  if(sb) sb.onclick=openSmithyUpgrade;
+}
+
+// экран улучшения кузни
+function openSmithyUpgrade(){
+  const lvl=forgeLevel();
+  if(lvl>=SMITHY_MAX) return;
+  const cost=smithyCost(lvl);
+  const canPay=S.gold>=cost.gold && S.dust>=cost.dust;
+  const body=$('#forgeBody');
+  body.innerHTML=`<div class="panel" style="margin:0">
+    <h2>⚒️ Улучшение кузни</h2>
+    <p class="lede">Кузня ур. ${lvl} → <b>${lvl+1}</b></p>
+    <p>Позволит ковать <b>${SMITHY_RARITY_NAME[lvl+1]}</b> артефакты (${'★'.repeat(lvl+1)}) — их сила раскроется полностью.</p>
+    <div class="portal-cost">Стоимость: <b>🪙 ${cost.gold}</b> + <b>✦ ${cost.dust}</b></div>
+    <div class="btnrow" style="margin-top:14px">
+      <button class="btn" id="doSmithyUp" ${canPay?'':'disabled'}>${canPay?'Улучшить кузню':'Недостаёт ресурсов'}</button>
+      <button class="btn ghost" id="smithyBack">← Назад</button>
+    </div>
+    ${!canPay?`<p class="hint" style="text-align:center;color:#e08a7a">Нужно ${cost.gold}🪙 и ${cost.dust}✦</p>`:''}
+  </div>`;
+  $('#smithyBack').onclick=renderForge;
+  if(canPay) $('#doSmithyUp').onclick=()=>{
+    S.gold-=cost.gold; S.dust-=cost.dust;
+    S.forgeLevel=lvl+1;
+    persist(); renderLedger();
+    toast(`<b>Кузня улучшена до ур.${S.forgeLevel}!</b> Теперь куёт ${SMITHY_RARITY_NAME[S.forgeLevel]} артефакты ${'★'.repeat(S.forgeLevel)}.`);
+    renderForge();
+  };
 }
 
 function doForge(inst){
   const art=artifactById(inst.id);
   if(inst.level>=FORGE_MAX) return;
+  if(!canForgeRarity(art.rarity)){
+    toast(`Кузня ур.${forgeLevel()} не может ковать ${SMITHY_RARITY_NAME[art.rarity]} артефакты (${'★'.repeat(art.rarity)}). Улучши кузню!`);
+    return;
+  }
   const cost=forgeCost(art,inst.level);
   const dustCost=forgeDustCost(inst.level);
   if(S.gold<cost){toast('Недостаёт золота для ковки.');return;}
@@ -3413,6 +4314,7 @@ function switchView(v){
   if(v==='roost')renderRoost();
   if(v==='spire')renderSpire();
   if(v==='lair')renderLair();
+  if(v==='hatch')renderHatch();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -3451,8 +4353,50 @@ function loadGame(){
     if(!data||!Array.isArray(data.dragons)) return false;
     // мягкое слияние: берём сохранённое поверх дефолтов (на случай новых полей)
     S=Object.assign({},S,data);
+    migrateDragons();
     return true;
   }catch(e){return false;}
+}
+
+// приведение старых сохранений к новой системе (бюджет генов + характеры)
+function migrateDragons(){
+  // яйца: старое число → массив типизированных (случайные стихии, поверхность)
+  if(typeof S.eggs==='number'){
+    const n=S.eggs; S.eggs=[];
+    for(let i=0;i<n;i++) S.eggs.push({el:ELEMENTS_LIST[rnd(0,ELEMENTS_LIST.length-1)], tier:1});
+  }
+  if(!Array.isArray(S.eggs)) S.eggs=[];
+  if(!Array.isArray(S.chests)) S.chests=[];
+  if(!S.keys||typeof S.keys!=='object') S.keys={1:0,2:0,3:0};
+  if(!S.decorations||typeof S.decorations!=='object') S.decorations={};
+  if(!Array.isArray(S.decorOwned)) S.decorOwned=[];
+  let migrated=0;
+  for(const d of S.dragons){
+    // характер: назначить, если нет
+    if(!d.nature){ d.nature=rollNature(); migrated++; }
+    // геном: если сумма превышает потолок бюджета (старые 6/6/6/6=24) — ужать до бюджета,
+    // сохранив «профиль» (пропорции), чтобы дракон не потерял индивидуальность
+    if(d.genes){
+      const sum=geneSum(d.genes);
+      if(sum>GENE_BUDGET_MAX){
+        const keys=GENE_KEYS.slice();
+        // масштабируем пропорционально к целевому бюджету
+        const target=GENE_BUDGET_MAX;
+        const scaled={};
+        keys.forEach(k=>{ scaled[k]=Math.round((d.genes[k]||0)/sum*target); });
+        // подгоняем сумму точно под target
+        let s=geneSum(scaled);
+        while(s>target){ const k=keys.filter(k=>scaled[k]>0).sort((a,b)=>scaled[b]-scaled[a])[0]; scaled[k]--; s--; }
+        while(s<target){ const k=keys.filter(k=>scaled[k]<GENE_MAX).sort((a,b)=>scaled[a]-scaled[b])[0]; scaled[k]++; s++; }
+        scaled.spark=d.genes.spark;
+        d.genes=scaled;
+        d.curHp=Math.min(d.curHp||statsOf(d).maxHp, statsOf(d).maxHp);
+      }
+    } else {
+      d.genes=randomGenes();
+    }
+  }
+  if(migrated>0) persist();
 }
 
 /* ======================= IDLE-ДОХОД ======================= */
@@ -3531,7 +4475,7 @@ function claimQuest(id){
   if(!q||!q.done||q.claimed) return;
   const r=questDef(id).reward;
   if(r.gold) S.gold+=r.gold;
-  if(r.eggs) S.eggs+=r.eggs;
+  if(r.eggs){for(let i=0;i<r.eggs;i++)addEgg(ELEMENTS_LIST[rnd(0,4)],1);}
   if(r.dust) S.dust+=r.dust;
   q.claimed=true;
   floatText('+ '+rewardText(r),'#d9a441');
@@ -3546,7 +4490,7 @@ function claimChest(){
   if(!S.chestReady) return;
   const r=chestReward();
   if(r.gold) S.gold+=r.gold;
-  if(r.eggs) S.eggs+=r.eggs;
+  if(r.eggs){for(let i=0;i<r.eggs;i++)addEgg(ELEMENTS_LIST[rnd(0,4)],1);}
   if(r.dust) S.dust+=r.dust;
   S.chestReady=false;
   floatText('ПОДАРОК ОТКРЫТ','#d9a441');
@@ -3608,8 +4552,7 @@ function confirmReset(){
 }
 
 /* ===== ИНИЦИАЛИЗАЦИЯ ===== */
-$('#hatchBtn').onclick=hatchEgg;
-$('#buyEggBtn').onclick=buyEgg;
+/* гнездо рендерится через renderHatch при открытии вкладки */
 
 /* ===== СТАРТОВЫЙ ЭКРАН (онбординг при первом запуске) ===== */
 const STARTER_DRAGONS=['ember','glacier','sporewing']; // огонь, лёд, яд
